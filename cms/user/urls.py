@@ -30,5 +30,8 @@ urlpatterns = [
     url(r'^logout/$', views.logout, name='logout'),
     # 权限分配
     url(r'^permissions/$', views.permissions, name='permissions'),
+    # 查看用户
+    url(r'^listUser/$', views.listUser, name='listUser'),
 
 ]
+

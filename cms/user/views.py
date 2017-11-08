@@ -26,6 +26,7 @@ def main(request):
     return render(request, 'user/main.html')
 
 
+# 查看用户界面
 def listUser(request):
     return render(request, 'user/listUser.html')
 
@@ -62,7 +63,3 @@ def logout(request):
 # 权限分配页面
 def permissions(request):
     return render(request, 'user/permissions.html')
-
-
-
-
