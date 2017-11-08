@@ -41,7 +41,7 @@ def login_handle(request):
         context = {"username": username}
         # return
         return red
-        # return render(request, 'user/index.html', context)
+        # return render(request, 'user/index1.html', context)
     else:
         context = {'error': 'error'}
         return render(request, '/user/login.html', context)
