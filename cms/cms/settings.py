@@ -35,7 +35,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 用户模块
     'user',
+    # 设备管理模块
+    'device',
+    # 日志模块
+    'log',
+    # 生产管理模块
+    'product',
+    # 安保系统模块
+    'security'
 
 ]
 
@@ -118,6 +127,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-MEDIA_ROOT=os.path.join(BASE_DIR,'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static')
 
 # MEDIA_ROOT="/var/www/test/static"

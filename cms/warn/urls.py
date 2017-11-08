@@ -18,17 +18,9 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    # 登陆
-    url(r'^login/$', views.login, name='login'),
-    # 首页
-    url(r'^index/$', views.index, name='index'),
-    # 主要
+    # 报警管理主要界面（开启/关闭报警模块）
     url(r'^main/$', views.main, name='main'),
-    # 登陆处理
-    url(r'^login_handle/$', views.login_handle, name='login_handle'),
-    # 注销
-    url(r'^logout/$', views.logout, name='logout'),
-    # 权限分配
-    url(r'^permissions/$', views.permissions, name='permissions'),
+
+    # url(r'^main/$', views.main, name='main'),
 
 ]

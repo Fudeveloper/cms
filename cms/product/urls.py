@@ -18,17 +18,15 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    # 登陆
-    url(r'^login/$', views.login, name='login'),
-    # 首页
-    url(r'^index/$', views.index, name='index'),
-    # 主要
     url(r'^main/$', views.main, name='main'),
-    # 登陆处理
-    url(r'^login_handle/$', views.login_handle, name='login_handle'),
-    # 注销
-    url(r'^logout/$', views.logout, name='logout'),
-    # 权限分配
-    url(r'^permissions/$', views.permissions, name='permissions'),
-
+    # ERP系统
+    url(r'^erp/$', views.erp, name='erp'),
+    # 设备信息
+    url(r'^deviceManage/$', views.deviceManage, name='deviceManage'),
+    # 质量管理
+    url(r'^qualityManage/$', views.qualityManage, name='qualityManage'),
+    # 用户图纸
+    url(r'^drawing/$', views.drawing, name='drawing'),
+    # 拓展
+    url(r'^expand/$', views.expand, name='expand'),
 ]

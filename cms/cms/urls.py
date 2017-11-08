@@ -18,6 +18,11 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^user/', include('user.urls',namespace='user')),
+    url(r'^user/', include('user.urls', namespace='user')),
+    url(r'^log/', include('log.urls', namespace='log')),
+    url(r'^product/', include('product.urls', namespace='product')),
+    url(r'^security/', include('security.urls', namespace='security')),
+    url(r'^warn/', include('warn.urls', namespace='warn')),
+    url(r'^device/', include('device.urls', namespace='device')),
 
 ]

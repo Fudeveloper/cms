@@ -26,6 +26,10 @@ def main(request):
     return render(request, 'user/main.html')
 
 
+def listUser(request):
+    return render(request, 'user/listUser.html')
+
+
 # 登陆处理
 def login_handle(request):
     post_info = request.POST
@@ -44,11 +48,21 @@ def login_handle(request):
         # return render(request, 'user/index1.html', context)
     else:
         context = {'error': 'error'}
-        return render(request, '/user/login.html', context)
+        return render(request, 'user/login.html', context)
 
 
+# 注销
 def logout(request):
     red = redirect('/user/login/')
     red.delete_cookie('username')
-    print(request.COOKIES['username'])
+    # print(request.COOKIES['username'])
     return red
+
+
+# 权限分配页面
+def permissions(request):
+    return render(request, 'user/permissions.html')
+
+
+
+
