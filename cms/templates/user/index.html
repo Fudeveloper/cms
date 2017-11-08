@@ -49,7 +49,7 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;" class="admin-header-user">
                         <img src="/static/images/0.jpg"/>
-                        <span>beginner</span>
+                        <span>{{username}}</span>
                     </a>
                     <dl class="layui-nav-child">
                         <dd>
@@ -58,14 +58,14 @@
                         <dd>
                             <a href="javascript:;"><i class="fa fa-gear" aria-hidden="true"></i> 设置</a>
                         </dd>
-                        <dd id="lock">
-                            <a href="javascript:;">
-                                <i class="fa fa-lock" aria-hidden="true"
-                                   style="padding-right: 3px;padding-left: 1px;"></i> 锁屏 (Alt+L)
-                            </a>
-                        </dd>
+                        <!--<dd id="lock">-->
+                            <!--<a href="javascript:;">-->
+                                <!--<i class="fa fa-lock" aria-hidden="true"-->
+                                   <!--style="padding-right: 3px;padding-left: 1px;"></i> 锁屏 (Alt+L)-->
+                            <!--</a>-->
+                        <!--</dd>-->
                         <dd>
-                            <a href="login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
+                            <a href="{%url 'user:logout'%}"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
                         </dd>
                     </dl>
                 </li>
@@ -109,16 +109,16 @@
     <div class="site-mobile-shade"></div>
 
     <!--锁屏模板 start-->
-    <script type="text/template" id="lock-temp">
-        <div class="admin-header-lock" id="lock-box">
-            <div class="admin-header-lock-img">
-                <img src="/static/images/0.jpg"/>
-            </div>
-            <div class="admin-header-lock-name" id="lockUserName">beginner</div>
-            <input type="text" class="admin-header-lock-input" value="输入密码解锁.." name="lockPwd" id="lockPwd"/>
-            <button class="layui-btn layui-btn-small" id="unlock">解锁</button>
-        </div>
-    </script>
+    <!--<script type="text/template" id="lock-temp">-->
+        <!--<div class="admin-header-lock" id="lock-box">-->
+            <!--<div class="admin-header-lock-img">-->
+                <!--<img src="/static/images/0.jpg"/>-->
+            <!--</div>-->
+            <!--<div class="admin-header-lock-name" id="lockUserName">beginner</div>-->
+            <!--<input type="text" class="admin-header-lock-input" value="输入密码解锁.." name="lockPwd" id="lockPwd"/>-->
+            <!--<button class="layui-btn layui-btn-small" id="unlock">解锁</button>-->
+        <!--</div>-->
+    <!--</script>-->
     <!--锁屏模板 end -->
 
     <script type="text/javascript" src="/static/plugins/layui/layui.js"></script>
@@ -131,10 +131,10 @@
 
             $('#video1').on('click', function () {
                 layer.open({
-                    title: 'YouTube',
+                    title: '百度',
                     maxmin: true,
                     type: 2,
-                    content: 'video.html',
+                    content: 'http://www.baidu.com',
                     area: ['800px', '500px']
                 });
             });
