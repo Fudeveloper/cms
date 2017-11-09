@@ -33,5 +33,8 @@ urlpatterns = [
     # 查看用户
     url(r'^listUser/$', views.listUser, name='listUser'),
 
+    url(r'^getUserInfo/$', views.getUserInfo, name='getUserInfo'),
+
+
 ]
 

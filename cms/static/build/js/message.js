@@ -55,6 +55,6 @@ layui.define(['jquery', 'kitconfig'], function(exports) {
             that.times++;
         }
     };
-    layui.link('/static/build/css/message.css');
+    layui.link(kitconfig.resourcePath + '/css/message.css');
     exports('message', message);
 });
