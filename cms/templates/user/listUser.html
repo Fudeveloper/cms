@@ -21,22 +21,24 @@
   <thead>
     <tr>
       <th lay-data="{checkbox:true, fixed: true}"></th>
-      <th lay-data="{field:'id', width:100, sort: true, fixed: true}">ID</th>
-      <th lay-data="{field:'username', width:100}">用户名</th>
-      <th lay-data="{field:'sex', width:100, sort: true}">性别</th>
-      <th lay-data="{field:'city', width:100}">城市</th>
+      <th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
+      <th lay-data="{field:'username', width:80}">用户名</th>
+      <th lay-data="{field:'sex', width:80, sort: true}">性别</th>
+      <th lay-data="{field:'city', width:80}">城市</th>
       <th lay-data="{field:'sign', width:177}">签名</th>
       <th lay-data="{field:'experience', width:100, sort: true}">积分</th>
 
-      <th lay-data="{field:'classify', width:100}">职业</th>
+      <th lay-data="{field:'classify', width:80}">职业</th>
       <th lay-data="{field:'wealth', width:135, sort: true}">财富</th>
-      <th lay-data="{field:'score', width:100, sort: true, fixed: 'right'}">评分</th>
-      <th lay-data="{fixed: 'right', width:160, align:'center', toolbar: '#barDemo'}"></th>
+      <th lay-data="{field:'score', width:80, sort: true, fixed: 'right'}">评分</th>
+      <!--最后一列-->
+      <th lay-data="{fixed: 'right', width:'full', align:'center', toolbar: '#barDemo'}"></th>
     </tr>
   </thead>
 </table>
 
 <script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
   <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
   <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
   <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>

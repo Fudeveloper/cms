@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>KIT ADMIN</title>
+    <title>管理系统</title>
     <link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="/static/plugins/font-awesome/css/font-awesome.min.css" media="all">
     <link rel="stylesheet" href="/static/build/css/app.css" media="all">
@@ -13,18 +13,18 @@
 <body>
 <div class="layui-layout layui-layout-admin kit-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">KIT ADMIN</div>
-        <div class="layui-logo kit-logo-mobile">K</div>
-        <ul class="layui-nav layui-layout-left kit-nav" kit-one-level>
-            <li class="layui-nav-item"><a href="javascript:;">控制台</a></li>
-            <li class="layui-nav-item"><a href="javascript:;">商品管理</a></li>
-        </ul>
+        <div class="layui-logo">管理系统</div>
+        <div class="layui-logo kit-logo-mobile">ROBOT</div>
+        <!--<ul class="layui-nav layui-layout-left kit-nav" kit-one-level>-->
+        <!--<li class="layui-nav-item"><a href="javascript:;">控制台</a></li>-->
+        <!--<li class="layui-nav-item"><a href="javascript:;">商品管理</a></li>-->
+        <!--</ul>-->
         <ul class="layui-nav layui-layout-right kit-nav">
             <li class="layui-nav-item"><a href="javascript:;" id="pay"><i class="fa fa-gratipay" aria-hidden="true"></i>
                 捐赠我</a></li>
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="/static/images/0.jpg" class="layui-nav-img"> Van
+                    <img src="/static/images/0.jpg" class="layui-nav-img"> {{username}}
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="javascript:;">基本资料</a></dd>
@@ -40,54 +40,120 @@
         <div class="layui-side-scroll">
             <div class="kit-side-fold"><i class="fa fa-navicon" aria-hidden="true"></i></div>
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <!--layui-nav-itemed class中添加，表示默认展开的一级导航-->
             <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
-                <li class="layui-nav-item">
-                    <a class="" href="javascript:;"><i class="fa fa-plug" aria-hidden="true"></i><span> 用户管理</span></a>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;"><i class="layui-icon" aria-hidden="true">&#xe612;</i><span>用户管理</span></a>
                     <dl class="layui-nav-child">
                         <dd>
                             <!--data-options="{url:'test.html',icon:'&#xe6c6;',title:'表格',id:'1'}"-->
                             <a href="javascript:;" kit-target data-url="{%url 'user:listUser'%}" data-icon="fa-user"
                                data-title="查看用户">
-                                <i class="fa fa-user"
-                                                                           aria-hidden="true"></i><span> 查看用户</span></a>
+                                <i class="layui-icon">&#xe600;</i>
+                                <!--<i class="fa fa-user"-->
+                                <!--aria-hidden="true"></i>-->
+                                <span> 查看用户</span></a>
                         </dd>
                         <dd>
                             <a href="javascript:;" data-url="{%url 'user:permissions'%}" data-icon="fa-user"
-                               data-title="权限分配" kit-target data-id='2'><i class="fa fa-user"
-                                                                           aria-hidden="true"></i><span> 权限分配</span></a>
+                               data-title="权限分配" kit-target data-id='2'><i class="layui-icon">&#xe600;</i><span> 权限分配</span></a>
                         </dd>
                         <dd>
-                            <a href="javascript:;" data-url="{%url 'warn:main'%}" data-icon="&#xe628;"
-                               data-title="开启/关闭报警模块" kit-target data-id='3'><i class="layui-icon">&#xe628;</i><span> 开启/关闭报警模块</span></a>
+                            <a href="javascript:;" data-url="{%url 'warn:main'%}" data-icon="&#xe600;"
+                               data-title="开启/关闭报警模块" kit-target data-id='3'><i class="layui-icon">&#xe600;</i><span> 开启/关闭报警模块</span></a>
                         </dd>
 
                     </dl>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a href="javascript:;"><i class="fa fa-plug" aria-hidden="true"></i><span> 设备管理</span></a>
+                <li class="layui-nav-item ">
+                    <a href="javascript:;"><i class="layui-icon" aria-hidden="true">&#xe614;</i><span> 设备管理</span></a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" kit-target
-                               data-options="{url:'navbar.html',icon:'&#xe658;',title:'Navbar',id:'6'}"><i
-                                class="layui-icon">&#xe658;</i><span> 设备管理</span></a></dd>
-                        <dd><a href="javascript:;" kit-target
-                               data-options="{url:'tab.html',icon:'&#xe658;',title:'TAB',id:'7'}"><i class="layui-icon">&#xe658;</i><span> Tab</span></a>
-                        </dd>
-                        <dd><a href="javascript:;" kit-target
-                               data-options="{url:'onelevel.html',icon:'&#xe658;',title:'OneLevel',id:'50'}"><i
-                                class="layui-icon">&#xe658;</i><span> OneLevel</span></a></dd>
-                        <dd><a href="javascript:;" kit-target
-                               data-options="{url:'app.html',icon:'&#xe658;',title:'App',id:'8'}"><i class="layui-icon">&#xe658;</i><span> app.js主入口</span></a>
-                        </dd>
+                        <dd><a href="javascript:;" data-url="{%url 'warn:main'%}" data-icon="&#xe628;"
+                               data-title="设备管理" kit-target data-id='3'><i class="layui-icon">&#xe600;</i><span> 设备管理</span></a></dd>
+
+
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;" data-url="/components/table/table.html" data-name="table" kit-loader><i
-                            class="fa fa-plug" aria-hidden="true"></i><span> 表格(page)</span></a>
+                    <a class="" href="javascript:;"><i class="layui-icon" aria-hidden="true">&#xe63c;
+</i><span> 日志</span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <!--data-options="{url:'test.html',icon:'&#xe6c6;',title:'表格',id:'1'}"-->
+                            <a href="javascript:;" kit-target data-url="{%url 'user:listUser'%}" data-icon="fa-user"
+                               data-title="登陆日志" data-id='5'>
+                                <i class="layui-icon">&#xe600;</i><span> 登陆日志</span></a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;" data-url="{%url 'user:permissions'%}" data-icon="fa-user"
+                               data-title="操作日志" kit-target data-id='6'><i class="layui-icon">&#xe600;</i><span> 操作日志</span></a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;" data-url="{%url 'warn:main'%}" data-icon="&#xe628;"
+                               data-title="报警日志" kit-target data-id='7'><i class="layui-icon">&#xe600;</i><span> 报警日志</span></a>
+                        </dd>
+
+                    </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;" data-url="/views/form.html" data-name="form" kit-loader><i class="fa fa-plug"
-                                                                                                      aria-hidden="true"></i><span> 表单(page)</span></a>
+                    <a class="" href="javascript:;"><i class="layui-icon" aria-hidden="true">&#xe631;</i><span> 生产管理</span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <!--data-options="{url:'test.html',icon:'&#xe6c6;',title:'表格',id:'1'}"-->
+                            <a href="javascript:;" kit-target data-url="{%url 'user:listUser'%}" data-icon="fa-user"
+                               data-title="ERP系统" data-id='8'>
+                                <i class="layui-icon">&#xe600;</i><span> ERP系统</span></a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;" data-url="{%url 'user:permissions'%}" data-icon="fa-user"
+                               data-title="设备信息" kit-target data-id='9'><i class="layui-icon">&#xe600;</i></i><span> 设备信息</span></a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;" data-url="{%url 'warn:main'%}" data-icon="&#xe628;"
+                               data-title="质量管理" kit-target data-id='10'><i class="layui-icon">&#xe600;</i><span> 质量管理</span></a>
+                        </dd>
+                        <dd>
+                            <!--data-options="{url:'test.html',icon:'&#xe6c6;',title:'表格',id:'1'}"-->
+                            <a href="javascript:;" kit-target data-url="{%url 'user:listUser'%}" data-icon="fa-user"
+                               data-title="用户图纸" data-id='11'>
+                                <i class="layui-icon">&#xe600;</i><span> 用户图纸</span></a>
+                        </dd>
+                        <dd>
+                            <!--data-options="{url:'test.html',icon:'&#xe6c6;',title:'表格',id:'1'}"-->
+                            <a href="javascript:;" kit-target data-url="{%url 'user:listUser'%}" data-icon="fa-user"
+                               data-title="拓展" data-id='12'>
+                                <i class="layui-icon">&#xe600;</i><span> 拓展</span></a>
+                        </dd>
+
+                    </dl>
                 </li>
+                <li class="layui-nav-item">
+                    <a class="" href="javascript:;"><i class="layui-icon" aria-hidden="true">&#xe6ed;</i><span> 安保系统</span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <!--data-options="{url:'test.html',icon:'&#xe6c6;',title:'表格',id:'1'}"-->
+                            <a href="javascript:;" kit-target data-url="{%url 'user:listUser'%}" data-icon="fa-user"
+                               data-title="门禁管理" data-id='13'>
+                                <i class="layui-icon">&#xe600;</i><span> 门禁管理</span></a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;" data-url="{%url 'user:permissions'%}" data-icon="fa-user"
+                               data-title="视频监控" kit-target data-id='14'><i class="layui-icon">&#xe600;</i></i><span> 视频监控</span></a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;" data-url="{%url 'warn:main'%}" data-icon="&#xe628;"
+                               data-title="环境监控" kit-target data-id='15'><i class="layui-icon">&#xe600;</i><span> 环境监控</span></a>
+                        </dd>
+
+                    </dl>
+                </li>
+
+
+                <!--无二级菜单导航-->
+                <!--<li class="layui-nav-item">-->
+                <!--<a href="javascript:;" data-url="/views/form.html" data-name="form" kit-loader><i class="fa fa-plug"-->
+                <!--aria-hidden="true"></i><span> 生产管理</span></a>-->
+                <!--</li>-->
             </ul>
         </div>
     </div>
@@ -96,17 +162,16 @@
         <div style="padding: 15px;">主体内容加载中,请稍等...</div>
     </div>
 
-    <div class="layui-footer">
+    <div class="layui-footer" style="text-align: right">
         <!-- 底部固定区域 -->
-        2017 &copy;
-        <a href="http://kit.zhengjinfan.cn/">kit.zhengjinfan.cn/</a> MIT license
-
+        <div style="float: left"><a>福建渃博特自动化设备有限公司</a></div>
+        <img src="/static/build/images/logo.png" style="width: 20%;height: 70%">
     </div>
 </div>
-<script type="text/javascript">
-    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-    document.write(unescape("%3Cspan id='cnzz_stat_icon_1264021086'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1264021086%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
-</script>
+<!--<script type="text/javascript">-->
+<!--var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");-->
+<!--document.write(unescape("%3Cspan id='cnzz_stat_icon_1264021086'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1264021086%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));-->
+<!--</script>-->
 <script src="/static/plugins/layui/layui.js"></script>
 <script>
     var message;

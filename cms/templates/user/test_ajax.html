@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../static/build/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#btn1').click(function () {
+                $.get('/user/test', function (data) {
+                    var fan_status = data['fan'];
+                    var light_status = data['light'];
+
+                    if (fan_status === "open") {
+//                        alert('相等')
+                        $('#a1').html("风扇：开")
+                    } else {
+                        $('#a1').html("风扇：关")
+                    }
+                })
+            })
+        })
+
+
+    </script>
+</head>
+<body>
+<a id="a1">风扇：</a><br>
+
+
+<input type="button" id="btn1" value="点击">
+</body>
+</html>
