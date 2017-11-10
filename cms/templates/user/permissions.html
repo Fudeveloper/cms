@@ -1,10 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <title>layer iframe 示例</title>
+    <link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/123.css" media="all">
+
+    <style>body {
+        padding: 10px;
+        font-size: 14px;
+        background: #fff;
+        width: 95%;
+        margin: 0 auto;
+        font-size: 14px;
+        line-height: 20px;
+        overflow: hidden;
+    }
+
+    p {
+        margin-bottom: 10px;
+    }
+
+    input {
+        border: 1px solid #999;
+        padding: 5px 10px;
+        margin: 0 10px 10px 0;
+    }</style>
+
+    <script language="javascript" type="text/javascript"
+            src="/static/build/js/unknow.js" charset="gb2312"></script>
 </head>
 <body>
+<div>
+    <div class="site-title">
+        <fieldset>
+            <legend><a name="checkbox">复选框</a></legend>
+        </fieldset>
+    </div>
+    <div class="layui-form">
+        <!--美化复选-->
+        <input type="checkbox" name="write" title="写作" checked>
+        <input type="checkbox" name="dai" title="发呆">
+        <input type="checkbox" name="jin" title="禁用" disabled>
+        <!--正常复选-->
+        <!--<input type="checkbox" name="write" title="写作" lay-skin="primary" checked>-->
+        <!--<input type="checkbox" name="dai" title="发呆" lay-skin="primary">-->
+        <!--<input type="checkbox" name="jin" title="禁用" lay-skin="primary" disabled>-->
+    </div>
 
+</div>
+
+
+<pre>
+
+</pre>
+<!--<div>-->
+    <!--<button class="layui-btn layui-btn-primary" id="add">让层自适应iframe</button>-->
+    <!--<button class="layui-btn layui-btn-primary" id="new">在父层弹出一个层</button>-->
+    <!--<button class="layui-btn layui-btn-primary" id="transmit">给父页面传值</button>-->
+    <!--<button class="layui-btn layui-btn-primary" id="closeIframe">关闭iframe</button>-->
+<!--</div>-->
+
+<script src="/static/build/js/jquery-1.12.4.min.js"></script>
+<script src="/static/plugins/layui/layui.js"></script>
+
+<script src="/static/build/js/laycode.js"></script>
+<script>new Function($('.run').text())()
+//$('pre').show().laycode({height: 180});
+</script>
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form;
+
+    });
+
+</script>
+<!--<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");-->
+<!--document.write(unescape("%3Cspan id='cnzz_stat_icon_30088308'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "w.cnzz.com/c.php%3Fid%3D30088308' type='text/javascript'%3E%3C/script%3E"));</script>-->
 </body>
 </html>

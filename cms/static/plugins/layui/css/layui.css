@@ -2070,7 +2070,8 @@ a cite {
 }
 
 .layui-table td, .layui-table th, .layui-table-header, .layui-table-tool, .layui-table-view, .layui-table[lay-skin=row], .layui-table[lay-skin=line] {
-    border: 1px solid #e2e2e2
+    border: 1px solid #e2e2e2;
+    /*text-align: center;*/
 }
 
 .layui-table td, .layui-table th {
