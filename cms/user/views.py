@@ -1,11 +1,23 @@
 from django.shortcuts import render, redirect
-
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.conf import settings
+import requests
+
+
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64)'}
+api_link = ""
+if settings.DEBUG == False:
+    global api_link
+    api_link = "http://123.207.68.28/"
+else:
+    global api_link
+    api_link = "127.0.0.1"
 
 
 # Create your views here.
 # 登陆页面
 def login(request):
+    # return HttpResponse(settings.DEBUG)
     return render(request, 'user/login.html')
 
 
@@ -37,6 +49,11 @@ def login_handle(request):
     username = post_info.get('username')
     passwd = post_info.get('passwd')
     # 验证用户
+
+    post_data = {"userName": username, "passWord": passwd}
+    headers = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64)'}
+    requests.post(url=api_link + "Account/Logon/",data=passwd,headers=headers)
+
     if username == "123" and passwd == "123":
         # 用户账号和密码正确，进入主页
         red = redirect('/user/index/')

@@ -19,5 +19,7 @@ from . import views
 
 urlpatterns = [
     url(r'^main/$', views.main, name='main'),
+    url(r'^control/$', views.control, name='control'),
+
 
 ]

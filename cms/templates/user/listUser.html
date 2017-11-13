@@ -19,15 +19,18 @@
 
 </div>
 
-<table class="layui-table" lay-data="{ height:'full', url:'{%url 'user:getUserInfo'%}', page:true, id:'idTest'}"
+<table class="layui-table" lay-data="{ height:'full-40', url:'{%url 'user:getUserInfo'%}', page:true, id:'idTest'}"
        lay-filter="demo" style="text-align: center">
     <thead>
     <tr>
         <th lay-data="{checkbox:true, fixed: true}"></th>
         <th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
         <th lay-data="{field:'username', width:80}">用户名</th>
+        <th lay-data="{field:'Name', width:80}">姓名</th>
+                <th lay-data="{field:'phone', width:80}">手机号</th>
+
         <th lay-data="{field:'status', width:85, sort: true}">状态</th>
-        <th lay-data="{field:'group', width:80}">用户组</th>
+        <th lay-data="{field:'group', width:120}">用户组</th>
         <th lay-data="{field:'permissions', width:250}">权限</th>
         <!--<th lay-data="{field:'experience', width:100, sort: true}">积分</th>-->
 
@@ -76,8 +79,9 @@
             } else if (obj.event === 'change') {
 
                 layer.open({
+                    title: '权限分配',
                     type: 2,
-                    area: ['700px', '450px'],
+                    area: ['680px', '470px'],
                     fixed: false, //不固定
                     maxmin: true,
                     content: '/user/permissions/'

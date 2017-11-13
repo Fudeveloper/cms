@@ -4,3 +4,6 @@ from django.shortcuts import render
 # 设备管理主要界面
 def main(request):
     return render(request, 'device/main.html')
+
+def control(request):
+    return render(request, 'device/control.html')
