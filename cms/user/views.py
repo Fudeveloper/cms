@@ -1,17 +1,21 @@
+import requests
+import json
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.conf import settings
-import requests
 
-
+# 请求头
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64)'}
-api_link = ""
-if settings.DEBUG == False:
-    global api_link
-    api_link = "http://123.207.68.28/"
-else:
-    global api_link
-    api_link = "127.0.0.1"
+# 服务器地址
+api_link = "http://120.78.62.39:8088/"
+
+
+# if settings.DEBUG == False:
+#     global api_link
+#     api_link = "http://123.207.68.28/"
+# else:
+#     global api_link
+#     api_link = "127.0.0.1"
 
 
 # Create your views here.
@@ -48,29 +52,36 @@ def login_handle(request):
     post_info = request.POST
     username = post_info.get('username')
     passwd = post_info.get('passwd')
-    # 验证用户
 
+    # 与服务器通信,验证用户
     post_data = {"userName": username, "passWord": passwd}
-    headers = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64)'}
-    requests.post(url=api_link + "Account/Logon/",data=passwd,headers=headers)
+    res = requests.post(url=api_link + "/Api/Account/Logon/", data=post_data, headers=headers)
+    # 正确返回登录成功
+    response_data = json.loads(res.text)['errorData']
 
-    if username == "123" and passwd == "123":
+    # if username == "123" and passwd == "123":
+    if response_data == "登录成功":
         # 用户账号和密码正确，进入主页
         red = redirect('/user/index/')
         # request.session['username'] = username
         # request.session['user_id'] = uname
         red.set_cookie('username', username)
         context = {"username": username}
-        # return
         return red
-        # return render(request, 'user/index1.html', context)
+
     else:
-        context = {'error': 'error'}
+        context = {'result': 'error'}
         return render(request, 'user/login.html', context)
 
 
 # 注销
 def logout(request):
+    # 服务器上登出用户
+    res = requests.post(url=api_link + "/Api/Account/LogOut/", headers=headers)
+    response_data = json.loads(res.text)['errorData']
+    print(response_data)
+
+    # 本地浏览器退出
     red = redirect('/user/login/')
     red.delete_cookie('username')
     # print(request.COOKIES['username'])

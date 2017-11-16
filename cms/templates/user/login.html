@@ -34,7 +34,11 @@
             <input type="password" placeholder="密码" class="login_txtbx " name="passwd"/>
 
         </div>
-
+        {% if result == 'error' %}
+        <div class="layui-user-icon larry-login" style="height: 20px;">
+            <a id="error_message" style="color: #0094ff">用户名或密码错误</a>
+        </div>
+        {% endif %}
         <!--验证码预留-->
         <!--<div class="layui-val-icon larry-login">-->
         <!--<div class="layui-code-box">-->
@@ -54,6 +58,7 @@
 <script type="text/javascript" src="/static/plugins/layui/layui.js"></script>
 <script type="text/javascript" src="/static/build/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="/static/build/js/jparticle.jquery.js"></script>
+
 <!-- <script type="text/javascript" src="../common/js/larry-canvs.js"></script> -->
 <!--<script type="text/javascript" src="/static/js/login.js"></script>-->
 </body>
