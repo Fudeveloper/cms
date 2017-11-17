@@ -25,12 +25,12 @@
     <tr>
         <th lay-data="{checkbox:true, fixed: true}"></th>
         <th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
-        <th lay-data="{field:'username', width:80}">用户名</th>
-        <th lay-data="{field:'Name', width:80}">姓名</th>
-                <th lay-data="{field:'phone', width:80}">手机号</th>
+        <th lay-data="{field:'userName', width:80}">用户名</th>
+        <th lay-data="{field:'name', width:80}">姓名</th>
+        <th lay-data="{field:'phone', width:80}">手机号</th>
 
         <th lay-data="{field:'status', width:85, sort: true}">状态</th>
-        <th lay-data="{field:'group', width:120}">用户组</th>
+        <th lay-data="{field:'groupID', width:120}">用户组</th>
         <th lay-data="{field:'permissions', width:250}">权限</th>
         <!--<th lay-data="{field:'experience', width:100, sort: true}">积分</th>-->
 
@@ -45,8 +45,8 @@
 
 <script type="text/html" id="barDemo">
     <!--<a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>-->
-    <a class="layui-btn layui-btn-mini" lay-event="edit">更改密码</a>
-    <a class="layui-btn  layui-btn-normal layui-btn-mini" lay-event="change" id="change">变更权限</a>
+    <a class="layui-btn layui-btn-mini" lay-event="change_passwd">更改密码</a>
+    <a class="layui-btn  layui-btn-normal layui-btn-mini" lay-event="change_permiss" id="change_permiss">变更权限</a>
 
 
     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除用户</a>
@@ -71,13 +71,26 @@
                 layer.msg('ID：' + data.id + ' 的查看操作');
             } else if (obj.event === 'del') {
                 layer.confirm('真的删除行么', function (index) {
+//                    界面删除
                     obj.del();
+//                    服务器删除
+//                    console.log(index);
                     layer.close(index);
                 });
-            } else if (obj.event === 'edit') {
-                layer.alert('编辑行：<br>' + JSON.stringify(data))
-            } else if (obj.event === 'change') {
+            } else if (obj.event === 'change_passwd') {
+                layer.confirm('请输入新的密码：<input type="text" id="new_passwd"/>', function (index) {
 
+//                    获取输入的新密码
+                    console.log($("#new_passwd").val().trim());
+                    layer.close(index);
+                });
+
+                $.get("http://120.78.62.39:8088/Api/Account/UserInfoList", function () {
+                    alert("sucess");
+                })
+//                layer.alert('编辑行：<br>' + JSON.stringify(data))
+            } else if (obj.event === 'change_permiss') {
+//              id为此元素标识，关闭时传入
                 layer.open({
                     title: '权限分配',
                     type: 2,
@@ -110,7 +123,7 @@
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
         });
-
+        $.support.cors=true;
     });
 
 </script>

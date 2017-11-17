@@ -33,8 +33,8 @@ def index(request):
         if request.path != '/user/login/':
             return redirect('/user/login/')
 
-    username = request.COOKIES['username']
-    context = {"username": username}
+    name = request.COOKIES['name']
+    context = {"name": name}
     return render(request, 'user/index.html', context)
 
 
@@ -57,16 +57,24 @@ def login_handle(request):
     post_data = {"userName": username, "passWord": passwd}
     res = requests.post(url=api_link + "/Api/Account/Logon/", data=post_data, headers=headers)
     # 正确返回登录成功
-    response_data = json.loads(res.text)['errorData']
-
+    result = json.loads(res.text)
+    response_data = result['errorData']
     # if username == "123" and passwd == "123":
     if response_data == "登录成功":
         # 用户账号和密码正确，进入主页
         red = redirect('/user/index/')
-        # request.session['username'] = username
+        # request.session['username'] = "123"
         # request.session['user_id'] = uname
+
+        # 查询用户真实姓名
+        intent_name = requests.get("http://120.78.62.39:8088/Api/Account/UserInfo/", headers=headers).text
+        data = json.loads(intent_name)
+        name = data['appendData']['name']
+
+        # 将用户信息存入cookie
         red.set_cookie('username', username)
-        context = {"username": username}
+        red.set_cookie('name', name)
+
         return red
 
     else:
@@ -95,264 +103,14 @@ def permissions(request):
 
 # 模拟获取用户数据
 def getUserInfo(request):
-    return JsonResponse({"code": 0, "msg": "", "count": 33, "data": [{
-        "id": 10000,
-        "username": "user-0",
-        "status": "在线",
-        "group": "系统管理员",
-        "permissions": "增加用户,删除用户,更改用户密码,查看当前登陆人员，配置用户权限，查看所有日志，添加模块，启用/关闭报警方式，解除警报，控制设备，查看数据",
-
-    },
-        {
-            "id": 10001,
-            "username": "user-1",
-            "status": "在线",
-            "group": "生产管理员",
-            "permissions": "添加模块，启用/关闭报警方式，解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10002,
-            "username": "user-2",
-            "status": "在线",
-            "group": "操作员",
-            "permissions": "解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10003,
-            "username": "user-3",
-            "status": "在线",
-            "group": "来宾",
-            "permissions": "查看数据",
-
-        },
-        {
-            "id": 10000,
-            "username": "user-0",
-            "status": "在线",
-            "group": "系统管理员",
-            "permissions": "增加用户,删除用户,更改用户密码,查看当前登陆人员，配置用户权限，查看所有日志，添加模块，启用/关闭报警方式，解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10001,
-            "username": "user-1",
-            "status": "在线",
-            "group": "生产管理员",
-            "permissions": "添加模块，启用/关闭报警方式，解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10002,
-            "username": "user-2",
-            "status": "在线",
-            "group": "操作员",
-            "permissions": "解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10003,
-            "username": "user-3",
-            "status": "在线",
-            "group": "来宾",
-            "permissions": "查看数据",
-
-        },
-        {
-            "id": 10000,
-            "username": "user-0",
-            "status": "在线",
-            "group": "系统管理员",
-            "permissions": "增加用户,删除用户,更改用户密码,查看当前登陆人员，配置用户权限，查看所有日志，添加模块，启用/关闭报警方式，解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10001,
-            "username": "user-1",
-            "status": "在线",
-            "group": "生产管理员",
-            "permissions": "添加模块，启用/关闭报警方式，解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10002,
-            "username": "user-2",
-            "status": "在线",
-            "group": "操作员",
-            "permissions": "解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10003,
-            "username": "user-3",
-            "status": "在线",
-            "group": "来宾",
-            "permissions": "查看数据",
-
-        },
-        {
-            "id": 10000,
-            "username": "user-0",
-            "status": "在线",
-            "group": "系统管理员",
-            "permissions": "增加用户,删除用户,更改用户密码,查看当前登陆人员，配置用户权限，查看所有日志，添加模块，启用/关闭报警方式，解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10001,
-            "username": "user-1",
-            "status": "在线",
-            "group": "生产管理员",
-            "permissions": "添加模块，启用/关闭报警方式，解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10002,
-            "username": "user-2",
-            "status": "在线",
-            "group": "操作员",
-            "permissions": "解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10003,
-            "username": "user-3",
-            "status": "在线",
-            "group": "来宾",
-            "permissions": "查看数据",
-
-        },
-        {
-            "id": 10000,
-            "username": "user-0",
-            "status": "在线",
-            "group": "系统管理员",
-            "permissions": "增加用户,删除用户,更改用户密码,查看当前登陆人员，配置用户权限，查看所有日志，添加模块，启用/关闭报警方式，解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10001,
-            "username": "user-1",
-            "status": "在线",
-            "group": "生产管理员",
-            "permissions": "添加模块，启用/关闭报警方式，解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10002,
-            "username": "user-2",
-            "status": "在线",
-            "group": "操作员",
-            "permissions": "解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10003,
-            "username": "user-3",
-            "status": "在线",
-            "group": "来宾",
-            "permissions": "查看数据",
-
-        },
-        {
-            "id": 10000,
-            "username": "user-0",
-            "status": "在线",
-            "group": "系统管理员",
-            "permissions": "增加用户,删除用户,更改用户密码,查看当前登陆人员，配置用户权限，查看所有日志，添加模块，启用/关闭报警方式，解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10001,
-            "username": "user-1",
-            "status": "在线",
-            "group": "生产管理员",
-            "permissions": "添加模块，启用/关闭报警方式，解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10002,
-            "username": "user-2",
-            "status": "在线",
-            "group": "操作员",
-            "permissions": "解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10003,
-            "username": "user-3",
-            "status": "在线",
-            "group": "来宾",
-            "permissions": "查看数据",
-
-        },
-        {
-            "id": 10000,
-            "username": "user-0",
-            "status": "在线",
-            "group": "系统管理员",
-            "permissions": "增加用户,删除用户,更改用户密码,查看当前登陆人员，配置用户权限，查看所有日志，添加模块，启用/关闭报警方式，解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10001,
-            "username": "user-1",
-            "status": "在线",
-            "group": "生产管理员",
-            "permissions": "添加模块，启用/关闭报警方式，解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10002,
-            "username": "user-2",
-            "status": "在线",
-            "group": "操作员",
-            "permissions": "解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10003,
-            "username": "user-3",
-            "status": "在线",
-            "group": "来宾",
-            "permissions": "查看数据",
-
-        },
-        {
-            "id": 10000,
-            "username": "user-0",
-            "status": "在线",
-            "group": "系统管理员",
-            "permissions": "增加用户,删除用户,更改用户密码,查看当前登陆人员，配置用户权限，查看所有日志，添加模块，启用/关闭报警方式，解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10001,
-            "username": "user-1",
-            "status": "在线",
-            "group": "生产管理员",
-            "permissions": "添加模块，启用/关闭报警方式，解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10002,
-            "username": "user-2",
-            "status": "在线",
-            "group": "操作员",
-            "permissions": "解除警报，控制设备，查看数据",
-
-        },
-        {
-            "id": 10003,
-            "username": "user-3",
-            "status": "在线",
-            "group": "来宾",
-            "permissions": "查看数据",
-
-        }
-
-    ]})
+    # 从服务器获取所有用户信息
+    result = requests.get(api_link + "/Api/Account/UserInfoList", headers=headers).text
+    json_result = json.loads(result)
+    # 用户信息
+    user_infos = json_result['appendData']
+    # 用户数量
+    user_count = len(user_infos)
+    return JsonResponse({"code": 0, "msg": "", "count": user_count, "data": user_infos})
 
 
 import json

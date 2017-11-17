@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>layer iframe 示例</title>
     <link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all">
-    <link rel="stylesheet" href="/static/123.css" media="all">
+    <link rel="stylesheet" href="/static/build/css/un.css" media="all">
 
     <style>
         body {
@@ -132,8 +132,8 @@
 <div style="text-align: right;">
 
 
-    <button class="layui-btn" id="add">变更权限</button>
-    <button class="layui-btn" id="add">取消</button>
+    <button class="layui-btn" id="sub_change">变更权限</button>
+    <button class="layui-btn" id="cancel">取消</button>
     <!--<button class="layui-btn layui-btn-primary" id="new">在父层弹出一个层</button>-->
     <!--<button class="layui-btn layui-btn-primary" id="transmit">给父页面传值</button>-->
     <!--<button class="layui-btn layui-btn-primary" id="closeIframe">关闭iframe</button>-->
@@ -152,7 +152,20 @@
         var form = layui.form;
 
     });
+    //获取窗口索引
+    var index = parent.layer.getFrameIndex(window.name);
 
+    //    提交权限变更的操作
+    $("#sub_change").on("click", function () {
+//        向服务器提交变更操作
+
+        parent.layer.close(index);
+    });
+
+    //    权限变更取消
+    $("#cancel").on("click", function () {
+        parent.layer.close(index);
+    })
 </script>
 <!--<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");-->
 <!--document.write(unescape("%3Cspan id='cnzz_stat_icon_30088308'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "w.cnzz.com/c.php%3Fid%3D30088308' type='text/javascript'%3E%3C/script%3E"));</script>-->
