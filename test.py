@@ -29,3 +29,11 @@ print(user_infos)
 # json_result = json.loads(result)
 # user_infos = json_result['appendData']
 # print(user_infos)
+
+
+
+# data = {"passWordOld": "null", "passWordNew": "123"}
+# result = requests.put("http://120.78.62.39:8088/Api/Account/PassWordChange?id=9", json=data, headers=headers).content
+# print("123")
+# json_result = json.loads(result)
+# print result

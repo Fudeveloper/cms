@@ -4,6 +4,34 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.conf import settings
 
+# status = False
+# 权限信息
+permissons = {}
+
+# 权限验证装饰器
+def out_side(permiss_name):
+    print("验证{}权限".format(permiss_name))
+
+    def check_permiss(func):
+        print("装饰器初始化")
+
+        def inner(*args, **kwargs):
+            print("验证权限")
+            # if status = True:
+
+            if permissons[permiss_name] == True:
+                print("通过验证")
+                return_value = func(*args, **kwargs)
+                return return_value
+            else:
+                print("未通过验证")
+                return HttpResponse("您无权限访问此页面，请联系系统管理员。")
+
+        return inner
+
+    return check_permiss
+
+
 # 请求头
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64)'}
 # 服务器地址
@@ -43,6 +71,7 @@ def main(request):
 
 
 # 查看用户界面
+# @out_side("listUser")
 def listUser(request):
     return render(request, 'user/listUser.html')
 
@@ -104,8 +133,9 @@ def permissions(request):
 # 模拟获取用户数据
 def getUserInfo(request):
     # 从服务器获取所有用户信息
-    result = requests.get(api_link + "/Api/Account/UserInfoList", headers=headers).text
+    result = requests.get(api_link + "/Api/Account/UserInfoList/", headers=headers).text
     json_result = json.loads(result)
+    print(json_result)
     # 用户信息
     user_infos = json_result['appendData']
     # 用户数量
@@ -127,3 +157,7 @@ def test(reqeust):
 
 def test_ajax(request):
     return render(request, 'user/test_ajax.html')
+
+
+def refuse(request):
+    return render(request, 'user/refuse.html')
