@@ -3,10 +3,12 @@ import json
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 
 # status = False
 # 权限信息
 permissons = {}
+
 
 # 权限验证装饰器
 def out_side(permiss_name):
@@ -78,18 +80,22 @@ def listUser(request):
 
 # 登陆处理
 def login_handle(request):
+    # 获取并设置用户ua
+    global headers
+    ua = request.META.get('HTTP_USER_AGENT', 'unknown')
+    headers = {'User-Agent': ua}
+    # 取得用户提交的用户名和密码
     post_info = request.POST
     username = post_info.get('username')
     passwd = post_info.get('passwd')
-
     # 与服务器通信,验证用户
     post_data = {"userName": username, "passWord": passwd}
     res = requests.post(url=api_link + "/Api/Account/Logon/", data=post_data, headers=headers)
     # 正确返回登录成功
     result = json.loads(res.text)
     response_data = result['errorData']
-    # if username == "123" and passwd == "123":
     if response_data == "登录成功":
+        print("登录成功")
         # 用户账号和密码正确，进入主页
         red = redirect('/user/index/')
         # request.session['username'] = "123"
@@ -103,10 +109,10 @@ def login_handle(request):
         # 将用户信息存入cookie
         red.set_cookie('username', username)
         red.set_cookie('name', name)
-
         return red
 
     else:
+        # 用户名密码错误处理
         context = {'result': 'error'}
         return render(request, 'user/login.html', context)
 
@@ -121,6 +127,7 @@ def logout(request):
     # 本地浏览器退出
     red = redirect('/user/login/')
     red.delete_cookie('username')
+    red.delete_cookie('name')
     # print(request.COOKIES['username'])
     return red
 
@@ -130,7 +137,7 @@ def permissions(request):
     return render(request, 'user/permissions.html')
 
 
-# 模拟获取用户数据
+# 列出所有用户
 def getUserInfo(request):
     # 从服务器获取所有用户信息
     result = requests.get(api_link + "/Api/Account/UserInfoList/", headers=headers).text
@@ -143,7 +150,7 @@ def getUserInfo(request):
     return JsonResponse({"code": 0, "msg": "", "count": user_count, "data": user_infos})
 
 
-import json
+
 
 
 def test(reqeust):
@@ -159,5 +166,23 @@ def test_ajax(request):
     return render(request, 'user/test_ajax.html')
 
 
-def refuse(request):
-    return render(request, 'user/refuse.html')
+# 修改密码
+@csrf_exempt
+def PassWordChange(request, user_id):
+    data = {"passWordOld": "null", "passWordNew": "lalala"}
+    result = requests.put("http://120.78.62.39:8088/Api/Account/PassWordChange?id={}".format(user_id), json=data,
+                          headers=headers).text
+    result = json.loads(result)
+    print(result['errorData'])
+    # result = str(result)
+    # json_result = json.loads(result)
+    # print(json_result)
+    # return HttpResponse(id)
+    # print(result['errorData'])
+    # if result['errorData']=='密码修改成功':
+    #     status = 'ok'
+    # else:
+    #     status = 'false'
+
+    json_data = {"status": 1}
+    return JsonResponse(json_data)

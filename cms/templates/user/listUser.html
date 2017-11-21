@@ -78,23 +78,31 @@
                     layer.close(index);
                 });
             } else if (obj.event === 'change_passwd') {
+
                 layer.confirm('请输入新的密码：<input type="text" id="new_passwd"/>', function (index) {
 
-//                    获取输入的新密码
-                    var new_passwd =$("#new_passwd").val().trim()
-//                    $.post("http://120.78.62.39:8088/Api/Account/PassWordChange?id="+9,{"passWordOld":null,"passWordNew":new_passwd},function () {
-//                        alert("123");
-//                    });
+                    data = obj.data
+//                     获取输入的新密码
+                    var new_passwd = $("#new_passwd").val().trim();
+
+//                    提交密码修改请求
                     $.ajax({
-                        url:"http://120.78.62.39:8088/Api/Account/PassWordChange?id="+9,
-                        type:"PUT",
-                        data:{"passWordOld":null,"passWordNew":new_passwd},
-                        crossDomain:true,
-                        dataType :'json',
-                        sucess:function () {
+                        url: "/user/PassWordChange/" + data['id'],
+                        type: "POST",
+                        data: {"passWordOld": null, "passWordNew": new_passwd},
+                        crossDomain: true,
+                        dataType: 'json',
+                        success: function () {
                             alert("sucess");
+                        },
+                        error: function () {
+                            alert("error");
+
                         }
+
                     });
+
+                    layer.close(index);
                     layer.close(index);
                 });
 
