@@ -7,8 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all">
-    <script src="/static/build/js/jsonExportToCSV.js"></script>
-
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
 <body>
@@ -20,14 +18,13 @@
     <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
     <button class="layui-btn" data-type="isAll">验证是否全选</button>
     <div style="float: right;">
-        <button class="layui-btn" data-type="export" id="export">导出到Excel</button>
+        <button class="layui-btn" data-type="isAll" id="export">导出到Excel</button>
 
     </div>
 
 </div>
 
-<table id="tab" class="layui-table"
-       lay-data="{ height:'full-40', url:'{%url 'user:getUserInfo'%}', page:true, id:'idTest'}"
+<table class="layui-table" lay-data="{ height:'full-40', url:'{%url 'user:getUserInfo'%}', page:true, id:'idTest'}"
        lay-filter="demo" style="text-align: center">
     <thead>
     <tr>
@@ -104,7 +101,7 @@
                             if (data.status == "true") {
                                 alert('修改密码成功');
 
-                            } else {
+                            }else{
                                 alert("修改密码失败，请联系管理员");
                             }
                         },
@@ -132,8 +129,6 @@
                     content: '/user/permissions/'
                 });
             }
-
-
         });
 
         var $ = layui.$, active = {
@@ -158,40 +153,6 @@
             active[type] ? active[type].call(this) : '';
         });
         $.support.cors = true;
-
-//        导出用户列表至csv
-        $('#export').click(function () {
-            $.ajax({
-                url: "/user/getUserInfo/",
-                type: "GET",
-                success: function (data) {
-                    JSonToCSV.setDataConver({
-                        data: data.data,
-                        fileName: 'users',
-                        columns: {
-                            title: ['ID', '用户名', '姓名','手机号','状态','用户组','权限'],
-                            key: ['id', 'userName', 'name','phone','status','groupID','permissions'],
-                            formatter: function (n, v) {
-                                if (n === 'amont' && !isNaN(Number(v))) {
-                                    v = v + '';
-                                    v = v.split('.');
-                                    v[0] = v[0].replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
-                                    return v.join('.');
-                                }
-                                if (n === 'proportion') return v + '%';
-                            }
-                        }
-                    });
-                },
-                error: function () {
-                    alert("导出失败，请联系管理员");
-
-                }
-
-            });
-
-
-        })
     });
 
 </script>

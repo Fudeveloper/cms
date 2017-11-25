@@ -1,7 +1,8 @@
 import requests
 import json
+import re
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, FileResponse, StreamingHttpResponse
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 
@@ -150,9 +151,6 @@ def getUserInfo(request):
     return JsonResponse({"code": 0, "msg": "", "count": user_count, "data": user_infos})
 
 
-
-
-
 def test(reqeust):
     res = {"fan": "open", "light": "close"}
     response = HttpResponse(json.dumps(res), content_type="application/json")
@@ -169,20 +167,43 @@ def test_ajax(request):
 # 修改密码
 @csrf_exempt
 def PassWordChange(request, user_id):
-    data = {"passWordOld": "null", "passWordNew": "lalala"}
+    # 向服务器发送修改密码请求
+    post_info = request.POST
+    new_passwd = post_info.get('passWordNew')
+    data = {"passWordOld": "null", "passWordNew": new_passwd}
     result = requests.put("http://120.78.62.39:8088/Api/Account/PassWordChange?id={}".format(user_id), json=data,
                           headers=headers).text
-    result = json.loads(result)
-    print(result['errorData'])
-    # result = str(result)
-    # json_result = json.loads(result)
-    # print(json_result)
-    # return HttpResponse(id)
-    # print(result['errorData'])
-    # if result['errorData']=='密码修改成功':
-    #     status = 'ok'
-    # else:
-    #     status = 'false'
 
-    json_data = {"status": 1}
+    if re.findall('密码修改成功', result):
+        status = 'true'
+    else:
+        status = 'false'
+    print("status:" + status)
+    json_data = {"status": status}
     return JsonResponse(json_data)
+
+
+# 导出用户信息
+# def export_userlist(request,head,body):
+
+# def export_userlist(request):
+#     def file_iterator(file_name, chunk_size=512):
+#         with open(file_name) as f:
+#             while True:
+#                 c = f.read(chunk_size)
+#                 if c:
+#                     yield c
+#                 else:
+#                     break
+#
+#     def get_streaming(head, body):
+#         return head + "\n" + body
+#
+#     # the_file_name = "big_file.pdf"
+#     # response = StreamingHttpResponse(file_iterator(the_file_name))
+#     response = StreamingHttpResponse(get_streaming("姓名", "123"))
+#
+#     response['Content-Type'] = 'application/octet-stream'
+#     response['Content-Disposition'] = 'attachment;filename="{0}"'.format("123.csv")
+#
+#     return response
