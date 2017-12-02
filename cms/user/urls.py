@@ -37,6 +37,6 @@ urlpatterns = [
     url(r'^test/$', views.test, name='test'),
     url(r'^test_ajax/$', views.test_ajax, name='test'),
     url(r'^PassWordChange/(\d*)$', views.PassWordChange, name='PassWordChange'),
-    url(r'^export_userlist/$', views.export_userlist, name='export_userlist'),
+    # url(r'^export_userlist/$', views.export_userlist, name='export_userlist'),
 
 ]

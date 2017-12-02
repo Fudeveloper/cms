@@ -23,4 +23,6 @@ urlpatterns = [
     url(r'^operateLog/$', views.operateLog, name='operateLog'),
     url(r'^warnLog/$', views.warnLog, name='warnLog'),
 
+    url(r'^warn_drawing/$', views.warn_drawing, name='warn_drawing'),
+
 ]

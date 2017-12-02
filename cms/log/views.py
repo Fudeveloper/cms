@@ -16,3 +16,6 @@ def operateLog(request):
 
 def warnLog(request):
     return render(request, 'log/warnLog.html')
+
+def warn_drawing(request):
+    return render(request, 'log/warn_drawing.html')

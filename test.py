@@ -1,6 +1,6 @@
 import requests
 
-post_data = {"username": "lalala", "password": "123"}
+post_data = {"username": "admin", "password": "admin"}
 import json
 
 # post_data = json.dumps(post_data, ensure_ascii=False,)
@@ -32,7 +32,12 @@ print(response_data)
 
 
 # 修改任意用户密码
-data = {"passWordOld": "null", "passWordNew": "123"}
-result = requests.put("http://120.78.62.39:8088/Api/Account/PassWordChange?id=9", json=data, headers=headers).text
+# data = {"passWordOld": "null", "passWordNew": "123"}
+# result = requests.put("http://120.78.62.39:8088/Api/Account/PassWordChange?id=9", json=data, headers=headers).text
+#
+# print(result)
+
+
+result = requests.get("http://120.78.62.39:8088/Api/Permiss/Info?userId=9",  headers=headers).text
 
 print(result)
