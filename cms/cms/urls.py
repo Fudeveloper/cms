@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from . import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -24,5 +25,7 @@ urlpatterns = [
     url(r'^security/', include('security.urls', namespace='security')),
     url(r'^warn/', include('warn.urls', namespace='warn')),
     url(r'^device/', include('device.urls', namespace='device')),
+    url(r'^innerIndex.html$', name="innerIndex", view=views.innerIndex),
+
 
 ]

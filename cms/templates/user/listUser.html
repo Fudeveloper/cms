@@ -27,7 +27,7 @@
 </div>
 
 <table id="tab" class="layui-table"
-       lay-data="{ height:'full-40', url:'{%url 'user:getUserInfo'%}', page:true, id:'idTest'}"
+       lay-data="{ height:'full-40', url:'{%url 'user:getUserInfo'%}', page:true, id:'userList'}"
        lay-filter="demo" style="text-align: center">
     <thead>
     <tr>
@@ -116,7 +116,7 @@
                     });
 
                     layer.close(index);
-                    layer.close(index);
+//                    layer.close(index);
                 });
 
 
@@ -138,17 +138,17 @@
 
         var $ = layui.$, active = {
             getCheckData: function () { //获取选中数据
-                var checkStatus = table.checkStatus('idTest')
+                var checkStatus = table.checkStatus('userList')
                     , data = checkStatus.data;
                 layer.alert(JSON.stringify(data));
             }
             , getCheckLength: function () { //获取选中数目
-                var checkStatus = table.checkStatus('idTest')
+                var checkStatus = table.checkStatus('userList')
                     , data = checkStatus.data;
                 layer.msg('选中了：' + data.length + ' 个');
             }
             , isAll: function () { //验证是否全选
-                var checkStatus = table.checkStatus('idTest');
+                var checkStatus = table.checkStatus('userList');
                 layer.msg(checkStatus.isAll ? '全选' : '未全选')
             }
         };
