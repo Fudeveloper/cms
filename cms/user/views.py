@@ -2,59 +2,20 @@ import requests
 import json
 import re
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, FileResponse, StreamingHttpResponse
-from django.conf import settings
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import logging
 import base64
+from decorate import *
 
 logger = logging.getLogger('cms.views')
 
-# status = False
 # 权限信息
-permissons = {"lala":True}
-api_link = settings.__getattr__("API_ADDRESS")
-
-
-# 权限验证装饰器
-def check_permiss(permiss_name):
-    print("验证{}权限".format(permiss_name))
-
-    def inner_check_permiss(func):
-        print("装饰器初始化")
-
-        def inner(*args, **kwargs):
-            print("验证权限")
-            try:
-                permiss_result = permissons[permiss_name]
-            except:
-                permiss_result = ""
-            if permiss_result:
-                print("通过验证")
-                return_value = func(*args, **kwargs)
-                return return_value
-            else:
-                print("未通过验证")
-                return HttpResponse("您暂无权限访问此页面")
-
-        return inner
-
-    return inner_check_permiss
-
-
-# 登录验证装饰器
-def auth(func):
-    def inner(request, *args, **kwargs):
-        username = request.COOKIES.get('username')
-        if not username:
-            return redirect('/user/login/')
-        return func(request, *args, **kwargs)
-
-    return inner
+api_link = settings.API_ADDRESS
+headers = settings.HEADERS
 
 
 # 请求头
-headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64)'}
 
 
 # 服务器地址
@@ -68,7 +29,6 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64)'}
 #     api_link = "127.0.0.1"
 
 
-# Create your views here.
 # 登陆页面
 def login(request):
     # print(settings.__getattr__("API_ADDRESS"))
@@ -77,6 +37,7 @@ def login(request):
 
 
 # 主页
+@auth
 def index(request):
     # # 如果cookie不存在
     # if 'username' not in request.COOKIES:
@@ -96,18 +57,28 @@ def main(request):
 
 # 查看用户界面
 # @check_permiss("listUser")
-@check_permiss("lala")
+@check_permiss("selectAllUsers")
 @auth
 def listUser(request):
-    return render(request, 'user/listUser.html')
+    intent_name = requests.get(api_link + "/Api/Account/UserInfo", headers=headers).text
+    data = json.loads(intent_name)
+    print(intent_name)
+    alterUserPassword = only_check_permiss("alterUserPassword")
+    alterUserPermiss = only_check_permiss("alterUserPermiss")
+    delUser = only_check_permiss("delUser")
+    # alterUserPassword
+    context = {
+        "alterUserPassword": alterUserPassword,
+        "alterUserPermiss": alterUserPermiss,
+        "delUser": delUser
+    }
+    return render(request, 'user/listUser.html', context=context)
 
 
 # 登陆处理
 def login_handle(request):
     # 获取并设置用户ua
-    global headers
-    ua = request.META.get('HTTP_USER_AGENT', 'unknown')
-    headers = {'User-Agent': ua}
+    # ua = request.META.get('HTTP_USER_AGENT', 'unknown')
     # 取得用户提交的用户名和密码
     post_info = request.POST
     username = post_info.get('username')
@@ -117,7 +88,7 @@ def login_handle(request):
     res = requests.post(url=api_link + "/Api/Account/Logon", data=post_data, headers=headers)
     # 正确返回登录成功
     result = json.loads(res.text)
-    print(result)
+    # print(result)
     response_data = ""
     try:
         response_data = result['errorData']
@@ -127,24 +98,31 @@ def login_handle(request):
         print("登录成功")
         # 用户账号和密码正确，进入主页
         red = redirect('/user/index/')
-
         # 查询用户真实姓名
         intent_name = requests.get(api_link + "/Api/Account/UserInfo", headers=headers).text
-        print(intent_name)
         data = json.loads(intent_name)
-        name = data['appendData']['name']
-        print(name)
+        append_data = data['appendData']
+        name = append_data['name']
+        userid = append_data['id']
         name2 = base64.b64encode(str(name).encode("utf-8"))
-        print(name2)
         # 将用户信息存入cookie
         red.set_cookie('username', username)
         red.set_cookie('name', name2)
-        return red
+        red.set_cookie('userid', userid)
+        permissions_result = requests.get(api_link + "/Api/Permiss/GetData?userId={}".format(userid),
+                                          headers=headers).text
+        permissions_result = json.loads(permissions_result)['appendData']
 
-    # elif response_data == "登录成功":
-    #     # 用户名密码错误处理
-    #     context = {'result': 'error'}
-    #     return render(request, 'user/login.html', context)
+        permissions = []
+        for i in range(len(permissions_result)):
+            permissions.append(permissions_result[i]['permissName'])
+            print(permissions_result[i])
+        # 动态创建变量名
+        variable_name = 'permissions_{0}'.format(userid)
+        print(variable_name)
+        exec('settings.{0} = permissions'.format(variable_name))
+        # print(settings.__getattr__(variable_name))
+        return red
 
     elif response_data == "该用户未注册":
         context = {'result': 'unregister'}
@@ -162,6 +140,11 @@ def login_handle(request):
 # 注销
 @auth
 def logout(request):
+    # 本地浏览器退出
+    red = redirect('/user/login/')
+    red.delete_cookie('username')
+    red.delete_cookie('name')
+    red.delete_cookie('userid')
     # 服务器上登出用户
     res = requests.post(url=api_link + "/Api/Account/LogOut/", headers=headers)
     response_data = ""
@@ -169,18 +152,14 @@ def logout(request):
         response_data = json.loads(res.text)['errorData']
     except Exception as e:
         logger.error(e)
-    print(response_data)
-
-    # 本地浏览器退出
-    red = redirect('/user/login/')
-    red.delete_cookie('username')
-    red.delete_cookie('name')
-    # print(request.COOKIES['username'])
+    # print(response_data)
     return red
 
 
 # 权限分配页面
+
 @auth
+@check_permiss("alterUserPermiss")
 def permissions(request):
     return render(request, 'user/permissions.html')
 

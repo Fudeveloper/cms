@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>layer iframe 示例</title>
+    <title>开启/关闭报警模块</title>
     <link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="/static/build/css/un.css" media="all">
 
@@ -31,6 +31,7 @@
             src="/static/build/js/unknow.js" charset="gb2312"></script>
 </head>
 <body>
+<form class="layui-form">
 <div>
 
     <div>
@@ -45,30 +46,30 @@
         <div class="layui-form">
             <div>
                 <label class="layui-form-label">语音报警</label>
-                <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                <input type="checkbox" name="voidAlert" lay-skin="switch" lay-text="ON|OFF">
             </div>
             <div style="clear: both"></div>
             <div>
                 <label class="layui-form-label">界面报警</label>
-                <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                <input type="checkbox" name="interfaceAlert" lay-skin="switch" lay-text="ON|OFF">
             </div>
 
             <div style="clear: both"></div>
             <div>
                 <label class="layui-form-label">短信报警</label>
-                <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                <input type="checkbox" name="messageAlert" lay-skin="switch" lay-text="ON|OFF">
             </div>
 
             <div style="clear: both"></div>
             <div>
                 <label class="layui-form-label">邮件报警</label>
-                <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                <input type="checkbox" name="emailAlert" lay-skin="switch" lay-text="ON|OFF">
             </div>
 
             <div style="clear: both"></div>
             <div>
                 <label class="layui-form-label">声光报警</label>
-                <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                <input type="checkbox" name="acousto-opticAlert" lay-skin="switch" lay-text="ON|OFF">
             </div>
         </div>
 
@@ -82,13 +83,13 @@
 <div style="text-align: right;">
 
 
-    <button class="layui-btn" id="add">提交</button>
-    <button class="layui-btn" id="add">取消</button>
+    <button class="layui-btn" lay-submit lay-filter="*">提交</button>
+    <button class="layui-btn">取消</button>
     <!--<button class="layui-btn layui-btn-primary" id="new">在父层弹出一个层</button>-->
     <!--<button class="layui-btn layui-btn-primary" id="transmit">给父页面传值</button>-->
     <!--<button class="layui-btn layui-btn-primary" id="closeIframe">关闭iframe</button>-->
 </div>
-
+</form>
 <script src="/static/build/js/jquery-1.12.4.min.js"></script>
 <script src="/static/plugins/layui/layui.js"></script>
 
@@ -100,7 +101,10 @@
 <script>
     layui.use(['form'], function () {
         var form = layui.form;
-
+        form.on('submit(*)', function (data) {
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
     });
 
 </script>

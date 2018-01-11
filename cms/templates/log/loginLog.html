@@ -15,13 +15,12 @@
 
 
 
-<table class="layui-table" lay-data="{height:'full-5', url:'{%url 'user:getUserInfo'%}', page:false}">
+<table class="layui-table" lay-data="{height:'full-5', url:'{%url 'log:loginLog_handler'%}', page:true}">
   <thead>
     <tr>
-      <th lay-data="{field:'id', width:80, sort: true}">ID</th>
-      <th lay-data="{field:'Name', width:150}">用户名</th>
+      <th lay-data="{field:'name', width:80, sort: true}">用户名</th>
+      <th lay-data="{field:'content', width:150}">登录操作状态</th>
       <th lay-data="{field:'time', width:300, sort: true}">时间</th>
-      <th lay-data="{field:'content', width:400}">事件描述</th>
 
     </tr>
   </thead>

@@ -26,6 +26,6 @@ urlpatterns = [
     url(r'^warn/', include('warn.urls', namespace='warn')),
     url(r'^device/', include('device.urls', namespace='device')),
     url(r'^innerIndex.html$', name="innerIndex", view=views.innerIndex),
-
+    url(r'^test/$', name="test", view=views.test),
 
 ]

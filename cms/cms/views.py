@@ -15,3 +15,7 @@ def innerIndex(request):
 
 def refuse(request):
     return render(request, 'refuse.html')
+
+
+def test(request):
+    return render(request, 'test.html')

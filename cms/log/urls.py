@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^warnLog/$', views.warnLog, name='warnLog'),
 
     url(r'^warn_drawing/$', views.warn_drawing, name='warn_drawing'),
+    url(r'^loginLog_handler/$', views.loginLog_handler, name='loginLog_handler'),
 
 ]

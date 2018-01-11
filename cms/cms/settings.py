@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 import os
 
+HEADERS = {'User-Agent': 'webClient'}
 API_ADDRESS = "http://120.78.62.39:8088"
 # API_ADDRESS = "http://192.168.1.200:8088/"
 
@@ -124,7 +125,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/

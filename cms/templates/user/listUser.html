@@ -52,12 +52,23 @@
 </table>
 
 <script type="text/html" id="barDemo">
-    <!--<a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>-->
+    {% ifequal alterUserPassword True %}
     <a class="layui-btn layui-btn-mini" lay-event="change_passwd">更改密码</a>
-    <a class="layui-btn  layui-btn-normal layui-btn-mini" lay-event="change_permiss" id="change_permiss">变更权限</a>
+    {% else %}
+    <a class="layui-btn layui-btn-mini layui-btn-disabled">更改密码</a>
+    {% endifequal %}
 
-
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除用户</a>
+    {% ifequal alterUserPermiss True %}
+    <a class="layui-btn  layui-btn-normal layui-btn-mini" lay-event="change_permiss">变更权限</a>
+    {% else %}
+    <a class="layui-btn  layui-btn-normal layui-btn-mini layui-btn-disabled">变更权限</a>
+    {% endifequal %}
+    <!--layui-btn-disabled-->
+    {% ifequal delUser True %}
+    <a class="layui-btn layui-btn-danger layui-btn-mini " lay-event="del">删除用户</a>
+    {% else %}
+    <a class="layui-btn layui-btn-danger layui-btn-mini layui-btn-disabled">删除用户</a>
+    {% endifequal %}
 
 </script>
 
@@ -169,8 +180,8 @@
                         data: data.data,
                         fileName: 'users',
                         columns: {
-                            title: ['ID', '用户名', '姓名','手机号','状态','用户组','权限'],
-                            key: ['id', 'userName', 'name','phone','status','groupID','permissions'],
+                            title: ['ID', '用户名', '姓名', '手机号', '状态', '用户组', '权限'],
+                            key: ['id', 'userName', 'name', 'phone', 'status', 'groupID', 'permissions'],
                             formatter: function (n, v) {
                                 if (n === 'amont' && !isNaN(Number(v))) {
                                     v = v + '';

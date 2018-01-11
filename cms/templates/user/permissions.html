@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>layer iframe 示例</title>
+    <title>配置权限</title>
     <link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="/static/build/css/un.css" media="all">
 
@@ -31,12 +31,12 @@
             src="/static/build/js/unknow.js" charset="gb2312"></script>
 </head>
 <body>
-<div>
 
+<form class="layui-form">
     <div style="float: left">
         <div class="site-title">
             <fieldset style="text-align: center">
-                <a name="checkbox">系统管理员</a>
+                <a name="checkbox" style="cursor: pointer">系统管理员</a>
                 <!--<legend><a name="checkbox">系统管理员</a></legend>-->
 
             </fieldset>
@@ -44,23 +44,23 @@
 
         <div class="layui-form">
             <!--美化复选-->
-            <input type="checkbox" name="write" title="增加用户" checked>
+            <input type="checkbox" name="addUser" title="增加用户">
             <br/>
             <br/>
 
             <input type="checkbox" name="dai" title="删除用户">
             <br/>
             <br/>
-            <input type="checkbox" name="jin" title="更改用户密码">
+            <input type="checkbox" name="alterUserPassword" title="更改用户密码">
             <br/>
             <br/>
-            <input type="checkbox" name="write" title="查看在线人员" checked>
+            <input type="checkbox" name="selectLogonUser" title="查看所有用户信息">
             <br/>
             <br/>
-            <input type="checkbox" name="dai" title="配置用户权限">
+            <input type="checkbox" name="alterUserPermiss" title="配置用户权限">
             <br/>
             <br/>
-            <input type="checkbox" name="jin" title="查看登陆日志">
+            <input type="checkbox" name="selectAllLog" title="查看登陆日志">
             <br/>
             <br/>
             <input type="checkbox" name="jin" title="查看操作日志">
@@ -75,16 +75,16 @@
     <div style="float: left">
         <div class="site-title">
             <fieldset style="text-align: center">
-                <a name="checkbox">生产管理员</a>
+                <a name="checkbox" style="cursor: pointer">生产管理员</a>
                 <!--<legend><a name="checkbox">生产管理员</a></legend>-->
             </fieldset>
         </div>
         <div class="layui-form">
             <!--美化复选-->
-            <input type="checkbox" name="write" title="添加模块" checked>
+            <input type="checkbox" name="addModels" title="添加模块" >
             <br/>
             <br/>
-            <input type="checkbox" name="dai" title="启用/关闭报警方式">
+            <input type="checkbox" name="alterAlertSetting" title="启用/关闭报警方式">
 
 
             <br/>
@@ -95,7 +95,7 @@
     <div style="float: left">
         <div class="site-title">
             <fieldset style="text-align: center">
-                <a name="checkbox">操作员</a>
+                <a name="checkbox" style="cursor: pointer">操作员</a>
                 <!--<legend><a name="checkbox">操作员</a></legend>-->
             </fieldset>
         </div>
@@ -105,7 +105,7 @@
             <input type="checkbox" name="jin" title="解除警报">
             <br/>
             <br/>
-            <input type="checkbox" name="write" title="控制设备" checked>
+            <input type="checkbox" name="operateDevice" title="控制设备" >
             <br/>
             <br/>
         </div>
@@ -114,32 +114,29 @@
     <div style="float: left">
         <div class="site-title">
             <fieldset style="text-align: center">
-                <a name="checkbox">来宾</a>
+                <a name="checkbox" style="cursor: pointer">来宾</a>
                 <!--<legend><a name="checkbox">来宾</a></legend>-->
             </fieldset>
         </div>
         <div class="layui-form">
             <!--美化复选-->
-            <input type="checkbox" name="dai" title="查看生产状态">
+            <input type="checkbox" name="selectData" title="查看生产状态">
         </div>
 
     </div>
 
 
-</div>
-<div style="clear: left"></div>
+    <div style="clear: left"></div>
 
-<div style="text-align: right;">
+    <div style="text-align: right;">
 
-
-    <button class="layui-btn" id="sub_change">变更权限</button>
-    <button class="layui-btn" id="cancel">取消</button>
-    <!--<button class="layui-btn layui-btn-primary" id="new">在父层弹出一个层</button>-->
-    <!--<button class="layui-btn layui-btn-primary" id="transmit">给父页面传值</button>-->
-    <!--<button class="layui-btn layui-btn-primary" id="closeIframe">关闭iframe</button>-->
-</div>
-
-<script src="/static/build/js/jquery-1.12.4.min.js"></script>
+        <button class="layui-btn" lay-submit lay-filter="*">变更权限</button>
+        <button class="layui-btn" id="cancel">取消</button>
+        <!--<button class="layui-btn layui-btn-primary" id="new">在父层弹出一个层</button>-->
+        <!--<button class="layui-btn layui-btn-primary" id="transmit">给父页面传值</button>-->
+        <!--<button class="layui-btn layui-btn-primary" id="closeIframe">关闭iframe</button>-->
+    </div>
+</form>
 <script src="/static/plugins/layui/layui.js"></script>
 
 <script src="/static/build/js/laycode.js"></script>
@@ -150,22 +147,36 @@
 <script>
     layui.use(['form'], function () {
         var form = layui.form;
+        var $ = layui.jquery;
 
+        $('fieldset').click(function () {
+            var childrens = $(this).parent().next();
+            var checkboxs = $(childrens).find("input[type=checkbox]");
+            $(checkboxs).attr("checked", true);
+            form.render();
+
+        });
+
+
+        //获取窗口索引
+        var index = parent.layer.getFrameIndex(window.name);
+
+        //    提交权限变更的操作
+//        $("#sub_change").on("click", function () {
+////        向服务器提交变更操作
+//
+//            parent.layer.close(index);
+//        });
+        form.on('submit(*)', function (data) {
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+        //    权限变更取消
+        $("#cancel").on("click", function () {
+            parent.layer.close(index);
+        })
     });
-    //获取窗口索引
-    var index = parent.layer.getFrameIndex(window.name);
 
-    //    提交权限变更的操作
-    $("#sub_change").on("click", function () {
-//        向服务器提交变更操作
-
-        parent.layer.close(index);
-    });
-
-    //    权限变更取消
-    $("#cancel").on("click", function () {
-        parent.layer.close(index);
-    })
 </script>
 <!--<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");-->
 <!--document.write(unescape("%3Cspan id='cnzz_stat_icon_30088308'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "w.cnzz.com/c.php%3Fid%3D30088308' type='text/javascript'%3E%3C/script%3E"));</script>-->
