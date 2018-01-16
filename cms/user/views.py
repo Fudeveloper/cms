@@ -62,7 +62,7 @@ def main(request):
 def listUser(request):
     intent_name = requests.get(api_link + "/Api/Account/UserInfo", headers=headers).text
     data = json.loads(intent_name)
-    print(intent_name)
+    print("--------------------"+intent_name+"------------------------")
     alterUserPassword = only_check_permiss("alterUserPassword")
     alterUserPermiss = only_check_permiss("alterUserPermiss")
     delUser = only_check_permiss("delUser")
