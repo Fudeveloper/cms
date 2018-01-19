@@ -8,15 +8,17 @@ API_ADDRESS = "http://120.78.62.39:8088"
 # 登陆
 res = requests.post(API_ADDRESS + "/Api/Account/Logon", json=post_data, headers=headers)
 response_data = json.loads(res.text)['errorData']
-print(res.text)
+# print(res.text)
+print(res.cookies)
+cookies = res.cookies
 # print(res)
 # 查询当前用户信息
 
-result = requests.get(API_ADDRESS + "/Api/Account/UserInfo", headers=headers).text
-
-data = json.loads(result)
-print(data)
-print(data['appendData']['name'])
+# result = requests.get(API_ADDRESS + "/Api/Account/UserInfo", headers=headers).text
+#
+# data = json.loads(result)
+# print(data)
+# print(data['appendData']['name'])
 # 从服务器获取所有用户信息
 # result = requests.get("http://120.78.62.39:8088/Api/Account/UserInfoList", headers=headers).text
 # json_result = json.loads(result)
@@ -62,8 +64,8 @@ print(data['appendData']['name'])
 # # user_infos = json_result['appendData']
 # print(json_result)
 
-result = requests.get(API_ADDRESS + "/Api/Login_Log/List?offset=0&limit=0", headers=headers).text
-
+result = requests.get(API_ADDRESS + "/Api/Login_Log/List?offset=0&limit=0", headers=headers, cookies=cookies).text
+print(cookies['CookiesName'])
 data = json.loads(result)
 print(data)
 # print(data['appendData']['name'])

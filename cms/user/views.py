@@ -1,11 +1,13 @@
-import requests
 import json
-import re
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 import logging
+
 import base64
+import re
+import requests
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+
+import cookie_handler
 from decorate import *
 
 logger = logging.getLogger('cms.views')
@@ -60,9 +62,10 @@ def main(request):
 @check_permiss("selectAllUsers")
 @auth
 def listUser(request):
-    intent_name = requests.get(api_link + "/Api/Account/UserInfo", headers=headers).text
+    userid, presend_cookie = cookie_handler.get_cookie(request)
+    intent_name = requests.get(api_link + "/Api/Account/UserInfo", headers=headers, cookies=presend_cookie).text
     data = json.loads(intent_name)
-    print("--------------------"+intent_name+"------------------------")
+    print("--------------------" + intent_name + "------------------------")
     alterUserPassword = only_check_permiss("alterUserPassword")
     alterUserPermiss = only_check_permiss("alterUserPermiss")
     delUser = only_check_permiss("delUser")
@@ -86,6 +89,7 @@ def login_handle(request):
     # 与服务器通信,验证用户
     post_data = {"userName": username, "passWord": passwd}
     res = requests.post(url=api_link + "/Api/Account/Logon", data=post_data, headers=headers)
+    print(res.cookies)
     # 正确返回登录成功
     result = json.loads(res.text)
     # print(result)
@@ -101,9 +105,16 @@ def login_handle(request):
         # 查询用户真实姓名
         intent_name = requests.get(api_link + "/Api/Account/UserInfo", headers=headers).text
         data = json.loads(intent_name)
+        print(data)
         append_data = data['appendData']
+        if not append_data:
+            context = {'result': 'unknow'}
+            return render(request, 'user/login.html', context)
         name = append_data['name']
         userid = append_data['id']
+
+        cookie_handler.set_cookie(userid, res)
+
         name2 = base64.b64encode(str(name).encode("utf-8"))
         # 将用户信息存入cookie
         red.set_cookie('username', username)
@@ -114,14 +125,16 @@ def login_handle(request):
         permissions_result = json.loads(permissions_result)['appendData']
 
         permissions = []
+        if permissions_result==None:
+            context = {'result': 'unknow'}
+            return render(request, 'user/login.html', context)
         for i in range(len(permissions_result)):
             permissions.append(permissions_result[i]['permissName'])
             print(permissions_result[i])
         # 动态创建变量名
-        variable_name = 'permissions_{0}'.format(userid)
-        print(variable_name)
-        exec('settings.{0} = permissions'.format(variable_name))
-        # print(settings.__getattr__(variable_name))
+        permissions_variable_name = 'permissions_{0}'.format(userid)
+        print(permissions_variable_name)
+        exec('settings.{0} = permissions'.format(permissions_variable_name))
         return red
 
     elif response_data == "该用户未注册":
@@ -140,19 +153,23 @@ def login_handle(request):
 # 注销
 @auth
 def logout(request):
+    print("-----------------------------")
+    userid, presend_cookie = cookie_handler.get_cookie(request)
+
     # 本地浏览器退出
     red = redirect('/user/login/')
     red.delete_cookie('username')
     red.delete_cookie('name')
     red.delete_cookie('userid')
     # 服务器上登出用户
-    res = requests.post(url=api_link + "/Api/Account/LogOut/", headers=headers)
+    res = requests.post(url=api_link + "/Api/Account/LogOut/", headers=headers, cookies=presend_cookie)
     response_data = ""
     try:
         response_data = json.loads(res.text)['errorData']
     except Exception as e:
         logger.error(e)
     # print(response_data)
+    cookie_handler.remove_cookie(userid)
     return red
 
 
@@ -169,8 +186,9 @@ def permissions(request):
 
 @auth
 def getUserInfo(request):
+    userid, presend_cookie = cookie_handler.get_cookie(request)
     # 从服务器获取所有用户信息
-    result = requests.get(api_link + "/Api/Account/UserInfoList", headers=headers).text
+    result = requests.get(api_link + "/Api/Account/UserInfoList", headers=headers, cookies=presend_cookie).text
     json_result = json.loads(result)
     print(json_result)
     # 用户信息
