@@ -48,7 +48,7 @@
             <br/>
             <br/>
 
-            <input type="checkbox" name="dai" title="删除用户">
+            <input type="checkbox" name="delUser" title="删除用户">
             <br/>
             <br/>
             <input type="checkbox" name="alterUserPassword" title="更改用户密码">
@@ -60,13 +60,13 @@
             <input type="checkbox" name="alterUserPermiss" title="配置用户权限">
             <br/>
             <br/>
-            <input type="checkbox" name="selectAllLog" title="查看登陆日志">
+            <input type="checkbox" name="selectLoginLog" title="查看登陆日志">
             <br/>
             <br/>
-            <input type="checkbox" name="jin" title="查看操作日志">
+            <input type="checkbox" name="selectOperateLog" title="查看操作日志">
             <br/>
             <br/>
-            <input type="checkbox" name="jin" title="查看报警日志">
+            <input type="checkbox" name="selectWarnLog" title="查看报警日志">
             <br/>
             <br/>
         </div>
@@ -81,7 +81,7 @@
         </div>
         <div class="layui-form">
             <!--美化复选-->
-            <input type="checkbox" name="addModels" title="添加模块" >
+            <input type="checkbox" name="addModels" title="添加模块">
             <br/>
             <br/>
             <input type="checkbox" name="alterAlertSetting" title="启用/关闭报警方式">
@@ -102,10 +102,10 @@
         <div class="layui-form">
             <!--美化复选-->
 
-            <input type="checkbox" name="jin" title="解除警报">
+            <input type="checkbox" name="canselWarn" title="解除警报">
             <br/>
             <br/>
-            <input type="checkbox" name="operateDevice" title="控制设备" >
+            <input type="checkbox" name="operateDevice" title="控制设备">
             <br/>
             <br/>
         </div>
@@ -148,25 +148,37 @@
     layui.use(['form'], function () {
         var form = layui.form;
         var $ = layui.jquery;
-
-        $('fieldset').click(function () {
-            var childrens = $(this).parent().next();
-            var checkboxs = $(childrens).find("input[type=checkbox]");
-            $(checkboxs).attr("checked", true);
-            form.render();
-
+        var permiss_array = {{permiss|safe}}
+        var checkboxs = $('input:checkbox').toArray();
+        permiss_array.forEach(function (permiss) {
+            checkboxs.forEach(function (checkbox) {
+                if (checkbox.name === permiss) {
+                    console.log(permiss);
+                    $(checkbox).attr("checked",true);
+                }
+            });
         });
+//        form.render();
+
+//        console.log(permiss_array);
+//        $('fieldset').click(function () {
+//            var childrens = $(this).parent().next();
+//            var checkboxs = $(childrens).find("input[type=checkbox]");
+//            $(checkboxs).attr("checked", true);
+//            form.render();
+//
+//        });
 
 
         //获取窗口索引
         var index = parent.layer.getFrameIndex(window.name);
 
-        //    提交权限变更的操作
-//        $("#sub_change").on("click", function () {
-////        向服务器提交变更操作
-//
-//            parent.layer.close(index);
-//        });
+//            提交权限变更的操作
+        $("#sub_change").on("click", function () {
+//        向服务器提交变更操作
+
+            parent.layer.close(index);
+        });
         form.on('submit(*)', function (data) {
             layer.msg(JSON.stringify(data.field));
             return false;

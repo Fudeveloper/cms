@@ -29,7 +29,7 @@ urlpatterns = [
     # 注销
     url(r'^logout/$', views.logout, name='logout'),
     # 权限分配
-    url(r'^permissions/$', views.permissions, name='permissions'),
+    url(r'^permissions/(\d*)$', views.permissions, name='permissions'),
     # 查看用户
     url(r'^listUser/$', views.listUser, name='listUser'),
 
@@ -37,6 +37,9 @@ urlpatterns = [
     url(r'^test/$', views.test, name='test'),
     url(r'^test_ajax/$', views.test_ajax, name='test'),
     url(r'^PassWordChange/(\d*)$', views.PassWordChange, name='PassWordChange'),
-    # url(r'^export_userlist/$', views.export_userlist, name='export_userlist'),
+    url(r'^permissions_handler/$', views.permissions_handler, name='permissions_handler'),
+
+
+    # url(r'^GetUserPermiss/(\d*)$', views.GetUserPermiss, name='GetUserPermiss'),
 
 ]

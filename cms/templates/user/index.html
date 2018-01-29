@@ -20,12 +20,14 @@
         <!--<li class="layui-nav-item"><a href="javascript:;">商品管理</a></li>-->
         <!--</ul>-->
         <ul class="layui-nav layui-layout-right kit-nav">
+                        <li class="layui-nav-item"><a href="javascript:;" id="openDoor">
+                开门</a></li>
             <li class="layui-nav-item"><a href="javascript:;" id="warnModels"><i class="fa fa-gratipay"
                                                                                  aria-hidden="true"></i>
                 开启/关闭报警模块</a></li>
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="/static/images/0.jpg" class="layui-nav-img"> {{name}}
+                    <img src="/static/images/{{groupid}}.png" class="layui-nav-img"> {{name}}
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="javascript:;">基本资料</a></dd>
@@ -207,6 +209,25 @@
                 shadeClose: true
             });
         });
+        $("#openDoor").on("click",function () {
+            $.ajax({
+                        url: "/device/UpDataDevState/",
+                        type: "GET",
+                        success: function (data) {
+                            if (data.status === "true") {
+                                layer.msg('开门成功');
+
+                            } else {
+                                layer.msg("开门失败");
+                            }
+                        },
+                        error: function () {
+                            layer.msg("开门失败，服务器错误");
+
+                        }
+
+                    });
+        })
     });
 
 

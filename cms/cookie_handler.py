@@ -9,10 +9,16 @@ def set_cookie(userid, res):
 
 
 # 根据用户id获取对应cookie
-def get_cookie(request):
-    userid = request.COOKIES.get("userid")
+def get_cookie(request, user_id=""):
+    if not user_id:
+        userid = request.COOKIES.get("userid")
+    else:
+        userid = user_id
     cookies_variable_name = 'cookies_{0}'.format(userid)
-    presend_cookie = settings.__getattr__(cookies_variable_name)
+    try:
+        presend_cookie = settings.__getattr__(cookies_variable_name)
+    except Exception as e:
+        presend_cookie = ""
     return userid, presend_cookie
 
 

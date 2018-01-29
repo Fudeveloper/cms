@@ -47,8 +47,9 @@ def index(request):
     #     return redirect('/user/login/')
 
     name = request.COOKIES['name']
+    groupid = request.COOKIES['groupid']
     name_decode = base64.b64decode(name)
-    context = {"name": name_decode}
+    context = {"name": name_decode, "groupid": groupid}
     return render(request, 'user/index.html', context)
 
 
@@ -89,7 +90,6 @@ def login_handle(request):
     # 与服务器通信,验证用户
     post_data = {"userName": username, "passWord": passwd}
     res = requests.post(url=api_link + "/Api/Account/Logon", data=post_data, headers=headers)
-    print(res.cookies)
     # 正确返回登录成功
     result = json.loads(res.text)
     # print(result)
@@ -98,21 +98,33 @@ def login_handle(request):
         response_data = result['errorData']
     except Exception as e:
         logger.error(e)
+    print(response_data)
     if response_data == "登录成功":
         print("登录成功")
         # 用户账号和密码正确，进入主页
         red = redirect('/user/index/')
         # 查询用户真实姓名
-        intent_name = requests.get(api_link + "/Api/Account/UserInfo", headers=headers).text
+        intent_name = requests.get(api_link + "/Api/Account/UserInfo", headers=headers, cookies=res.cookies).text
         data = json.loads(intent_name)
         print(data)
-        append_data = data['appendData']
+        if "appendData" in data.keys():
+            append_data = data['appendData']
+            print(append_data)
+        else:
+            print("_________________________not in ")
+            context = {'result': 'unknow'}
+            return render(request, 'user/login.html', context)
         if not append_data:
+            print("-----------------------")
+            print(append_data)
+
             context = {'result': 'unknow'}
             return render(request, 'user/login.html', context)
         name = append_data['name']
         userid = append_data['id']
-
+        groupid = append_data['groupID']
+        if not groupid:
+            groupid = 3
         cookie_handler.set_cookie(userid, res)
 
         name2 = base64.b64encode(str(name).encode("utf-8"))
@@ -120,17 +132,30 @@ def login_handle(request):
         red.set_cookie('username', username)
         red.set_cookie('name', name2)
         red.set_cookie('userid', userid)
-        permissions_result = requests.get(api_link + "/Api/Permiss/GetData?userId={}".format(userid),
-                                          headers=headers).text
-        permissions_result = json.loads(permissions_result)['appendData']
-
-        permissions = []
-        if permissions_result==None:
-            context = {'result': 'unknow'}
-            return render(request, 'user/login.html', context)
-        for i in range(len(permissions_result)):
-            permissions.append(permissions_result[i]['permissName'])
-            print(permissions_result[i])
+        red.set_cookie("groupid", groupid)
+        if username == "admin":
+            data = requests.get(api_link + "/Api/Permiss/Get", headers=headers, cookies=res.cookies).text
+            data = json.loads(data)
+            if 'appendData' in data.keys():
+                datas = data['appendData']
+                permissions =[]
+                for data in datas:
+                    permissions.append(data['permissName'])
+            else:
+                context = {'result': 'unknow'}
+                return render(request, 'user/login.html', context)
+        else:
+            permissions_result = requests.get(api_link + "/Api/Permiss/GetData?userId={}".format(userid),
+                                              headers=headers, cookies=res.cookies).text
+            print(permissions_result)
+            permissions_result = json.loads(permissions_result)['appendData']
+            permissions = []
+            if permissions_result == None:
+                context = {'result': 'unknow'}
+                return render(request, 'user/login.html', context)
+            for i in range(len(permissions_result)):
+                permissions.append(permissions_result[i]['permissName'])
+                print(permissions_result[i])
         # 动态创建变量名
         permissions_variable_name = 'permissions_{0}'.format(userid)
         print(permissions_variable_name)
@@ -144,9 +169,12 @@ def login_handle(request):
     elif response_data == "该用户未激活":
         context = {'result': 'not active'}
         return render(request, 'user/login.html', context)
-
+    elif response_data == "账号或密码错误":
+        context = {'result': 'incorrect passwd'}
+        return render(request, 'user/login.html', context)
     else:
         context = {'result': 'unknow'}
+
     return render(request, 'user/login.html', context)
 
 
@@ -163,11 +191,11 @@ def logout(request):
     red.delete_cookie('userid')
     # 服务器上登出用户
     res = requests.post(url=api_link + "/Api/Account/LogOut/", headers=headers, cookies=presend_cookie)
-    response_data = ""
-    try:
-        response_data = json.loads(res.text)['errorData']
-    except Exception as e:
-        logger.error(e)
+    res = json.loads(res.text)
+    if "errorData" in res.keys():
+        response_data = ['errorData']
+    else:
+        response_data = ""
     # print(response_data)
     cookie_handler.remove_cookie(userid)
     return red
@@ -177,25 +205,46 @@ def logout(request):
 
 @auth
 @check_permiss("alterUserPermiss")
-def permissions(request):
-    return render(request, 'user/permissions.html')
+def permissions(request, user_id):
+    userid, presend_cookie = cookie_handler.get_cookie(request)
+    result = requests.get(api_link + "/Api/Permiss/GetData?userId={0}".format(user_id), headers=headers,
+                          cookies=presend_cookie).text
+    result = json.loads(result)
+    print(result)
+
+    permissions = []
+    if "appendData" in result.keys():
+        result = result['appendData']
+        for i in range(len(result)):
+            permissions.append(result[i]['permissName'])
+            print(result[i])
+    context = {"permiss": permissions}
+    return render(request, 'user/permissions.html', context=context)
+
+
+def permissions_handler(request):
+    userid, presend_cookie = cookie_handler.get_cookie(request)
 
 
 # 列出所有用户
-
-
 @auth
 def getUserInfo(request):
     userid, presend_cookie = cookie_handler.get_cookie(request)
     # 从服务器获取所有用户信息
     result = requests.get(api_link + "/Api/Account/UserInfoList", headers=headers, cookies=presend_cookie).text
-    json_result = json.loads(result)
-    print(json_result)
+    result = json.loads(result)
+
+    print(result)
     # 用户信息
-    user_infos = json_result['appendData']
-    print(user_infos)
+    if "appendData" in result.keys():
+        user_infos = result['appendData']
+        # print(user_infos)
+        user_count = len(user_infos)
+    else:
+        user_infos = ""
+        user_count = 0
+    # print(user_infos)
     # 用户数量
-    user_count = len(user_infos)
     return JsonResponse({"code": 0, "msg": "", "count": user_count, "data": user_infos})
 
 
@@ -213,16 +262,17 @@ def test_ajax(request):
 
 
 # 修改密码
-@auth
 @csrf_exempt
+@auth
 def PassWordChange(request, user_id):
     # 向服务器发送修改密码请求
+    userid, presend_cookie = cookie_handler.get_cookie(request)
     post_info = request.POST
     new_passwd = post_info.get('passWordNew')
     data = {"passWordOld": "null", "passWordNew": new_passwd}
     result = requests.put(api_link + "/Api/Account/PassWordChange?id={}".format(user_id), json=data,
-                          headers=headers).text
-
+                          cookies=presend_cookie, headers=headers).text
+    # print(result)
     if re.findall('密码修改成功', result):
         status = 'true'
     else:

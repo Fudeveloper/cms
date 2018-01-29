@@ -10,7 +10,6 @@ Pillow==4.2.1
 PyMySQL==0.7.11
 python-devtools==2
 requests==2.18.4
-setupfiles==0.0.50
 six==1.10.0
 tornado==4.5.2
 transaction==2.1.2

@@ -15,7 +15,7 @@ def main(request):
     return render(request, 'log/main.html')
 
 
-@check_permiss("selectAllLog")
+@check_permiss("selectLoginLog")
 def loginLog(request):
     return render(request, 'log/loginLog.html')
 

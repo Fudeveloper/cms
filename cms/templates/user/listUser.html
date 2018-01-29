@@ -100,7 +100,7 @@
 
                 layer.confirm('请输入新的密码：<input type="text" id="new_passwd"/>', function (index) {
 
-                    data = obj.data
+                    data = obj.data;
 //                     获取输入的新密码
                     var new_passwd = $("#new_passwd").val().trim();
 
@@ -112,15 +112,15 @@
                         crossDomain: true,
                         dataType: 'json',
                         success: function (data) {
-                            if (data.status == "true") {
+                            if (data.status === "true") {
                                 alert('修改密码成功');
 
                             } else {
-                                alert("修改密码失败，请联系管理员");
+                                alert("修改密码失败");
                             }
                         },
                         error: function () {
-                            alert("修改密码失败，请联系管理员");
+                            alert("修改密码失败");
 
                         }
 
@@ -133,15 +133,32 @@
 
 //                layer.alert('编辑行：<br>' + JSON.stringify(data))
             } else if (obj.event === 'change_permiss') {
-//              id为此元素标识，关闭时传入
+//                更改权限事件
+                data = obj.data;
+//                请求后端获取权限接口
+//                $.ajax({
+//                    async: false,
+//                    url: "/user/GetUserPermiss/",
+//                    type: "GET",
+//                    crossDomain: true,
+//                    success: function (data) {
+//                        console.log(data['permiss']);
+//
+//                    },
+//                    error: function () {
+//                        alert("请求权限失败");
+//                    }
+//                });
                 layer.open({
                     title: '权限分配',
                     type: 2,
-                    area: ['680px', '470px'],
+                    area: ['730px', '480px'],
                     fixed: false, //不固定
                     maxmin: true,
-                    content: '/user/permissions/'
+                    content: '/user/permissions/' + data['id']
                 });
+//              id为此元素标识，关闭时传入
+
             }
 
 
@@ -195,7 +212,7 @@
                     });
                 },
                 error: function () {
-                    alert("导出失败，请联系管理员");
+                    alert("导出失败");
 
                 }
 
