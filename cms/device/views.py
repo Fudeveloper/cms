@@ -42,11 +42,12 @@ def getDeviceData(request):
 
 
 # , device_id="", operate_code=""
-def UpDataDevState(request):
+# 开门
+def UpDataDevState(request, device_id, device_status):
     status = "false"
     #  operate_code:1为开，0为关
     userid, presend_cookie = cookie_handler.get_cookie(request)
-    data = {"deviceState": "0", "deviceID": "3"}
+    data = {"deviceState": device_status, "deviceID": device_id}
     result = requests.post(api_link + "/Api/DeviceData/UpDataDevState", headers=headers, cookies=presend_cookie,
                            json=data).text
     result = json.loads(result)

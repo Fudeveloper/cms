@@ -20,7 +20,7 @@
         <!--<li class="layui-nav-item"><a href="javascript:;">商品管理</a></li>-->
         <!--</ul>-->
         <ul class="layui-nav layui-layout-right kit-nav">
-                        <li class="layui-nav-item"><a href="javascript:;" id="openDoor">
+            <li class="layui-nav-item"><a href="javascript:;" id="openDoor">
                 开门</a></li>
             <li class="layui-nav-item"><a href="javascript:;" id="warnModels"><i class="fa fa-gratipay"
                                                                                  aria-hidden="true"></i>
@@ -184,52 +184,82 @@
 <!--var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");-->
 <!--document.write(unescape("%3Cspan id='cnzz_stat_icon_1264021086'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1264021086%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));-->
 <!--</script>-->
+<script src="/static/build/js/jquery-1.12.4.min.js"></script>
+
 <script src="/static/plugins/layui/layui.js"></script>
+
 <script>
     var message;
+
+
     layui.config({
         base: '/static/build/js/'
     }).use(['app', 'message'], function () {
 
-        var app = layui.app,
-            $ = layui.jquery,
-            layer = layui.layer;
-        //将message设置为全局以便子页面调用
-        message = layui.message;
-        //主入口
-        app.set({
-            type: 'iframe'
-        }).init();
-        $('#warnModels').on('click', function () {
-            layer.open({
-                title: false,
-                type: 2,
-                content: '/warn/main/',
-                area: ['500px', '300px'],
-                shadeClose: true
+            var app = layui.app,
+                $ = layui.jquery,
+                layer = layui.layer;
+            //将message设置为全局以便子页面调用
+            message = layui.message;
+            //主入口
+            app.set({
+                type: 'iframe'
+            }).init();
+            $('#warnModels').on('click', function () {
+                layer.open({
+                    title: false,
+                    type: 2,
+                    content: '/warn/main/',
+                    area: ['500px', '300px'],
+                    shadeClose: true
+                });
             });
-        });
-        $("#openDoor").on("click",function () {
-            $.ajax({
-                        url: "/device/UpDataDevState/",
-                        type: "GET",
-                        success: function (data) {
-                            if (data.status === "true") {
-                                layer.msg('开门成功');
+            $("#openDoor").on("click", function () {
+                openDoor(103, 1);
+            });
 
-                            } else {
-                                layer.msg("开门失败");
-                            }
-                        },
-                        error: function () {
-                            layer.msg("开门失败，服务器错误");
+            function openDoor(device_id, device_status) {
+                $.ajax({
+                    url: "/device/UpDataDevState/" + device_id + "/" + device_status + "/",
+                    type: "GET",
+                    success: function (data) {
+                        if (data.status === "true") {
+                            layer.msg('开门成功');
+                            setTimeout("closeDoor(103, 0)", 2000);
 
+                        } else {
+                            layer.msg("开门失败");
                         }
+                    },
+                    error: function () {
+                        layer.msg("开门失败，服务器错误");
 
-                    });
-        })
-    });
+                    }
 
+                });
+
+
+            }
+
+
+        }
+    );
+
+    function closeDoor(device_id, device_status) {
+        $.ajax({
+            url: "/device/UpDataDevState/" + device_id + "/" + device_status + "/",
+            type: "GET",
+            success: function (data) {
+                if (data.status === "true") {
+                } else {
+                }
+            },
+            error: function () {
+
+            }
+
+        });
+    }
 
 </script>
 </body>
