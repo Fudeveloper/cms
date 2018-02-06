@@ -46,7 +46,7 @@ print(cookies)
 # 查询某用户权限信息
 
 # #
-# result = requests.get(API_ADDRESS + "/Api/Permiss/GetData?userId=2", headers=headers, cookies=cookies).text
+# result = requests.get(API_ADDRESS + "/Api/Permiss/GetData?userId=3", headers=headers, cookies=cookies).text
 #
 # result = json.loads(result)
 #
@@ -112,18 +112,18 @@ print(cookies)
 # ]
 
 # data = '[ {"permissName":"addUser"}]'
-# data = ({"permissName": "addUser"}, {"permissName": "alterUserPermiss"})
-# result = requests.put(API_ADDRESS + "/Api/Permiss/UpData?userId=2", headers=headers, cookies=cookies, json=data).text
+# data = ({"permissName": "addUser"})
+# result = requests.put(API_ADDRESS + "/Api/Permiss/UpData?userId=10", headers=headers, cookies=cookies, json=data).text
 #
 # print(result)
 
-data = {"id": "3"}
-result = requests.post(API_ADDRESS + "/Api/DeviceData/List", headers=headers, cookies=cookies, json=data).text
-result = json.loads(result)
-
-device = result['appendData']
-for de in device:
-    print(de)
+# data = {"id": "3"}
+# result = requests.post(API_ADDRESS + "/Api/DeviceData/List", headers=headers, cookies=cookies, json=data).text
+# result = json.loads(result)
+#
+# device = result['appendData']
+# for de in device:
+#     print(de)
 # 获取所有权限
 # result = requests.get(API_ADDRESS + "/Api/Permiss/Get", headers=headers, cookies=cookies).text
 #

@@ -133,29 +133,29 @@ def login_handle(request):
         red.set_cookie('name', name2)
         red.set_cookie('userid', userid)
         red.set_cookie("groupid", groupid)
-        if username == "admin":
-            data = requests.get(api_link + "/Api/Permiss/Get", headers=headers, cookies=res.cookies).text
-            data = json.loads(data)
-            if 'appendData' in data.keys():
-                datas = data['appendData']
-                permissions =[]
-                for data in datas:
-                    permissions.append(data['permissName'])
-            else:
-                context = {'result': 'unknow'}
-                return render(request, 'user/login.html', context)
-        else:
-            permissions_result = requests.get(api_link + "/Api/Permiss/GetData?userId={}".format(userid),
-                                              headers=headers, cookies=res.cookies).text
-            print(permissions_result)
-            permissions_result = json.loads(permissions_result)['appendData']
-            permissions = []
-            if permissions_result == None:
-                context = {'result': 'unknow'}
-                return render(request, 'user/login.html', context)
-            for i in range(len(permissions_result)):
-                permissions.append(permissions_result[i]['permissName'])
-                print(permissions_result[i])
+        # if username == "admin":
+        #     data = requests.get(api_link + "/Api/Permiss/Get", headers=headers, cookies=res.cookies).text
+        #     data = json.loads(data)
+        #     if 'appendData' in data.keys():
+        #         datas = data['appendData']
+        #         permissions = []
+        #         for data in datas:
+        #             permissions.append(data['permissName'])
+        #     else:
+        #         context = {'result': 'unknow'}
+        #         return render(request, 'user/login.html', context)
+        # else:
+        permissions_result = requests.get(api_link + "/Api/Permiss/GetData?userId={}".format(userid),
+                                          headers=headers, cookies=res.cookies).text
+        print(permissions_result)
+        permissions_result = json.loads(permissions_result)['appendData']
+        permissions = []
+        if permissions_result == None:
+            context = {'result': 'unknow'}
+            return render(request, 'user/login.html', context)
+        for i in range(len(permissions_result)):
+            permissions.append(permissions_result[i]['permissName'])
+            print(permissions_result[i])
         # 动态创建变量名
         permissions_variable_name = 'permissions_{0}'.format(userid)
         print(permissions_variable_name)
@@ -210,20 +210,53 @@ def permissions(request, user_id):
     result = requests.get(api_link + "/Api/Permiss/GetData?userId={0}".format(user_id), headers=headers,
                           cookies=presend_cookie).text
     result = json.loads(result)
-    print(result)
+    # print(result)
 
     permissions = []
     if "appendData" in result.keys():
         result = result['appendData']
-        for i in range(len(result)):
-            permissions.append(result[i]['permissName'])
-            print(result[i])
+        print(result)
+        if not result:
+            permissions = []
+        else:
+            for i in range(len(result)):
+                permissions.append(result[i]['permissName'])
+                # print(result[i])
+    print(permissions)
     context = {"permiss": permissions}
     return render(request, 'user/permissions.html', context=context)
 
 
-def permissions_handler(request):
+@csrf_exempt
+def change_permissions_handler(request):
+    post_data = request.POST.dict()
+    print(post_data["uesrid"])
+    permissions_data = post_data["permissions_data"]
+    changed_userid = post_data["uesrid"]
+    print(permissions_data)
+    json_data = json.loads(permissions_data)
+    print(json_data)
+    data = set(json_data)
+    send_data = []
+    print()
+    for i in json_data.keys():
+        send_data.append({"permissName": i})
+    # data = ({"permissName": "addUser"})
+    send_data = tuple(send_data, )
+    print(send_data)
     userid, presend_cookie = cookie_handler.get_cookie(request)
+    result = requests.put(api_link + "/Api/Permiss/UpData?userId={}".format(changed_userid), headers=headers,
+                          cookies=presend_cookie,
+                          json=send_data).text
+
+    json_result = json.loads(result)
+    if "errorData" in json_result.keys():
+        if json_result['errorData'] == "修改权限成功":
+            return JsonResponse({"status": "true"})
+        else:
+            return JsonResponse({"status": "false"})
+    else:
+        return JsonResponse({"status": "false"})
 
 
 # 列出所有用户

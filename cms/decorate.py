@@ -18,7 +18,10 @@ def check_permiss(permiss_name):
             print(userid)
             variable_name = 'permissions_{0}'.format(userid)
             global permissions
-            permissions = settings.__getattr__(variable_name)
+            try:
+                permissions = settings.__getattr__(variable_name)
+            except:
+                return HttpResponse("当前会话已结束，请重新登录")
             print(permissions)
             if permiss_name in permissions:
                 print("通过验证")

@@ -10,6 +10,7 @@ headers = settings.HEADERS
 
 # Create your views here.
 # 设备管理主要界面
+@check_permiss("getDeviceData")
 def main(request):
     return render(request, 'device/main.html')
 
@@ -42,7 +43,8 @@ def getDeviceData(request):
 
 
 # , device_id="", operate_code=""
-# 开门
+# 修改设备状态
+@auth
 def UpDataDevState(request, device_id, device_status):
     status = "false"
     #  operate_code:1为开，0为关
