@@ -91,9 +91,27 @@
             } else if (obj.event === 'del') {
                 layer.confirm('真的删除行么', function (index) {
 //                    界面删除
+//                    alert(data.id)
                     obj.del();
 //                    服务器删除
-//                    console.log(index);
+                    $.ajax({
+                        url: "/user/del_user/" + data.id,
+                        type: "GET",
+                        crossDomain: true,
+                        success: function (data) {
+                            if (data.status === "true") {
+                                layer.msg('删除用户成功');
+                            } else {
+                                layer.msg("删除用户失败");
+                            }
+                        },
+                        error: function () {
+                            layer.msg("服务器错误");
+
+                        }
+
+                    });
+
                     layer.close(index);
                 });
             } else if (obj.event === 'change_passwd') {

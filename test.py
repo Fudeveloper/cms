@@ -11,7 +11,7 @@ res = requests.post(API_ADDRESS + "/Api/Account/Logon", json=post_data, headers=
 response_data = json.loads(res.text)['errorData']
 print(res.text)
 cookies = res.cookies
-print(cookies)
+# print(cookies)
 # print(res)
 # 查询当前用户信息
 

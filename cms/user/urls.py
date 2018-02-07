@@ -39,6 +39,8 @@ urlpatterns = [
     url(r'^PassWordChange/(\d*)$', views.PassWordChange, name='PassWordChange'),
 
     url(r'^change_permissions_handler/$', views.change_permissions_handler, name='change_permissions_handler'),
+    url(r'^del_user/(\d*)$', views.del_user, name='del_user'),
+
 
 
     # url(r'^GetUserPermiss/(\d*)$', views.GetUserPermiss, name='GetUserPermiss'),

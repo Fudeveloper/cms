@@ -313,3 +313,18 @@ def PassWordChange(request, user_id):
     print("status:" + status)
     json_data = {"status": status}
     return JsonResponse(json_data)
+
+
+@auth
+def del_user(request, del_user_id):
+    userid, presend_cookie = cookie_handler.get_cookie(request)
+    result = requests.delete(api_link + "/Api/Account/User?id={0}".format(del_user_id),
+                             cookies=presend_cookie, headers=headers).text
+
+    if re.findall('操作成功', result):
+        status = 'true'
+    else:
+        status = 'false'
+    # print("status:" + status)
+    json_data = {"status": status}
+    return JsonResponse(json_data)
