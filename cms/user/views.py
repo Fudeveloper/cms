@@ -91,7 +91,11 @@ def login_handle(request):
     post_data = {"userName": username, "passWord": passwd}
     res = requests.post(url=api_link + "/Api/Account/Logon", data=post_data, headers=headers)
     # 正确返回登录成功
-    result = json.loads(res.text)
+    try:
+        result = json.loads(res.text)
+    except:
+        context = {'result': 'unknow'}
+        return render(request, 'user/login.html', context)
     # print(result)
     response_data = ""
     try:

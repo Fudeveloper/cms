@@ -13,29 +13,96 @@
 <body>
 
 
-<table class="layui-table" lay-data="{height:'full-10', url:'{%url 'user:getUserInfo'%}', page:true}">
+<table class="layui-table"
+       lay-filter="control"
+       lay-data="{height:'full-10', url:'{%url 'device:getContorlDevice'%}', page:true,initSort: {field:'DevID', type:'asc'}}">
     <thead>
-    <tr>
-        <th lay-data="{field:'id', width:80, sort: true}">ID</th>
-        <th lay-data="{field:'DeviceName', width:150}">设备名称</th>
-        <th lay-data="{field:'DeviceID', width:300, sort: true}">设备ID</th>
-        <th lay-data="{field:'DeviceID', width:300, sort: true}">设备状态</th>
 
-        <th lay-data="{field:'unit', width:400}">数据单位</th>
+    <tr>
+        <th lay-data="{field:'DevID', width:100,sort: true}">设备ID</th>
+
+        <th lay-data="{field:'DevDataName', width:150}">设备名称</th>
+        <!--<th lay-data="{field:'DevDataType', width:120, sort: true}">数据类型</th>-->
+        <!--<th lay-data="{field:'DevData', width:200}">数据值</th>-->
+        <!--<th lay-data="{field:'DevDataUnit', width:200}">数据单位</th>-->
+
+        <th lay-data="{fixed: 'right', width:'200', align:'center', toolbar: '#barDemo'}"></th>
 
     </tr>
     </thead>
 </table>
 
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-mini" lay-event="open_device">开启</a>
 
+
+    <!--layui-btn-disabled-->
+    <a class="layui-btn layui-btn-danger layui-btn-mini " lay-event="close_device">关闭</a>
+
+
+</script>
 <script src="/static/plugins/layui/layui.js" charset="utf-8"></script>
 
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
-    layui.use('table', function () {
+    layui.use(['table', 'jquery'], function () {
         var table = layui.table;
+        var $ = layui.jquery;
+        //监听表格复选框选择
+        table.on('checkbox(control)', function (obj) {
+            console.log(obj)
+        });
+        //监听工具条
+        table.on('tool(control)', function (obj) {
+            var data = obj.data;
+            console.log(data);
+            if (obj.event === 'open_device') {
+                $.ajax({
+                    url: "/device/UpDataDevState/" + data.DevID + "/" + 1,
+                    type: "GET",
+                    crossDomain: true,
+                    success: function (data) {
+                        if (data.status === "true") {
+                            layer.msg('开启成功');
+                        } else {
+                            layer.msg("开启失败");
+                        }
+                    },
+                    error: function () {
+                        layer.msg("服务器错误");
 
+                    }
+
+                });
+
+            } else if (obj.event === 'close_device') {
+                                $.ajax({
+                    url: "/device/UpDataDevState/" + data.DevID + "/" + 0,
+                    type: "GET",
+                    crossDomain: true,
+                    success: function (data) {
+                        if (data.status === "true") {
+                            layer.msg('关闭成功');
+                        } else {
+                            layer.msg("关闭失败");
+                        }
+                    },
+                    error: function () {
+                        layer.msg("服务器错误");
+
+                    }
+
+                });
+
+            }
+
+
+        });
+
+
+//        导出用户列表至csv
     });
+
 </script>
 
 </body>

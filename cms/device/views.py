@@ -18,29 +18,59 @@ def main(request):
 def control(request):
     return render(request, 'device/control.html')
 
-
+# 获取设备数据（查看）
+@check_permiss("selectAllDevice")
 @auth
 def getDeviceData(request):
     userid, presend_cookie = cookie_handler.get_cookie(request)
     data = {"id": "3"}
-    # 从服务器获取所有用户信息
+    # 从服务器获取所有设备信息
     result = requests.post(api_link + "/Api/DeviceData/List", headers=headers, cookies=presend_cookie,
                            json=data).text
     result = json.loads(result)
 
-    print(result)
-    # 用户信息
+    # print(result)
+    # 设备信息
+    only_data_devices = []
     if "appendData" in result.keys():
-        user_infos = result['appendData']
+        device_infos = result['appendData']
         # print(user_infos)
-        user_count = len(user_infos)
+        only_data_device_count = len(only_data_devices)
+        for device_info in device_infos:
+            if int(device_info["DevID"]) < 100:
+                only_data_devices.append(device_info)
     else:
-        user_infos = ""
-        user_count = 0
-    # print(user_infos)
+        only_data_devices = ""
+        only_data_device_count = 0
     # 用户数量
-    return JsonResponse({"code": 0, "msg": "", "count": user_count, "data": user_infos})
+    return JsonResponse({"code": 0, "msg": "", "count": only_data_device_count, "data": only_data_devices})
 
+# 获取可控制设备
+@check_permiss("selectAllDevice")
+@auth
+def getContorlDevice(request):
+    userid, presend_cookie = cookie_handler.get_cookie(request)
+    data = {"id": "3"}
+    # 从服务器获取所有设备信息
+    result = requests.post(api_link + "/Api/DeviceData/List", headers=headers, cookies=presend_cookie,
+                           json=data).text
+    result = json.loads(result)
+
+    # print(result)
+    # 设备信息
+    only_data_devices = []
+    if "appendData" in result.keys():
+        device_infos = result['appendData']
+        # print(user_infos)
+        only_data_device_count = len(only_data_devices)
+        for device_info in device_infos:
+            if int(device_info["DevID"]) >= 100:
+                only_data_devices.append(device_info)
+    else:
+        only_data_devices = ""
+        only_data_device_count = 0
+    # 用户数量
+    return JsonResponse({"code": 0, "msg": "", "count": only_data_device_count, "data": only_data_devices})
 
 # , device_id="", operate_code=""
 # 修改设备状态
@@ -53,6 +83,7 @@ def UpDataDevState(request, device_id, device_status):
     result = requests.post(api_link + "/Api/DeviceData/UpDataDevState", headers=headers, cookies=presend_cookie,
                            json=data).text
     result = json.loads(result)
+    print(result)
     if "errorData" in result.keys():
         if result['errorData'] == "修改设备数据成功":
             status = "true"

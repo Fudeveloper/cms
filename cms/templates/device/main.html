@@ -15,15 +15,15 @@
 
 
 
-<table class="layui-table" lay-data="{height:'full-10', url:'{%url 'device:getDeviceData'%}', page:true}">
+<table class="layui-table" lay-data="{height:'full-10', url:'{%url 'device:getDeviceData'%}', page:true,initSort: {field:'DevID', type:'asc'}}">
   <thead>
     <tr>
             <th lay-data="{field:'DevID', width:100,sort: true}">设备ID</th>
 
-      <th lay-data="{field:'DevDataName', width:150}">数据名称</th>
-      <th lay-data="{field:'DevDataType', width:120, sort: true}">数据类型</th>
-      <th lay-data="{field:'DevData', width:200}">数据值</th>
-      <th lay-data="{field:'DevDataUnit', width:200}">数据单位</th>
+      <th lay-data="{field:'DevDataName', width:150}">设备名称</th>
+      <!--<th lay-data="{field:'DevDataType', width:120, sort: true}">数据类型</th>-->
+      <th lay-data="{field:'DevData', width:80}">数据值</th>
+      <th lay-data="{field:'DevDataUnit', width:120}">数据单位</th>
 
     </tr>
   </thead>
