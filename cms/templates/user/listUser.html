@@ -14,7 +14,7 @@
 <body>
 
 <div class="layui-btn-group demoTable">
-    <button class="layui-btn" data-type="isAll" id="lalala">添加用户</button>
+    <!--<button class="layui-btn" data-type="isAll" id="lalala">添加用户</button>-->
 
     <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
     <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
@@ -27,7 +27,7 @@
 </div>
 
 <table id="tab" class="layui-table"
-       lay-data="{ height:'full-40', url:'{%url 'user:getUserInfo'%}', page:true, id:'userList'}"
+       lay-data="{ height:'full-40', url:'{%url 'user:getUserInfo'%}',  id:'userList'}"
        lay-filter="demo" style="text-align: center">
     <thead>
     <tr>

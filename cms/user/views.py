@@ -242,7 +242,6 @@ def change_permissions_handler(request):
     print(json_data)
     data = set(json_data)
     send_data = []
-    print()
     for i in json_data.keys():
         send_data.append({"permissName": i})
     # data = ({"permissName": "addUser"})
