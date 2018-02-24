@@ -131,7 +131,6 @@ def login_handle(request):
             append_data = data['appendData']
             print(append_data)
         else:
-            print("_________________________not in ")
             context = {'result': 'unknow'}
             return render(request, 'user/login.html', context)
         if not append_data:
@@ -154,6 +153,7 @@ def login_handle(request):
         red.set_cookie('userid', userid)
         red.set_cookie("groupid", groupid)
 
+        # debug 用
         permissions_result = requests.get(api_link + "/Api/Permiss/GetData?userId={}".format(userid),
                                           headers=headers, cookies=res.cookies).text
         print(permissions_result)
@@ -165,10 +165,7 @@ def login_handle(request):
         for i in range(len(permissions_result)):
             permissions.append(permissions_result[i]['permissName'])
             print(permissions_result[i])
-        # 动态创建变量名
-        permissions_variable_name = 'permissions_{0}'.format(userid)
-        print(permissions_variable_name)
-        exec('settings.{0} = permissions'.format(permissions_variable_name))
+        # 结束debug代码
         return red
 
     elif response_data == "该用户未注册":
@@ -230,8 +227,8 @@ def permissions(request, user_id, return_context):
             for i in range(len(result)):
                 permissions.append(result[i]['permissName'])
     print(permissions)
-    context = {"permiss": permissions}
-    return render(request, 'user/permissions.html', context=context)
+    return_context["permiss"] = permissions
+    return render(request, 'user/permissions.html', context=return_context)
 
 
 # 更改用户权限接口
