@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>layui</title>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all">
-
-    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
-</head>
-<body>
-
-
+{% extends "base_table.html" %}
+{% block title %}可控制设备{% endblock %}
+<!--{{has_permiss}}-->
+{% block table %}
 <table class="layui-table"
        lay-filter="control"
        lay-data="{height:'full-10', url:'{%url 'device:getContorlDevice'%}', initSort: {field:'DevID', type:'asc'}}">
@@ -31,7 +20,8 @@
     </tr>
     </thead>
 </table>
-
+{% endblock %}
+{% block js %}
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-mini" lay-event="open_device">开启</a>
 
@@ -42,8 +32,6 @@
 
 </script>
 <script src="/static/plugins/layui/layui.js" charset="utf-8"></script>
-
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
     layui.use(['table', 'jquery'], function () {
         var table = layui.table;
@@ -76,7 +64,7 @@
                 });
 
             } else if (obj.event === 'close_device') {
-                                $.ajax({
+                $.ajax({
                     url: "/device/UpDataDevState/" + data.DevID + "/" + 0,
                     type: "GET",
                     crossDomain: true,
@@ -104,6 +92,9 @@
     });
 
 </script>
+{% endblock %}
 
-</body>
-</html>
+
+
+
+

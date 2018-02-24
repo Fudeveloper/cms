@@ -1,18 +1,7 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>layui</title>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all">
-    <script src="/static/build/js/jsonExportToCSV.js"></script>
-
-    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
-</head>
-<body>
-
+﻿{% extends "base_table.html" %}
+{% block title %}查看用户{% endblock %}
+<!--{{has_permiss}}-->
+{% block table %}
 <div class="layui-btn-group demoTable">
     <!--<button class="layui-btn" data-type="isAll" id="lalala">添加用户</button>-->
 
@@ -25,7 +14,6 @@
     </div>
 
 </div>
-
 <table id="tab" class="layui-table"
        lay-data="{ height:'full-40', url:'{%url 'user:getUserInfo'%}',  id:'userList'}"
        lay-filter="demo" style="text-align: center">
@@ -50,7 +38,8 @@
     </tr>
     </thead>
 </table>
-
+{% endblock %}
+{% block js %}
 <script type="text/html" id="barDemo">
     {% ifequal alterUserPassword True %}
     <a class="layui-btn layui-btn-mini" lay-event="change_passwd">更改密码</a>
@@ -71,10 +60,8 @@
     {% endifequal %}
 
 </script>
-
-
 <script src="/static/plugins/layui/layui.js" charset="utf-8"></script>
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script src="/static/build/js/jsonExportToCSV.js"></script>
 <script>
     layui.use('table', function () {
         var table = layui.table;
@@ -92,7 +79,6 @@
                 layer.confirm('真的删除行么', function (index) {
 //                    界面删除
 //                    alert(data.id)
-                    obj.del();
 //                    服务器删除
                     $.ajax({
                         url: "/user/del_user/" + data.id,
@@ -101,6 +87,7 @@
                         success: function (data) {
                             if (data.status === "true") {
                                 layer.msg('删除用户成功');
+                                obj.del();
                             } else {
                                 layer.msg("删除用户失败");
                             }
@@ -211,6 +198,7 @@
                 url: "/user/getUserInfo/",
                 type: "GET",
                 success: function (data) {
+                    alert("success")
                     JSonToCSV.setDataConver({
                         data: data.data,
                         fileName: 'users',
@@ -241,6 +229,4 @@
     });
 
 </script>
-
-</body>
-</html>
+{% endblock %}

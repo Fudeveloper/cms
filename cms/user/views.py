@@ -1,51 +1,63 @@
-import json
 import logging
-
 import base64
 import re
-import requests
-from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-
-import cookie_handler
 from decorate import *
 
 logger = logging.getLogger('cms.views')
-
 # 权限信息
 api_link = settings.API_ADDRESS
 headers = settings.HEADERS
 
 
-# 请求头
+# 获取我的权限列表
+def get_my_permissions(request):
+    userid, presend_cookie = cookie_handler.get_cookie(request)
+    permissions_result = requests.get(api_link + "/Api/Permiss/GetData?userId={}".format(userid),
+                                      headers=headers, cookies=presend_cookie).text
+    permissions_result = json.loads(permissions_result)['appendData']
+    return permissions_result
 
 
-# 服务器地址
+# 在传入的权限列表permissions中检查是否有permiss_name
+def list_check_permiss(permiss_name, permissions):
+    if permiss_name in permissions:
+        return True
+    else:
+        return False
 
 
-# if settings.DEBUG == False:
-#     global api_link
-#     api_link = "http://123.207.68.28/"
-# else:
-#     global api_link
-#     api_link = "127.0.0.1"
+# 获取我的信息
+def get_my_info(request):
+    userid, presend_cookie = cookie_handler.get_cookie(request)
+    result = requests.get(api_link + "/Api/Account/UserInfo", headers=headers, cookies=presend_cookie).text
+    return result
+
+
+# 获取所有用户信息
+def get_listUser_data(request):
+    userid, presend_cookie = cookie_handler.get_cookie(request)
+    # 从服务器获取所有用户信息
+    result = requests.get(api_link + "/Api/Account/UserInfoList", headers=headers, cookies=presend_cookie).text
+    return result
+
+
+# 通过传入的id，获取该用户权限信息
+def get_permissons_by_id(request, user_id):
+    userid, presend_cookie = cookie_handler.get_cookie(request)
+    result = requests.get(api_link + "/Api/Permiss/GetData?userId={0}".format(user_id), headers=headers,
+                          cookies=presend_cookie).text
+    return result
 
 
 # 登陆页面
 def login(request):
-    # print(settings.__getattr__("API_ADDRESS"))
-    # return HttpResponse(settings.DEBUG)
     return render(request, 'user/login.html')
 
 
 # 主页
 @auth
 def index(request):
-    # # 如果cookie不存在
-    # if 'username' not in request.COOKIES:
-    #     # 如果访问的路径不是/login/就跳转到/login/
-    #     return redirect('/user/login/')
-
     name = request.COOKIES['name']
     groupid = request.COOKIES['groupid']
     name_decode = base64.b64decode(name)
@@ -58,25 +70,29 @@ def main(request):
     return render(request, 'user/main.html')
 
 
-# 查看用户界面
-# @check_permiss("listUser")
-@check_permiss("selectAllUsers")
+# 查看所有用户界面
+@check_permiss(get_listUser_data)
 @auth
-def listUser(request):
-    userid, presend_cookie = cookie_handler.get_cookie(request)
-    intent_name = requests.get(api_link + "/Api/Account/UserInfo", headers=headers, cookies=presend_cookie).text
-    data = json.loads(intent_name)
-    print("--------------------" + intent_name + "------------------------")
-    alterUserPassword = only_check_permiss("alterUserPassword")
-    alterUserPermiss = only_check_permiss("alterUserPermiss")
-    delUser = only_check_permiss("delUser")
+def listUser(request, return_context):
+    result = get_my_info(request)
+    json_result = json.loads(result)
+    print("--------------------" + "------------------------")
+
+    permissions_result = get_my_permissions(request)
+    permissions = []
+    try:
+        for i in range(len(permissions_result)):
+            permissions.append(permissions_result[i]['permissName'])
+    except:
+        return render(request, 'user/listUser.html', context={"has_permiss": "notlogin"})
+    alterUserPassword = list_check_permiss("alterUserPassword", permissions)
+    alterUserPermiss = list_check_permiss("alterUserPermiss", permissions)
+    delUser = list_check_permiss("delUser", permissions)
     # alterUserPassword
-    context = {
-        "alterUserPassword": alterUserPassword,
-        "alterUserPermiss": alterUserPermiss,
-        "delUser": delUser
-    }
-    return render(request, 'user/listUser.html', context=context)
+    return_context["alterUserPassword"] = alterUserPassword
+    return_context["delUser"] = delUser
+    return_context["alterUserPermiss"] = alterUserPermiss
+    return render(request, 'user/listUser.html', context=return_context)
 
 
 # 登陆处理
@@ -137,18 +153,7 @@ def login_handle(request):
         red.set_cookie('name', name2)
         red.set_cookie('userid', userid)
         red.set_cookie("groupid", groupid)
-        # if username == "admin":
-        #     data = requests.get(api_link + "/Api/Permiss/Get", headers=headers, cookies=res.cookies).text
-        #     data = json.loads(data)
-        #     if 'appendData' in data.keys():
-        #         datas = data['appendData']
-        #         permissions = []
-        #         for data in datas:
-        #             permissions.append(data['permissName'])
-        #     else:
-        #         context = {'result': 'unknow'}
-        #         return render(request, 'user/login.html', context)
-        # else:
+
         permissions_result = requests.get(api_link + "/Api/Permiss/GetData?userId={}".format(userid),
                                           headers=headers, cookies=res.cookies).text
         print(permissions_result)
@@ -193,6 +198,8 @@ def logout(request):
     red.delete_cookie('username')
     red.delete_cookie('name')
     red.delete_cookie('userid')
+    red.delete_cookie('groupid')
+
     # 服务器上登出用户
     res = requests.post(url=api_link + "/Api/Account/LogOut/", headers=headers, cookies=presend_cookie)
     res = json.loads(res.text)
@@ -208,13 +215,10 @@ def logout(request):
 # 权限分配页面
 
 @auth
-@check_permiss("alterUserPermiss")
-def permissions(request, user_id):
-    userid, presend_cookie = cookie_handler.get_cookie(request)
-    result = requests.get(api_link + "/Api/Permiss/GetData?userId={0}".format(user_id), headers=headers,
-                          cookies=presend_cookie).text
+@check_permiss(get_permissons_by_id)
+def permissions(request, user_id, return_context):
+    result = get_permissons_by_id(request, user_id)
     result = json.loads(result)
-    # print(result)
 
     permissions = []
     if "appendData" in result.keys():
@@ -225,12 +229,12 @@ def permissions(request, user_id):
         else:
             for i in range(len(result)):
                 permissions.append(result[i]['permissName'])
-                # print(result[i])
     print(permissions)
     context = {"permiss": permissions}
     return render(request, 'user/permissions.html', context=context)
 
 
+# 更改用户权限接口
 @csrf_exempt
 def change_permissions_handler(request):
     post_data = request.POST.dict()
@@ -262,12 +266,10 @@ def change_permissions_handler(request):
         return JsonResponse({"status": "false"})
 
 
-# 列出所有用户
+# 获取所有用户信息
 @auth
 def getUserInfo(request):
-    userid, presend_cookie = cookie_handler.get_cookie(request)
-    # 从服务器获取所有用户信息
-    result = requests.get(api_link + "/Api/Account/UserInfoList", headers=headers, cookies=presend_cookie).text
+    result = get_listUser_data(request)
     result = json.loads(result)
 
     print(result)
@@ -282,19 +284,6 @@ def getUserInfo(request):
     # print(user_infos)
     # 用户数量
     return JsonResponse({"code": 0, "msg": "", "count": user_count, "data": user_infos})
-
-
-def test(reqeust):
-    res = {"fan": "open", "light": "close"}
-    response = HttpResponse(json.dumps(res), content_type="application/json")
-    response.__setitem__('Access-Control-Allow-origin', '*')
-    response.__setitem__('Access-Control-Allow-Headers', 'x-requested-with,content-type')
-
-    return response
-
-
-def test_ajax(request):
-    return render(request, 'user/test_ajax.html')
 
 
 # 修改密码
@@ -318,16 +307,16 @@ def PassWordChange(request, user_id):
     return JsonResponse(json_data)
 
 
+# 删除用户
 @auth
 def del_user(request, del_user_id):
     userid, presend_cookie = cookie_handler.get_cookie(request)
     result = requests.delete(api_link + "/Api/Account/User?id={0}".format(del_user_id),
                              cookies=presend_cookie, headers=headers).text
-
+    print(result)
     if re.findall('操作成功', result):
         status = 'true'
     else:
         status = 'false'
-    # print("status:" + status)
     json_data = {"status": status}
     return JsonResponse(json_data)

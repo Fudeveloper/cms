@@ -1,41 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>layui</title>
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all">
-
-  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
-</head>
-<body>
-
-
-
-
+{% extends "base_table.html" %}
+{% block title %}登录日志{% endblock %}
+<!--{{has_permiss}}-->
+{% block table %}
 <table class="layui-table" lay-data="{height:'full-5', url:'{%url 'log:loginLog_handler'%}',}">
-  <thead>
+    <thead>
     <tr>
-      <th lay-data="{field:'name', width:80, sort: true}">用户名</th>
-      <th lay-data="{field:'content', width:150}">登录操作状态</th>
-      <th lay-data="{field:'time', width:300, sort: true}">时间</th>
-
+        <th lay-data="{field:'name', width:80, sort: true}">用户名</th>
+        <th lay-data="{field:'content', width:150}">登录操作状态</th>
+        <th lay-data="{field:'time', width:300, sort: true}">时间</th>
     </tr>
-  </thead>
+    </thead>
 </table>
-
-
-<script src="/static/plugins/layui/layui.js" charset="utf-8"></script>
-
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
-<script>
-layui.use('table', function(){
-  var table = layui.table;
-
-});
-</script>
-
-</body>
-</html>
+{% endblock %}

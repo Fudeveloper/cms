@@ -1,38 +1,35 @@
 from django.conf import settings
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
+import cookie_handler
+import requests
+import json
 
 permissions = {}
 
 
 # 权限验证装饰器
-def check_permiss(permiss_name):
-    print("装饰器初始化")
-
+# 所有被装饰的方法后，都要接收return_context参数
+def check_permiss(get_data_func=""):
     def inner_check_permiss(func):
-        print("验证{}权限".format(permiss_name))
-
         def inner(request, *args, **kwargs):
-            print("验证权限")
-            userid = request.COOKIES.get('userid')
-            print(userid)
-            variable_name = 'permissions_{0}'.format(userid)
-            global permissions
-            try:
-                permissions = settings.__getattr__(variable_name)
-            except:
-                return HttpResponse("当前会话已结束，请重新登录")
-            print(permissions)
-            if permiss_name in permissions:
-                print("通过验证")
-                return_value = func(request, *args, **kwargs)
-                return return_value
-            else:
-                print("未通过验证")
-                return HttpResponse("您暂无权限访问此页面")
-
+            result = get_data_func(request,*args, **kwargs)
+            print("++++++++++++++++++")
+            print(*args,**kwargs)
+            print("++++++++++++++++++")
+            json_result = json.loads(result)
+            print("----------------{}".format(json_result))
+            if "message" in json_result.keys():
+                if json_result['message'] == "无权限" :
+                    context = {"has_permiss": "false"}
+                elif json_result['message'] == "非法访问":
+                    context = {"has_permiss": "notlogin"}
+                elif json_result['message'] == "该用户未登录":
+                    context = {"has_permiss": "notlogin"}
+                else:
+                    context = {"has_permiss": "true"}
+            return func(request, *args, **kwargs,return_context=context)
         return inner
-
     return inner_check_permiss
 
 
@@ -47,8 +44,8 @@ def auth(func):
     return inner
 
 
-def only_check_permiss(permiss_name):
-    if permiss_name in permissions:
-        return True
-    else:
-        return False
+
+
+
+
+

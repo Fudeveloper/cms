@@ -1,44 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>layui</title>
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all">
-
-  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
-</head>
-<body>
-
-
-
-
-<table class="layui-table" lay-data="{height:'full-10', url:'{%url 'device:getDeviceData'%}', initSort: {field:'DevID', type:'asc'}}">
-  <thead>
+{% extends "base_table.html" %}
+{% block title %}设备管理{% endblock %}
+<!--{{has_permiss}}-->
+{% block table %}
+<table class="layui-table"
+       lay-data="{height:'full-10', url:'{%url 'device:getDeviceData'%}', initSort: {field:'DevID', type:'asc'}}">
+    <thead>
     <tr>
-            <th lay-data="{field:'DevID', width:100,sort: true}">设备ID</th>
+        <th lay-data="{field:'DevID', width:100,sort: true}">设备ID</th>
 
-      <th lay-data="{field:'DevDataName', width:150}">设备名称</th>
-      <!--<th lay-data="{field:'DevDataType', width:120, sort: true}">数据类型</th>-->
-      <th lay-data="{field:'DevData', width:80}">数据值</th>
-      <th lay-data="{field:'DevDataUnit', width:120}">数据单位</th>
+        <th lay-data="{field:'DevDataName', width:150}">设备名称</th>
+        <!--<th lay-data="{field:'DevDataType', width:120, sort: true}">数据类型</th>-->
+        <th lay-data="{field:'DevData', width:80}">数据值</th>
+        <th lay-data="{field:'DevDataUnit', width:120}">数据单位</th>
 
     </tr>
-  </thead>
+    </thead>
 </table>
-
-
+{% endblock %}
 <script src="/static/plugins/layui/layui.js" charset="utf-8"></script>
 
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
-<script>
-layui.use('table', function(){
-  var table = layui.table;
-
-});
-</script>
-
-</body>
-</html>

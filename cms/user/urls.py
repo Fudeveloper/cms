@@ -34,8 +34,6 @@ urlpatterns = [
     url(r'^listUser/$', views.listUser, name='listUser'),
 
     url(r'^getUserInfo/$', views.getUserInfo, name='getUserInfo'),
-    url(r'^test/$', views.test, name='test'),
-    url(r'^test_ajax/$', views.test_ajax, name='test'),
     url(r'^PassWordChange/(\d*)$', views.PassWordChange, name='PassWordChange'),
 
     url(r'^change_permissions_handler/$', views.change_permissions_handler, name='change_permissions_handler'),

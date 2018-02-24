@@ -8,25 +8,31 @@ api_link = settings.API_ADDRESS
 headers = settings.HEADERS
 
 
-# Create your views here.
-# 设备管理主要界面
-@check_permiss("getDeviceData")
-def main(request):
-    return render(request, 'device/main.html')
-
-
-def control(request):
-    return render(request, 'device/control.html')
-
-# 获取设备数据（查看）
-@check_permiss("selectAllDevice")
-@auth
-def getDeviceData(request):
+def get_Device_Data(request):
     userid, presend_cookie = cookie_handler.get_cookie(request)
     data = {"id": "3"}
     # 从服务器获取所有设备信息
     result = requests.post(api_link + "/Api/DeviceData/List", headers=headers, cookies=presend_cookie,
                            json=data).text
+    return result
+
+
+# Create your views here.
+# 设备管理主要界面
+@check_permiss( get_Device_Data)
+def main(request,return_context):
+    return render(request, 'device/main.html',context=return_context)
+
+
+@check_permiss( get_Device_Data)
+def control(request,return_context):
+    return render(request, 'device/control.html',context=return_context)
+
+
+# 获取设备数据（查看）
+@auth
+def getDeviceData(request):
+    result = get_Device_Data(request)
     result = json.loads(result)
 
     # print(result)
@@ -45,15 +51,11 @@ def getDeviceData(request):
     # 用户数量
     return JsonResponse({"code": 0, "msg": "", "count": only_data_device_count, "data": only_data_devices})
 
+
 # 获取可控制设备
-@check_permiss("selectAllDevice")
 @auth
 def getContorlDevice(request):
-    userid, presend_cookie = cookie_handler.get_cookie(request)
-    data = {"id": "3"}
-    # 从服务器获取所有设备信息
-    result = requests.post(api_link + "/Api/DeviceData/List", headers=headers, cookies=presend_cookie,
-                           json=data).text
+    result = get_Device_Data(request)
     result = json.loads(result)
 
     # print(result)
@@ -71,6 +73,7 @@ def getContorlDevice(request):
         only_data_device_count = 0
     # 用户数量
     return JsonResponse({"code": 0, "msg": "", "count": only_data_device_count, "data": only_data_devices})
+
 
 # , device_id="", operate_code=""
 # 修改设备状态
