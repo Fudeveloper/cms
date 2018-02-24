@@ -27,6 +27,5 @@ def remove_cookie(userid):
     try:
         cookies_variable_name = 'cookies_{0}'.format(userid)
         settings.__delattr__(cookies_variable_name)
-        print("del cookie{}".format(userid))
     except:
         pass

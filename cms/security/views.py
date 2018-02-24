@@ -20,3 +20,6 @@ def guard(request):
 # 视频监控
 def video(request):
     return render(request, 'security/video.html')
+
+def attendance(request):
+    return render(request, 'security/attendance.html')

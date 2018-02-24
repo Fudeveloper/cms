@@ -14,17 +14,18 @@ def get_Device_Data(request):
     # 从服务器获取所有设备信息
     result = requests.post(api_link + "/Api/DeviceData/List", headers=headers, cookies=presend_cookie,
                            json=data).text
+    # print(result)
     return result
 
 
 # Create your views here.
 # 设备管理主要界面
-@check_permiss( get_Device_Data)
+@check_permiss(get_Device_Data)
 def main(request,return_context):
     return render(request, 'device/main.html',context=return_context)
 
 
-@check_permiss( get_Device_Data)
+@check_permiss(get_Device_Data)
 def control(request,return_context):
     return render(request, 'device/control.html',context=return_context)
 
@@ -32,6 +33,7 @@ def control(request,return_context):
 # 获取设备数据（查看）
 @auth
 def getDeviceData(request):
+    print("----------ininin")
     result = get_Device_Data(request)
     result = json.loads(result)
 
@@ -43,12 +45,18 @@ def getDeviceData(request):
         # print(user_infos)
         only_data_device_count = len(only_data_devices)
         for device_info in device_infos:
-            if int(device_info["DevID"]) < 100:
-                only_data_devices.append(device_info)
+            print(device_info)
+            try:
+                if int(device_info["DevID"]) < 100:
+                    only_data_devices.append(device_info)
+            except:
+                    pass
+
     else:
         only_data_devices = ""
         only_data_device_count = 0
     # 用户数量
+    print(only_data_device_count)
     return JsonResponse({"code": 0, "msg": "", "count": only_data_device_count, "data": only_data_devices})
 
 
@@ -66,8 +74,11 @@ def getContorlDevice(request):
         # print(user_infos)
         only_data_device_count = len(only_data_devices)
         for device_info in device_infos:
-            if int(device_info["DevID"]) >= 100:
-                only_data_devices.append(device_info)
+            try:
+                if int(device_info["DevID"]) >= 100:
+                    only_data_devices.append(device_info)
+            except:
+                    pass
     else:
         only_data_devices = ""
         only_data_device_count = 0

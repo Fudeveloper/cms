@@ -3,8 +3,277 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="/static/build/js/echarts.js"></script>
+
 </head>
 <body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+  <div class="row" style="width: 100%">
+    <div class="col-md-6" style="width:50%;float:left;overflow:hidden;">
+        <div id="main" style="width: 90%;height:300px;margin-right: 15px"></div>
+    </div>
+    <div class="col-md-6" style="width:50%;float:left;overflow:hidden;">
+        <div id="main2" style="width: 90%;height:300px; "></div>
+    </div>
+</div>
 
+<div style="clear: both"></div>
+  <div class="row" style="width: 100%">
+    <div class="col-md-6" style="width:50%;float:left;overflow:hidden;margin-left: 15px">
+        <div id="main3" style="width: 90%;height:300px;margin-right: 15px"></div>
+    </div>
+</div>
+
+        <!--<div id="main3" style="width: 90%;height:350px;margin-right: 15px" ></div>-->
+
+
+<!--<div id="main3" style="width: 45%;height:400px; border: 1px #009E94 solid;"></div>-->
+
+<!--温度-->
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    option = {
+        title: {
+            text: '温度折线图',
+//            subtext: '纯属虚构'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['温度']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: false,
+//                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value} °C'
+                }
+            }
+        ],
+        series: [
+            {
+//                name: '最高气温',
+                type: 'line',
+                data: [17, 17, 17, 17, 17],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            },
+//            {
+////                name: '最低气温',
+//                type: 'line',
+//                data: [1, -2, 2, 5, 3, 2, 0],
+//                markPoint: {
+//                    data: [
+//                        {name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
+//                    ]
+//                },
+//                markLine: {
+//                    data: [
+//                        {type: 'average', name: '平均值'}
+//                    ]
+//                }
+//            }
+        ]
+    };
+
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+</script>
+<!--湿度-->
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main2'));
+
+    option = {
+        title: {
+            text: '湿度折线图',
+//            subtext: '纯属虚构'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['湿度']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: false,
+//                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value} %RH'
+                }
+            }
+        ],
+        series: [
+            {
+//                name: '最高气温',
+                type: 'line',
+                data: [65,65,65,65,65],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            },
+//            {
+////                name: '最低气温',
+//                type: 'line',
+//                data: [1, -2, 2, 5, 3, 2, 0],
+//                markPoint: {
+//                    data: [
+//                        {name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
+//                    ]
+//                },
+//                markLine: {
+//                    data: [
+//                        {type: 'average', name: '平均值'}
+//                    ]
+//                }
+//            }
+        ]
+    };
+
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+</script>
+<!--光照-->
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main3'));
+
+    option = {
+        title: {
+            text: '光照折线图',
+//            subtext: '纯属虚构'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['光照强度']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: false,
+//                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value} lx'
+                }
+            }
+        ],
+        series: [
+            {
+//                name: '最高气温',
+                type: 'line',
+                data: [3240,3240,3240,3240,3240],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            },
+//            {
+////                name: '最低气温',
+//                type: 'line',
+//                data: [1, -2, 2, 5, 3, 2, 0],
+//                markPoint: {
+//                    data: [
+//                        {name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
+//                    ]
+//                },
+//                markLine: {
+//                    data: [
+//                        {type: 'average', name: '平均值'}
+//                    ]
+//                }
+//            }
+        ]
+    };
+
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+</script>
 </body>
 </html>

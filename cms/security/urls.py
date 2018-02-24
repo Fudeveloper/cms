@@ -25,5 +25,7 @@ urlpatterns = [
     url(r'^guard/$', views.guard, name='guard'),
     # 视频监控
     url(r'^video/$', views.video, name='video'),
+    #
+    url(r'^attendance/$', views.attendance, name='attendance'),
 
 ]

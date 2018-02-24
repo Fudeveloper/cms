@@ -24,7 +24,4 @@ urlpatterns = [
     url(r'^UpDataDevState/(\d*)/(\d*)/$', views.UpDataDevState, name='UpDataDevState'),
     url(r'^getContorlDevice/$', views.getContorlDevice, name='getContorlDevice'),
 
-
-
-
 ]
