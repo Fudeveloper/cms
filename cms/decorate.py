@@ -18,7 +18,7 @@ def check_permiss(get_data_func):
             print(*args, **kwargs)
             print("++++++++++++++++++")
             json_result = json.loads(result)
-            # print("----------------{}".format(json_result))
+            print("----------------{}".format(json_result))
             if "message" in json_result.keys():
                 if json_result['message'] == "无权限":
                     context = {"has_permiss": "false"}
@@ -27,7 +27,7 @@ def check_permiss(get_data_func):
                 elif json_result['message'] == "该用户未登录":
                     context = {"has_permiss": "notlogin"}
                 else:
-                    context = {"has_permiss": "true", "data": json_result}
+                    context = {"has_permiss": "true", "basedata": json_result}
             return func(request, *args, **kwargs, return_context=context)
 
         return inner

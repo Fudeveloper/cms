@@ -1,6 +1,6 @@
 ﻿{% extends "base_table.html" %}
 {% block title %}查看用户{% endblock %}
-<!--{{has_permiss}}-->
+
 {% block table %}
 <div class="layui-btn-group demoTable">
     <!--<button class="layui-btn" data-type="isAll" id="lalala">添加用户</button>-->
@@ -14,32 +14,11 @@
     </div>
 
 </div>
-<table id="tab" class="layui-table"
-       lay-data="{ height:'full-40', url:'{%url 'user:getUserInfo'%}',  id:'userList'}"
-       lay-filter="demo" style="text-align: center">
-    <thead>
-    <tr>
-        <th lay-data="{checkbox:true, fixed: true}"></th>
-        <th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
-        <th lay-data="{field:'userName', width:80}">用户名</th>
-        <th lay-data="{field:'name', width:80}">姓名</th>
-        <th lay-data="{field:'phone', width:80}">手机号</th>
-
-        <th lay-data="{field:'status', width:85, sort: true}">状态</th>
-        <th lay-data="{field:'groupID', width:120}">用户组</th>
-        <th lay-data="{field:'permissions', width:250}">权限</th>
-        <!--<th lay-data="{field:'experience', width:100, sort: true}">积分</th>-->
-
-        <!--<th lay-data="{field:'classify', width:80}">职业</th>-->
-        <!--<th lay-data="{field:'wealth', width:135, sort: true}">财富</th>-->
-        <!--<th lay-data="{field:'score', width:80, sort: true, fixed: 'right'}">评分</th>-->
-        <!--最后一列-->
-        <th lay-data="{fixed: 'right', width:'300', align:'center', toolbar: '#barDemo'}"></th>
-    </tr>
-    </thead>
-</table>
+<table class="layui-hide" id="demo" lay-filter="demo"></table>
 {% endblock %}
 {% block js %}
+<script src="/static/plugins/layui/layui.js" charset="utf-8"></script>
+
 <script type="text/html" id="barDemo">
     {% ifequal alterUserPassword True %}
     <a class="layui-btn layui-btn-mini" lay-event="change_passwd">更改密码</a>
@@ -60,12 +39,33 @@
     {% endifequal %}
 
 </script>
-<script src="/static/plugins/layui/layui.js" charset="utf-8"></script>
 <script src="/static/build/js/jsonExportToCSV.js"></script>
 <script>
     layui.use('table', function () {
         var table = layui.table;
-
+        var $ = layui.jquery;
+        //展示已知数据
+        table.render({
+            initSort: {field: 'id', type: 'asc'},
+            elem: '#demo'
+            , cols: [[ //标题栏
+                {checkbox:true, fixed: true},
+                {field:'id', width:80, sort: true, fixed: true,title:"ID",align:"center"}
+                , {field:'userName', width:80,title:"用户名",align:"center"}
+                ,{field:'name', width:80,title:"姓名",align:"center"}
+                ,{field:'phone', width:80,title:"手机号",align:"center"}
+                ,{field:'status', width:85, sort: true,title:"状态",align:"center"}
+                ,{field:'groupID', width:120,title:"用户组",align:"center"}
+                ,{field:'permissions', width:250,title:"权限",align:"center"}
+                , {fixed: 'right', width: '300', align: 'center', toolbar: '#barDemo'}
+            ]]
+            , data: {{data | safe}}
+            ,even:true
+            //,skin: 'line' //表格风格
+            //,page: true //是否显示分页
+            //,limits: [5, 7, 10]
+            //,limit: 5 //每页默认显示的数量
+        });
         //监听表格复选框选择
         table.on('checkbox(demo)', function (obj) {
             console.log(obj)
@@ -226,7 +226,11 @@
 
 
         })
-    });
 
+    });
 </script>
 {% endblock %}
+
+
+
+

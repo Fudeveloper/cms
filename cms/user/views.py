@@ -74,24 +74,27 @@ def main(request):
 @check_permiss(get_listUser_data)
 @auth
 def listUser(request, return_context):
-    result = get_my_info(request)
-    json_result = json.loads(result)
-    print("--------------------" + "------------------------")
-
-    permissions_result = get_my_permissions(request)
-    permissions = []
-    try:
-        for i in range(len(permissions_result)):
-            permissions.append(permissions_result[i]['permissName'])
-    except:
-        return render(request, 'user/listUser.html', context={"has_permiss": "notlogin"})
-    alterUserPassword = list_check_permiss("alterUserPassword", permissions)
-    alterUserPermiss = list_check_permiss("alterUserPermiss", permissions)
-    delUser = list_check_permiss("delUser", permissions)
-    # alterUserPassword
-    return_context["alterUserPassword"] = alterUserPassword
-    return_context["delUser"] = delUser
-    return_context["alterUserPermiss"] = alterUserPermiss
+    print("--------------------------------------------------")
+    if 'basedata' in return_context.keys():
+        basedata = return_context["basedata"]
+        if "appendData" in basedata.keys():
+            infos = basedata['appendData']
+            count = len(infos)
+            return_context["data"] = infos
+            return_context["count"] = count
+            permissions_result = get_my_permissions(request)
+            permissions = []
+            try:
+                for i in range(len(permissions_result)):
+                    permissions.append(permissions_result[i]['permissName'])
+            except:
+                return render(request, 'user/listUser.html', context={"has_permiss": "notlogin"})
+            alterUserPassword = list_check_permiss("alterUserPassword", permissions)
+            alterUserPermiss = list_check_permiss("alterUserPermiss", permissions)
+            delUser = list_check_permiss("delUser", permissions)
+            return_context["alterUserPassword"] = alterUserPassword
+            return_context["delUser"] = delUser
+            return_context["alterUserPermiss"] = alterUserPermiss
     return render(request, 'user/listUser.html', context=return_context)
 
 
@@ -264,23 +267,23 @@ def change_permissions_handler(request):
 
 
 # 获取所有用户信息
-@auth
-def getUserInfo(request):
-    result = get_listUser_data(request)
-    result = json.loads(result)
-
-    print(result)
-    # 用户信息
-    if "appendData" in result.keys():
-        user_infos = result['appendData']
-        # print(user_infos)
-        user_count = len(user_infos)
-    else:
-        user_infos = ""
-        user_count = 0
-    # print(user_infos)
-    # 用户数量
-    return JsonResponse({"code": 0, "msg": "", "count": user_count, "data": user_infos})
+# @auth
+# def getUserInfo(request):
+#     result = get_listUser_data(request)
+#     result = json.loads(result)
+#
+#     print(result)
+#     # 用户信息
+#     if "appendData" in result.keys():
+#         user_infos = result['appendData']
+#         # print(user_infos)
+#         user_count = len(user_infos)
+#     else:
+#         user_infos = ""
+#         user_count = 0
+#     # print(user_infos)
+#     # 用户数量
+#     return JsonResponse({"code": 0, "msg": "", "count": user_count, "data": user_infos})
 
 
 # 修改密码

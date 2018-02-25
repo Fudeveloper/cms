@@ -8,18 +8,21 @@
 <script>
     layui.use('table', function () {
         var table = layui.table;
+
+
         //展示已知数据
         table.render({
+            initSort: {field:'time', type:'desc'},
             elem: '#demo'
             , cols: [[ //标题栏
-                {field: 'name', title: '用户名', width: 120, sort: true}
+                {field: 'name', title: '用户名', width: 120}
       ,{field: 'content', title: '登录操作状态', width: 150}
       ,{field: 'time', title: '时间', width: 300,sort: true}
             ]]
-            , data: {{data | safe}}
+            , data:{{data | safe}}
             //,skin: 'line' //表格风格
             , even: true
-            , count:{{count}}
+            , count: {{count}}
             //,page: true //是否显示分页
             //,limits: [5, 7, 10]
             //,limit: 5 //每页默认显示的数量

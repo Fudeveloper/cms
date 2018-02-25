@@ -9,8 +9,8 @@
 <body>
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
 <div class="row" style="width: 100%">
-    <div class="col-md-6" style="width:50%;float:left;overflow:hidden;">
-        <div id="main" style="width: 90%;height:300px;margin-right: 15px"></div>
+    <div class="col-md-6" style="width:100%;float:left;overflow:hidden;">
+        <div id="main" style="width: 90%;height:500px;margin: 5%"></div>
     </div>
     <!--<div class="col-md-6" style="width:50%;float:left;overflow:hidden;">-->
     <!--<div id="main2" style="width: 90%;height:300px; "></div>-->
@@ -38,17 +38,14 @@
     option = {
         baseOption: {
             timeline: {
-                padding: 5,
-                realtime: true,
-                loop: true,
+                tooltip:"",
                 axisType: 'category',
                 show: true,
                 autoPlay: true,
-                playInterval: 2500,
+                playInterval: 5000,
                 data: [
                     '2017-08', '2017-09', '2017-10', '2017-11', '2017-12',
                     {name: '2018-01', symbol: 'emptyStar6', symbolSize: 8},
-
                 ],
                 label: {
                     formatter: function (s) {
@@ -64,7 +61,7 @@
                     name: '',
                 }
                 ,],
-            yAxis: {type: 'value', name: '',show: false},
+            yAxis: {type: 'value', name: '', show: false},
             series: [
                 {
                     type: 'line',
@@ -83,17 +80,17 @@
                     trigger: 'item',
                     formatter: "{a} <br/>{b} : {c} ({d}%)"
                 },
-            legend: {
-                data:['总数','迟到','早退','下班未录入']
-            },
+                legend: {
+                    data: ['总数', '迟到', '早退', '下班未录入']
+                },
                 toolbox: {
                     show: true,
                     feature: {
                         mark: {show: true},
-                        dataView: {show: true, readOnly: false},
+                        dataView: {show: true, readOnly: true},
                         magicType: {
-                            show: true,
-                            type: ['pie', 'funnel'],
+                            show: false,
+                            type: ['pie', 'bar'],
                             option: {
                                 funnel: {
                                     x: '25%',
@@ -115,9 +112,9 @@
                         radius: '50%',
                         data: [
                             {value: idx * 842, name: '总数'},
-                            {value: idx *110, name: '迟到'},
-                            {value: idx * 9 , name: '早退'},
-                            {value: idx * 62 , name: '下班未录入'},
+                            {value: idx * 110, name: '迟到'},
+                            {value: idx * 9, name: '早退'},
+                            {value: idx * 62, name: '下班未录入'},
                         ]
                     }
                 ]
@@ -191,7 +188,7 @@
                         ]
                     }
                 ]
-            },
+            }
 
         ]
     };

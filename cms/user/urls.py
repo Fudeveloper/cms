@@ -33,7 +33,7 @@ urlpatterns = [
     # 查看用户
     url(r'^listUser/$', views.listUser, name='listUser'),
 
-    url(r'^getUserInfo/$', views.getUserInfo, name='getUserInfo'),
+    # url(r'^getUserInfo/$', views.getUserInfo, name='getUserInfo'),
     url(r'^PassWordChange/(\d*)$', views.PassWordChange, name='PassWordChange'),
 
     url(r'^change_permissions_handler/$', views.change_permissions_handler, name='change_permissions_handler'),

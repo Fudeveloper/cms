@@ -1,21 +1,32 @@
 {% extends "base_table.html" %}
 {% block title %}设备管理{% endblock %}
 <!--{{has_permiss}}-->
+
 {% block table %}
-<table class="layui-table"
-       lay-data="{height:'full-10', url:'{%url 'device:getDeviceData'%}', initSort: {field:'DevID', type:'asc'}}">
-    <thead>
-    <tr>
-        <th lay-data="{field:'DevID', width:100,sort: true}">设备ID</th>
-
-        <th lay-data="{field:'DevDataName', width:150}">设备名称</th>
-        <!--<th lay-data="{field:'DevDataType', width:120, sort: true}">数据类型</th>-->
-        <th lay-data="{field:'DevData', width:80}">数据值</th>
-        <th lay-data="{field:'DevDataUnit', width:120}">数据单位</th>
-
-    </tr>
-    </thead>
-</table>
+<table class="layui-hide" id="demo"></table>
 {% endblock %}
+{% block js %}
 <script src="/static/plugins/layui/layui.js" charset="utf-8"></script>
-
+<script>
+    layui.use('table', function () {
+        var table = layui.table;
+        //展示已知数据
+        table.render({
+           initSort: {field: 'DevID', type: 'asc'},
+            elem: '#demo'
+            , cols: [[ //标题栏
+                {field: 'DevID', title: '设备ID', width: 100, sort: true,align: 'center'}
+                , {field: 'DevDataName', title: '设备名称', width: 150,align: 'center'}
+                 , {field: 'DevData', title: '数据值', width: 150,align: 'center'}
+                 , {field: 'DevDataUnit', title: '数据单位', width: 120,align: 'center'}
+            ]]
+            , data: {{data | safe}}
+            ,even:true
+            //,skin: 'line' //表格风格
+            //,page: true //是否显示分页
+            //,limits: [5, 7, 10]
+            //,limit: 5 //每页默认显示的数量
+        });
+    });
+</script>
+{% endblock %}

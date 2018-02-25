@@ -1,5 +1,7 @@
-<!doctype html>
-<html>
+{% extends "base_table.html" %}
+{% block title %}变更权限{% endblock %}
+<!--{{has_permiss}}-->
+{% block table %}
 <head>
     <meta charset="utf-8">
     <title>配置权限</title>
@@ -30,8 +32,6 @@
     <script language="javascript" type="text/javascript"
             src="/static/build/js/unknow.js" charset="gb2312"></script>
 </head>
-<body>
-
 <form class="layui-form">
     <div style="float: left">
         <div class="site-title">
@@ -137,8 +137,9 @@
         <!--<button class="layui-btn layui-btn-primary" id="closeIframe">关闭iframe</button>-->
     </div>
 </form>
+{% endblock %}
+{% block js %}
 <script src="/static/plugins/layui/layui.js"></script>
-
 <script src="/static/build/js/laycode.js"></script>
 <script>
     new Function($('.run').text())()
@@ -226,7 +227,4 @@
     });
 
 </script>
-<!--<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");-->
-<!--document.write(unescape("%3Cspan id='cnzz_stat_icon_30088308'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "w.cnzz.com/c.php%3Fid%3D30088308' type='text/javascript'%3E%3C/script%3E"));</script>-->
-</body>
-</html>
+{% endblock %}
