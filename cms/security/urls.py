@@ -27,5 +27,7 @@ urlpatterns = [
     url(r'^video/$', views.video, name='video'),
     #
     url(r'^attendance/$', views.attendance, name='attendance'),
+    url(r'^get_envir_data/$', views.get_envir_data, name='get_envir_data'),
+
 
 ]
