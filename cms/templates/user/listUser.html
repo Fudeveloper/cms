@@ -19,26 +19,26 @@
 {% block js %}
 <script src="/static/plugins/layui/layui.js" charset="utf-8"></script>
 
-<script type="text/html" id="barDemo">
-    {% ifequal alterUserPassword True %}
-    <a class="layui-btn layui-btn-mini" lay-event="change_passwd">更改密码</a>
-    {% else %}
-    <a class="layui-btn layui-btn-mini layui-btn-disabled">更改密码</a>
-    {% endifequal %}
+<!--<script type="text/html" id="barDemo">-->
+    <!--{% ifequal alterUserPassword True %}-->
+    <!--<a class="layui-btn layui-btn-mini" lay-event="change_passwd">更改密码</a>-->
+    <!--{% else %}-->
+    <!--<a class="layui-btn layui-btn-mini layui-btn-disabled">更改密码</a>-->
+    <!--{% endifequal %}-->
 
-    {% ifequal alterUserPermiss True %}
-    <a class="layui-btn  layui-btn-normal layui-btn-mini" lay-event="change_permiss">变更权限</a>
-    {% else %}
-    <a class="layui-btn  layui-btn-normal layui-btn-mini layui-btn-disabled">变更权限</a>
-    {% endifequal %}
-    <!--layui-btn-disabled-->
-    {% ifequal delUser True %}
-    <a class="layui-btn layui-btn-danger layui-btn-mini " lay-event="del">删除用户</a>
-    {% else %}
-    <a class="layui-btn layui-btn-danger layui-btn-mini layui-btn-disabled">删除用户</a>
-    {% endifequal %}
+    <!--{% ifequal alterUserPermiss True %}-->
+    <!--<a class="layui-btn  layui-btn-normal layui-btn-mini" lay-event="change_permiss">变更权限</a>-->
+    <!--{% else %}-->
+    <!--<a class="layui-btn  layui-btn-normal layui-btn-mini layui-btn-disabled">变更权限</a>-->
+    <!--{% endifequal %}-->
+    <!--&lt;!&ndash;layui-btn-disabled&ndash;&gt;-->
+    <!--{% ifequal delUser True %}-->
+    <!--<a class="layui-btn layui-btn-danger layui-btn-mini " lay-event="del">删除用户</a>-->
+    <!--{% else %}-->
+    <!--<a class="layui-btn layui-btn-danger layui-btn-mini layui-btn-disabled">删除用户</a>-->
+    <!--{% endifequal %}-->
 
-</script>
+<!--</script>-->
 <script src="/static/build/js/jsonExportToCSV.js"></script>
 <script>
     layui.use('table', function () {
