@@ -130,3 +130,22 @@ def UpDataDevState(request, equip_id, device_id, device_status):
             status = "true"
     print(result)
     return JsonResponse({"status": status})
+
+
+@check_permiss(get_Device_Data)
+def api_get_device_Data(request, return_context):
+    if "basedata" in return_context.keys():
+        infos = return_context["basedata"]['appendData']
+        only_data_devices = []
+        print(infos)
+        for info in infos:
+            try:
+                if int(info["DevID"]) < 100:
+                    only_data_devices.append(info)
+            except:
+                pass
+        count = len(only_data_devices)
+
+        return JsonResponse({"code": 0, "msg": "", "count": count, "data": only_data_devices})
+    else:
+        return JsonResponse({"code": 0, "msg": "", "count": 0, "data": {}})

@@ -26,4 +26,7 @@ urlpatterns = [
     url(r'^UpDataDevState/(\d*)/(\d*)/(\d*)/$', views.UpDataDevState, name='UpDataDevState'),
     # url(r'^getContorlDevice/$', views.getContorlDevice, name='getContorlDevice'),
 
+    url(r'^api_get_device_Data/$', views.api_get_device_Data, name='api_get_device_Data'),
+
+
 ]

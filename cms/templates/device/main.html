@@ -10,24 +10,59 @@
 <script>
     layui.use('table', function () {
         var table = layui.table;
+        var $ = layui.jquery;
         //展示已知数据
         table.render({
 //           initSort: {field: 'DevID', type: 'asc'},
-            elem: '#demo'
+            id: 'reload_id'
+            , elem: '#demo'
             , cols: [[ //标题栏
-                {field: 'EquipID', title: '设备组号', width: 130, sort: true,align: 'center'},
-                {field: 'DevID', title: '设备ID', width: 100, sort: true,align: 'center'}
-                , {field: 'DevDataName', title: '设备名称', width: 150,align: 'center'}
-                 , {field: 'DevData', title: '数据值', width: 150,align: 'center'}
-                 , {field: 'DevDataUnit', title: '数据单位', width: 120,align: 'center'}
+                {field: 'EquipID', title: '设备组号', width: 130, sort: true, align: 'center'},
+                {field: 'DevID', title: '设备ID', width: 100, sort: true, align: 'center'}
+                , {field: 'DevDataName', title: '设备名称', width: 150, align: 'center'}
+                , {field: 'DevData', title: '数据值', width: 150, align: 'center'}
+                , {field: 'DevDataUnit', title: '数据单位', width: 120, align: 'center'}
             ]]
-            , data: {{data | safe}}
-            ,even:true
+            , data: "{{data | safe}}"
+            , even: true
             //,skin: 'line' //表格风格
             //,page: true //是否显示分页
             //,limits: [5, 7, 10]
             //,limit: 5 //每页默认显示的数量
         });
+
+
+//        var interval = setInterval(function () {
+////            $.get('/device/api_get_device_Data/').done(function (ajaxdata) {
+////                    reloadTable(ajaxdata.data)
+////            });
+//            table.reload("reload_id", { //此处是上文提到的 初始化标识id
+//                url: '/device/api_get_device_Data/',
+//                where: {
+//                    //key: { //该写法上文已经提到
+////                    type: item.type, id: item.id
+//                    //}
+//                }
+//            });
+//        }, 2000);
+
+//        var reloadTable = function (item) {
+//            console.log(item);
+//            table.reload("listReload", { //此处是上文提到的 初始化标识id
+//                url: '/device/api_get_device_Data/',
+//                where: {
+//                    //key: { //该写法上文已经提到
+//                    type: item.type, id: item.id
+//                    //}
+//                }
+//            });
+//        };
     });
+
+    //            table.reload('reload_id', {
+    //                url: '/device/api_get_device_Data/'
+    //                , where: {} //设定异步数据接口的额外参数
+    //                //,height: 300
+    //            });
 </script>
 {% endblock %}
