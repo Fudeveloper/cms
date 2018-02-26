@@ -4,6 +4,8 @@ from decorate import *
 import requests
 import json
 
+before_data = ""
+
 api_link = settings.API_ADDRESS
 headers = settings.HEADERS
 EQUIPID_COMPANY = settings.EQUIPID_COMPANY
@@ -135,6 +137,7 @@ def UpDataDevState(request, equip_id, device_id, device_status):
 @check_permiss(get_Device_Data)
 def api_get_device_Data(request, return_context):
     if "basedata" in return_context.keys():
+
         infos = return_context["basedata"]['appendData']
         only_data_devices = []
         print(infos)
@@ -144,8 +147,13 @@ def api_get_device_Data(request, return_context):
                     only_data_devices.append(info)
             except:
                 pass
-        count = len(only_data_devices)
+        if only_data_devices == before_data:
+            return JsonResponse({"data_change": "false"})
+        else:
+            global before_data
+            before_data = only_data_devices
+            count = len(only_data_devices)
 
-        return JsonResponse({"code": 0, "msg": "", "count": count, "data": only_data_devices})
+        return JsonResponse({"data_change": "true", "code": 0, "msg": "", "count": count, "data": only_data_devices})
     else:
-        return JsonResponse({"code": 0, "msg": "", "count": 0, "data": {}})
+        return JsonResponse({"code": 0, "msg": "", "count": 0, "data": {}, "data_change": "false"})

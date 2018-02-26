@@ -1,3 +1,4 @@
+# coding:utf-8
 import logging
 import base64
 import re
@@ -106,6 +107,7 @@ def login_handle(request):
     post_info = request.POST
     username = post_info.get('username')
     passwd = post_info.get('passwd')
+    print(username)
     # 与服务器通信,验证用户
     post_data = {"userName": username, "passWord": passwd}
     res = requests.post(url=api_link + "/Api/Account/Logon", data=post_data, headers=headers)
@@ -129,6 +131,7 @@ def login_handle(request):
         # 查询用户真实姓名
         intent_name = requests.get(api_link + "/Api/Account/UserInfo", headers=headers, cookies=res.cookies).text
         data = json.loads(intent_name)
+
         print(data)
         if "appendData" in data.keys():
             append_data = data['appendData']
@@ -137,11 +140,12 @@ def login_handle(request):
             context = {'result': 'unknow'}
             return render(request, 'user/login.html', context)
         if not append_data:
-            print("-----------------------")
+            # print("-----------------------")
             print(append_data)
 
             context = {'result': 'unknow'}
             return render(request, 'user/login.html', context)
+        print("++++++++++++++++++++++++++")
         name = append_data['name']
         userid = append_data['id']
         groupid = append_data['groupID']
@@ -151,7 +155,7 @@ def login_handle(request):
 
         name2 = base64.b64encode(str(name).encode("utf-8"))
         # 将用户信息存入cookie
-        red.set_cookie('username', username)
+        # red.set_cookie('username', username)
         red.set_cookie('name', name2)
         red.set_cookie('userid', userid)
         red.set_cookie("groupid", groupid)
