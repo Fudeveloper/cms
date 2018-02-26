@@ -1,16 +1,30 @@
 from django.conf import settings
+from decorate import *
 
 api_link = settings.API_ADDRESS
 headers = settings.HEADERS
-from decorate import *
+EQUIPID_COMPANY = settings.EQUIPID_COMPANY
+EQUIPID_OUR = settings.EQUIPID_OUR
 
-
-# Create your views here.
 
 # 获得设备数据
+# 更新：
+'''
+def get_Device_Data(request,equip_id):
+    userid, presend_cookie = cookie_handler.get_cookie(request)
+    data = {"EquipID": equip_id}
+    result = requests.post(api_link + "/Api/DeviceData/ListByEquipID", headers=headers, cookies=presend_cookie,
+                           json=data).text
+    return result
+
+'''
+
+
+
 def get_Device_Data(request):
     userid, presend_cookie = cookie_handler.get_cookie(request)
     data = {"id": "3"}
+    # / Api / DeviceData / ListByEquipID
     # 从服务器获取所有设备信息
     result = requests.post(api_link + "/Api/DeviceData/List", headers=headers, cookies=presend_cookie,
                            json=data).text
@@ -31,12 +45,13 @@ def environment(request, return_context):
         infos = return_context["basedata"]['appendData']
         return_context["basedata"] = ""
         for info in infos:
-            if info["DevID"] == '7':
-                temprature = info["DevData"]
-            elif info["DevID"] == '8':
-                humidity = info["DevData"]
-            elif info["DevID"] == '9':
-                light = info["DevData"]
+            if info["EquipID"] == EQUIPID_OUR:
+                if info["DevID"] == '7':
+                    temprature = info["DevData"]
+                elif info["DevID"] == '8':
+                    humidity = info["DevData"]
+                elif info["DevID"] == '9':
+                    light = info["DevData"]
 
         return_context["temprature"] = temprature
         return_context["humidity"] = humidity
@@ -75,14 +90,16 @@ def get_envir_data(request):
         infos = json_result["appendData"]
         if infos:
             for info in infos:
-                if info["DevID"] == '7':
-                    temprature = info["DevData"]
-                elif info["DevID"] == '8':
-                    humidity = info["DevData"]
-                elif info["DevID"] == '9':
-                    light = info["DevData"]
-            for i in [temprature, humidity, light]:
-                if i:
-                    status = "true"
-            print("--------light:{}".format(light))
+                if info["EquipID"] == EQUIPID_OUR:
+                    if info["DevID"] == '7':
+                        temprature = info["DevData"]
+                    elif info["DevID"] == '8':
+                        print(info)
+                        humidity = info["DevData"]
+                    elif info["DevID"] == '9':
+                        light = info["DevData"]
+                for i in [temprature, humidity, light]:
+                    if i:
+                        status = "true"
+            print("--------light:{},tem:{},humidity:{},status:{}".format(light, temprature, humidity,status))
     return JsonResponse({"temprature": temprature, "humidity": humidity, "light": light, "status": status})

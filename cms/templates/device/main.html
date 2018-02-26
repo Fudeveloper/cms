@@ -12,9 +12,10 @@
         var table = layui.table;
         //展示已知数据
         table.render({
-           initSort: {field: 'DevID', type: 'asc'},
+//           initSort: {field: 'DevID', type: 'asc'},
             elem: '#demo'
             , cols: [[ //标题栏
+                {field: 'EquipID', title: '设备组号', width: 130, sort: true,align: 'center'},
                 {field: 'DevID', title: '设备ID', width: 100, sort: true,align: 'center'}
                 , {field: 'DevDataName', title: '设备名称', width: 150,align: 'center'}
                  , {field: 'DevData', title: '数据值', width: 150,align: 'center'}

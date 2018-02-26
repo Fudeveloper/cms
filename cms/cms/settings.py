@@ -15,7 +15,8 @@ HEADERS = {'User-Agent': 'webClient'}
 API_ADDRESS = "http://120.78.62.39:8088"
 # API_ADDRESS = "http://192.168.1.200:8088/"
 
-
+EQUIPID_COMPANY = "01"
+EQUIPID_OUR = "100"
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

@@ -21,7 +21,9 @@ urlpatterns = [
     url(r'^main/$', views.main, name='main'),
     url(r'^control/$', views.control, name='control'),
     # url(r'^getDeviceData/$', views.getDeviceData, name='getDeviceData'),
-    url(r'^UpDataDevState/(\d*)/(\d*)/$', views.UpDataDevState, name='UpDataDevState'),
-    url(r'^getContorlDevice/$', views.getContorlDevice, name='getContorlDevice'),
+
+    # equip_id, device_id, device_status
+    url(r'^UpDataDevState/(\d*)/(\d*)/(\d*)/$', views.UpDataDevState, name='UpDataDevState'),
+    # url(r'^getContorlDevice/$', views.getContorlDevice, name='getContorlDevice'),
 
 ]
