@@ -151,7 +151,7 @@ def login_handle(request):
 
         name2 = base64.b64encode(str(name).encode("utf-8"))
         # 将用户信息存入cookie
-        red.set_cookie('username', username)
+        # red.set_cookie('username', username)
         red.set_cookie('name', name2)
         red.set_cookie('userid', userid)
         red.set_cookie("groupid", groupid)
