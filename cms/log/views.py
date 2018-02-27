@@ -29,7 +29,8 @@ def loginLog(request, return_context):
         user_count = len(user_infos)
         return_context["data"] = user_infos
         return_context["count"] = user_count
-
+        print(user_infos)
+        print(user_count)
     return render(request, 'log/loginLog.html', context=return_context)
 
 
