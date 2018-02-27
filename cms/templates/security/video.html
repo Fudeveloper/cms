@@ -16,9 +16,10 @@
         layui.use(['layer', 'jquery'], function () {
             var layer = layui.layer;
             var $ = layui.jquery;
+            var addr = "http://192.168.1.200";
             $(function () {
                 parent.layer.closeAll();
-                var addr = "http://192.168.1.100";
+                alert(addr)
                 $("#up").mousedown(function () {
                     $.get(addr + "/decoder_control.cgi?command=0&user=admin&pwd=");
                 });
@@ -78,7 +79,7 @@
             <!--<input type="button" value="右" id="right">-->
         </div>
         <div>
-            <iframe src="http://192.168.1.100/videostream.cgi?user=admin&pwd="
+            <iframe src="http://192.168.1.200/videostream.cgi?user=admin&pwd="
                     style="width: 100%;height: 500px;display: inline-block">
             </iframe>
         </div>
