@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all">
 </head>
 <body>
+{% block test_body %}{% endblock %}
 {%if has_permiss == 'false'%}
 您暂无权限访问此页面
 {%elif has_permiss == 'notlogin'%}

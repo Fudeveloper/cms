@@ -1,0 +1,100 @@
+{% extends "base_table.html" %}
+{% block title %}first{% endblock %}
+{% block test_body %}
+
+<style type="text/css">
+
+    .grid-demo {
+        cursor: pointer;
+        font-size: 21px;
+        margin-right: 3%;
+        margin-left: 3%;
+        border-radius: 5%;
+        margin-top: 5%;
+        padding: 10px;
+        line-height: 11;
+        text-align: center;
+        background-color: #79C48C;
+        color: #fff;
+    }
+
+    .grid-demo-bg1 {
+        /*border-radius: 60%;*/
+        background-color: #61727A;
+        /*margin-top: 5%;*/
+
+    }
+
+    .grid-demo-bg2 {
+        background-color: #D3BD74;
+    }
+
+    .grid-demo-bg3 {
+        background-color: #4d4944;
+    }
+
+    .grid-demo-bg4 {
+        background-color: #6EA3B8;
+    }
+</style>
+<div class="layui-fluid">
+    <!--<fieldset class="layui-elem-field layui-field-title">-->
+    <!--&lt;!&ndash;<legend>流体容器（宽度自适应，不固定）</legend>&ndash;&gt;-->
+    <!--</fieldset>-->
+    <div class="layui-row">
+        <div class="layui-col-sm3">
+            <div class="grid-demo grid-demo-bg1" >环境监视</div>
+        </div>
+        <div class="layui-col-sm3">
+            <div class="grid-demo grid-demo-bg1">设备监视</div>
+        </div>
+        <div class="layui-col-sm3">
+            <div class="grid-demo grid-demo-bg2">控制设备</div>
+        </div>
+        <div class="layui-col-sm3">
+            <div class="grid-demo grid-demo-bg3">折弯</div>
+        </div>
+    </div>
+</div>
+
+<div class="layui-fluid">
+    <!--<fieldset class="layui-elem-field layui-field-title">-->
+    <!--&lt;!&ndash;<legend>流体容器（宽度自适应，不固定）</legend>&ndash;&gt;-->
+    <!--</fieldset>-->
+    <div class="layui-row">
+        <div class="layui-col-sm3">
+            <div class="grid-demo grid-demo-bg3">焊接</div>
+        </div>
+        <div class="layui-col-sm3">
+            <div class="grid-demo grid-demo-bg3">搬运</div>
+        </div>
+        <div class="layui-col-sm3">
+            <div class="grid-demo grid-demo-bg4">教学</div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block js %}
+<script src="/static/plugins/layui/layui.js" charset="utf-8"></script>
+<script>
+    layui.use('table', function () {
+//        var table = layui.table;
+//        var render_data ={{data | safe}}
+
+        //展示已知数据
+//            table.render({
+//                initSort:{    field: 'time',type: 'desc'}
+//                ,elem: '#demo'
+//                , cols: [[ //标题栏
+//                    {field: 'name', title: '用户名', width: 120}
+//                    , {field: 'content', title: '登录操作状态', width: 150}
+//                    , {field: 'time', title: '时间', width: 300, sort: true}
+//                ]]
+//                , data: render_data
+//                , even: true
+//                ,limit: 5000
+//            });
+    });
+</script>
+{% endblock %}

@@ -149,3 +149,7 @@ def api_get_device_Data(request, return_context):
         return JsonResponse({"code": 0, "msg": "", "count": count, "data": only_data_devices})
     else:
         return JsonResponse({"code": 0, "msg": "", "count": 0, "data": {}})
+
+
+def first(request):
+    return render(request, 'device/first.html')
