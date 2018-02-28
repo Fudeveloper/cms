@@ -45,16 +45,21 @@
         //展示已知数据
 //        table.render();
         var change_data_array;
+        var need_update_array;
+        var now_data;
+        var change;
+        var data_change_flag;
+        var result;
         var interval = setInterval(function () {
-            change_data_array = [];
-//
-            $.get('/device/api_get_device_Data/').done(function (ajaxdata) {
-                var change = !_.isEqual(old_data, ajaxdata.data);
-                if (change) {
 
-                    var data_change_flag;
+            $.get('/device/api_get_device_Data/').done(function (ajaxdata) {
+                now_data = deepCopy(ajaxdata.data)
+                change_data_array = [];
+                need_update_array=[];
+                change = !_.isEqual(old_data,now_data);
+                console.log(change);
+                if (change) {
 //                    数据变化
-                    var now_data = ajaxdata.data;
                     $.each(now_data, function (now_index, now_json) {
                         data_change_flag = true;
                         $.each(old_data, function (old_index, old_json) {
@@ -67,17 +72,21 @@
                             change_data_array.push(now_json)
                         }
                     });
-                    old_data = ajaxdata.data
-                }
-                if (!_.isEmpty(change_data_array)) {
-                    var result = getField(change_data_array, changed_by_fields);
-                    var need_update_array = hytable.getRowIndexByFiled(changed_by_fields, result);
+                    old_data = deepCopy(ajaxdata.data);
+                    if (!_.isEmpty(change_data_array)) {
+                        result = getField(change_data_array, changed_by_fields);
+                    need_update_array = hytable.getRowIndexByFiled(changed_by_fields, result);
                     console.log(need_update_array);
                     $.each(need_update_array, function (index, update_index) {
-                        hytable.updateRow(update_index, change_data_array[index])
+                        setTimeout(function () {
+                            hytable.updateRow(update_index, change_data_array[index])
+                        },500)
                     });
 
                 }
+
+                }
+
 
             });
 
@@ -117,7 +126,17 @@
             });
             return result
         }
-
+var deepCopy = function(obj) {
+  var newO = {};
+  if (obj instanceof Array) {
+    newO = [];
+  }
+  for ( var key in obj) {
+    var val = obj[key];
+    newO[key] = typeof val === 'object' ? arguments.callee(val) : val;
+  }
+  return newO;
+}
     });
 
 
