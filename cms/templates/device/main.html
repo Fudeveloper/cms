@@ -6,13 +6,20 @@
 <table class="layui-hide" id="demo"></table>
 {% endblock %}
 {% block js %}
+<script src="/static/build/js/jquery-1.12.4.min.js"></script>
 <script src="/static/plugins/layui/layui.js" charset="utf-8"></script>
+<script src="/static/build/js/laytableplus.js"></script>
+<script src="/static/plugins/layui/lay/modules/underscore.js"></script>
+
 <script>
-    layui.use('table', function () {
+
+
+    layui.use(['table'], function () {
         var table = layui.table;
         var $ = layui.jquery;
-        //展示已知数据
-        table.render({
+        var old_data = {{data | safe}}
+        var changed_by_fields = ["DevID", "EquipID"];
+        var tableoption = {
 //           initSort: {field: 'DevID', type: 'asc'},
             id: 'reload_id'
             , elem: '#demo'
@@ -24,46 +31,95 @@
                 , {field: 'DevDataUnit', title: '数据单位', width: 120, align: 'center'}
             ]]
             , data: {{data | safe}}
-            , even: true
+            ,
+            even: true
             //,skin: 'line' //表格风格
             //,page: true //是否显示分页
             //,limits: [5, 7, 10]
             //,limit: 5 //每页默认显示的数量
-        });
+        }
+        var hytable = new HYtablelist(tableoption);
+//                console.log(2)
 
-
+        hytable.romance();//渲染
+        //展示已知数据
+//        table.render();
+        var change_data_array;
         var interval = setInterval(function () {
+            change_data_array = [];
+//
             $.get('/device/api_get_device_Data/').done(function (ajaxdata) {
-                console.log(ajaxdata)
-//                    reloadTable(ajaxdata.data)
-            });
-            table.reload("reload_id", { //此处是上文提到的 初始化标识id
-                url: '/device/api_get_device_Data/',
-                where: {
-                    //key: { //该写法上文已经提到
-//                    type: item.type, id: item.id
-                    //}
+                var change = !_.isEqual(old_data, ajaxdata.data);
+                if (change) {
+
+                    var data_change_flag;
+//                    数据变化
+                    var now_data = ajaxdata.data;
+                    $.each(now_data, function (now_index, now_json) {
+                        data_change_flag = true;
+                        $.each(old_data, function (old_index, old_json) {
+                            if (_.isEqual(old_json, now_json)) {
+                                data_change_flag = false;
+                            }
+                        });
+                        if (data_change_flag) {
+//                                alert(now_json);
+                            change_data_array.push(now_json)
+                        }
+                    });
+                    old_data = ajaxdata.data
                 }
+                if (!_.isEmpty(change_data_array)) {
+                    var result = getField(change_data_array, changed_by_fields);
+                    var need_update_array = hytable.getRowIndexByFiled(changed_by_fields, result);
+                    console.log(need_update_array);
+                    $.each(need_update_array, function (index, update_index) {
+                        hytable.updateRow(update_index, change_data_array[index])
+                    });
+
+                }
+
             });
+
+
+//            console.log(index_array)
         }, 2000);
 
-//        var reloadTable = function (item) {
-//            console.log(item);
-//            table.reload("listReload", { //此处是上文提到的 初始化标识id
+
+//        var interval = setInterval(function () {
+//            $.get('/device/api_get_device_Data/').done(function (ajaxdata) {
+//                console.log(ajaxdata)
+////                    reloadTable(ajaxdata.data)
+//            });
+//            table.reload("reload_id", { //此处是上文提到的 初始化标识id
 //                url: '/device/api_get_device_Data/',
 //                where: {
 //                    //key: { //该写法上文已经提到
-//                    type: item.type, id: item.id
+////                    type: item.type, id: item.id
 //                    //}
 //                }
 //            });
-//        };
+//        }, 2000);
+
+
+//      获得用来获取tableRowIndex的fields
+        function getField(change_data_array, fields) {
+//        console.log(fields);
+            var result = [];
+            $.each(fields, function (field_index, now_field) {
+                var field_change_array = [];
+                $.each(change_data_array, function (data_index, change_data) {
+//                    console.log(change_data[now_field]);
+                    field_change_array.push([change_data[now_field]]);
+                });
+                result.push(field_change_array);
+//                console.log(result)
+            });
+            return result
+        }
+
     });
 
-    //            table.reload('reload_id', {
-    //                url: '/device/api_get_device_Data/'
-    //                , where: {} //设定异步数据接口的额外参数
-    //                //,height: 300
-    //            });
+
 </script>
 {% endblock %}

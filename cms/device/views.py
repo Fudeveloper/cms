@@ -136,18 +136,18 @@ def UpDataDevState(request, equip_id, device_id, device_status):
 def api_get_device_Data(request, return_context):
     if "basedata" in return_context.keys():
         infos = return_context["basedata"]['appendData']
-        # only_data_devices = []
-        # print(infos)
-        # for info in infos:
-        #     try:
-        #         if int(info["DevID"]) < 100:
-        #             only_data_devices.append(info)
-        #     except:
-        #         pass
-        # count = len(only_data_devices)
-        test_data = {'DevDataName': '大门', 'DevDataUnit': '', 'EquipID': 100, 'DevDataType': 0, 'DevID': '1', 'DevData': '1110'}
+        only_data_devices = []
+        print(infos)
+        for info in infos:
+            try:
+                if int(info["DevID"]) < 100:
+                    only_data_devices.append(info)
+            except:
+                pass
+        count = len(only_data_devices)
+        # test_data = {'DevDataName': '大门', 'DevDataUnit': '', 'EquipID': 100, 'DevDataType': 0, 'DevID': '1', 'DevData': '1110'}
         # {'DevDataName': '大门', 'DevDataUnit': '', 'EquipID': '100', 'DevDataType': 0, 'DevID': '103', 'DevData': '0'}
-        return JsonResponse({"code": 0, "msg": "", "count": 1, "data": [test_data]})
+        return JsonResponse({"code": 0, "msg": "", "count": count, "data": only_data_devices})
     else:
         return JsonResponse({"code": 0, "msg": "", "count": 0, "data": {}})
 
