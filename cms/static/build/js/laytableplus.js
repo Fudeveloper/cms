@@ -168,16 +168,19 @@ function HYtablelist(tableoption) {
     }
 //通过多field限定字段，获得row索引数组,field可以为['username','id']形式
 //    resourse 为[["lik","andy"],["1","2"]] 二维数组的形式
-//    ["EquipID","DevID"],[["100"],["1"]]
-    this.getRowIndexByFiled = function (fileds, resourses) {
-        // console.log(fileds)
-        // console.log(resourses)
+//    ["DevID","EquipID"],
+//    [["1","100"],["9","100"]]
 
+    this.getRowIndexByFiled = function (fileds, resourses) {
+        // console.log(resourses)
+        // console.log(resourses)
+        // resourses = [["1","100"],["9","100"]]
         if (fileds && resourses && resourses.length > 0) {
             var allData = _this.AllRows();
             for (var _fieldIndex = 0; _fieldIndex < fileds.length; _fieldIndex++) {
-                var _matchData = [];
-                var _matchDataIndexes=[];
+                // console.log(fileds[_fieldIndex]);
+                var _matchData =[];
+                var _matchDataIndexes = [];
                 $.each(allData, function () {
                     var datadefine = this;
                     //判断所有
@@ -190,11 +193,20 @@ function HYtablelist(tableoption) {
                         // console.log(now_resource[_m])
                         if (_value == now_resource[_m]) {
                             _matchData.push(datadefine);
-                            _matchDataIndexes.push(datadefine.LAY_TABLE_INDEX)
+                            var need_update_index =datadefine.LAY_TABLE_INDEX;
+                            // console.log(need_update_index)
+
+                            if ((_matchDataIndexes.indexOf(need_update_index))==-1){
+                                console.log(need_update_index)
+                                // alert(need_update_index)
+                                _matchDataIndexes.push(need_update_index);
+                                console.log(_matchDataIndexes)
+                                // console.log(_matchDataIndexes);
+                            }
                         }
                     }
                 });
-                allData =_matchData
+                allData = _matchData
             }
             return _matchDataIndexes
         }

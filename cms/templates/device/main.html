@@ -18,6 +18,7 @@
         var table = layui.table;
         var $ = layui.jquery;
         var old_data = {{data | safe}}
+
         var changed_by_fields = ["DevID", "EquipID"];
         var tableoption = {
 //           initSort: {field: 'DevID', type: 'asc'},
@@ -30,20 +31,16 @@
                 , {field: 'DevData', title: '数据值', width: 150, align: 'center'}
                 , {field: 'DevDataUnit', title: '数据单位', width: 120, align: 'center'}
             ]]
-            , data: {{data | safe}}
-            ,
-            even: true
-            //,skin: 'line' //表格风格
-            //,page: true //是否显示分页
-            //,limits: [5, 7, 10]
-            //,limit: 5 //每页默认显示的数量
-        }
+            , data:{{data | safe}}
+            ,even: true
+        //,skin: 'line' //表格风格
+        //,page: true //是否显示分页
+        //,limits: [5, 7, 10]
+        //,limit: 5 //每页默认显示的数量
+    }
         var hytable = new HYtablelist(tableoption);
-//                console.log(2)
-
         hytable.romance();//渲染
-        //展示已知数据
-//        table.render();
+
         var change_data_array;
         var need_update_array;
         var now_data;
@@ -53,11 +50,10 @@
         var interval = setInterval(function () {
 
             $.get('/device/api_get_device_Data/').done(function (ajaxdata) {
-                now_data = deepCopy(ajaxdata.data)
+                now_data = deepCopy(ajaxdata.data);
                 change_data_array = [];
-                need_update_array=[];
-                change = !_.isEqual(old_data,now_data);
-                console.log(change);
+                need_update_array = [];
+                change = !_.isEqual(old_data, now_data);
                 if (change) {
 //                    数据变化
                     $.each(now_data, function (now_index, now_json) {
@@ -72,71 +68,55 @@
                             change_data_array.push(now_json)
                         }
                     });
-                    old_data = deepCopy(ajaxdata.data);
+
                     if (!_.isEmpty(change_data_array)) {
                         result = getField(change_data_array, changed_by_fields);
-                    need_update_array = hytable.getRowIndexByFiled(changed_by_fields, result);
-                    console.log(need_update_array);
-                    $.each(need_update_array, function (index, update_index) {
-                        setTimeout(function () {
-                            hytable.updateRow(update_index, change_data_array[index])
-                        },500)
-                    });
-
+//                        console.log(result);
+                        need_update_array = hytable.getRowIndexByFiled(changed_by_fields, result);
+//                        console.log(need_update_array);
+//                        console.log(change_data_array);
+                        $.each(need_update_array, function (index, update_index) {
+                            setTimeout(function () {
+                                hytable.updateRow(update_index, change_data_array[index])
+                            }, 5)
+                        });
+                        old_data = deepCopy(ajaxdata.data);
+                    }
                 }
-
-                }
-
-
             });
 
-
-//            console.log(index_array)
         }, 2000);
-
-
-//        var interval = setInterval(function () {
-//            $.get('/device/api_get_device_Data/').done(function (ajaxdata) {
-//                console.log(ajaxdata)
-////                    reloadTable(ajaxdata.data)
-//            });
-//            table.reload("reload_id", { //此处是上文提到的 初始化标识id
-//                url: '/device/api_get_device_Data/',
-//                where: {
-//                    //key: { //该写法上文已经提到
-////                    type: item.type, id: item.id
-//                    //}
-//                }
-//            });
-//        }, 2000);
 
 
 //      获得用来获取tableRowIndex的fields
         function getField(change_data_array, fields) {
 //        console.log(fields);
-            var result = [];
-            $.each(fields, function (field_index, now_field) {
+                var result = [];
+                $.each(fields, function (field_index, now_field) {
                 var field_change_array = [];
                 $.each(change_data_array, function (data_index, change_data) {
 //                    console.log(change_data[now_field]);
-                    field_change_array.push([change_data[now_field]]);
+                    field_change_array.push(change_data[now_field]);
+//                    console.log(field_change_array);
+
                 });
                 result.push(field_change_array);
 //                console.log(result)
             });
             return result
         }
-var deepCopy = function(obj) {
-  var newO = {};
-  if (obj instanceof Array) {
-    newO = [];
-  }
-  for ( var key in obj) {
-    var val = obj[key];
-    newO[key] = typeof val === 'object' ? arguments.callee(val) : val;
-  }
-  return newO;
-}
+
+        var deepCopy = function (obj) {
+            var newO = {};
+            if (obj instanceof Array) {
+                newO = [];
+            }
+            for (var key in obj) {
+                var val = obj[key];
+                newO[key] = typeof val === 'object' ? arguments.callee(val) : val;
+            }
+            return newO;
+        }
     });
 
 
