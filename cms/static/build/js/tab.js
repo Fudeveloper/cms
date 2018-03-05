@@ -192,7 +192,7 @@ layui.define(['jquery', 'element', 'nprogress', 'utils'], function (exports) {
                             });
                             break;
                         case 'closeAll': //关闭所有
-
+                            location.reload()
                             // that._title.children('li[lay-id]').each(function () {
                             //     var curId = $(this).attr('lay-id');
                             //     if (curId != -1)
@@ -208,15 +208,6 @@ layui.define(['jquery', 'element', 'nprogress', 'utils'], function (exports) {
                             //    console.log($(closeIcon));
                             //     $(closeIcon).click()
                             // });
-
-                            var _all_ul = $(".layui-tab-title");
-                            var _all_li = _all_ul.children()
-                            console.log(_all_li);
-                            var lal = _all_li.find(".layui-tab-close");
-                            lal.click()
-                            // var dataUrl = $(this).parents("ul").attr("data-url");
-                            // // console.log(dataUrl)
-                            // $(".layui-tab-title li[data-url='" + dataUrl + "']").parents("ul").find("li:not(.main-tab)").find(".layui-tab-close").click();
                             break;
                     }
                     _tool.click();
