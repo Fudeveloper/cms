@@ -127,10 +127,10 @@ layui.define(['jquery', 'element', 'nprogress', 'utils'], function (exports) {
                     '<ul>',
                     '<li class="kit-item" data-target="refresh">刷新当前选项卡</li>',
                     '<li class="kit-line"></li>',
-                    // '<li class="kit-item" data-target="closeCurrent">关闭当前选项卡</li>',
-                    // '<li class="kit-item" data-target="closeOther">关闭其他选项卡</li>',
-                    // '<li class="kit-line"></li>',
-                    // '<li class="kit-item" data-target="closeAll">关闭所有选项卡</li>',
+                    '<li class="kit-item" data-target="closeCurrent">关闭当前选项卡</li>',
+                    '<li class="kit-item" data-target="closeOther">关闭其他选项卡</li>',
+                    '<li class="kit-line"></li>',
+                    '<li class="kit-item" data-target="closeAll">关闭所有选项卡</li>',
                     '</ul>',
                     '</div>',
                     '<div class="layui-tab-content">',
@@ -192,35 +192,32 @@ layui.define(['jquery', 'element', 'nprogress', 'utils'], function (exports) {
                             });
                             break;
                         case 'closeAll': //关闭所有
+
                             // that._title.children('li[lay-id]').each(function () {
                             //     var curId = $(this).attr('lay-id');
                             //     if (curId != -1)
                             //         that.tabDelete(curId);
                             // });
                             // // that.tabChange(-1);
-                            var tabtitle = $(".layui-tab-title li");
-                            console.log(tabtitle)
-                            // var ids = new Array();
+
+                            // var tabtitle = $(".layui-tab-title li");
+                            // console.log(tabtitle)
+                            // var ids = [];
                             // $.each(tabtitle, function (i) {
-                            //     ids[i] = $(this).attr("lay-id");
-                            // })
-                            //
-                            // active.tabDeleteAll(ids);
-                            //
+                            //    var closeIcon= tabtitle.children().find(".layui-tab-close")
+                            //    console.log($(closeIcon));
+                            //     $(closeIcon).click()
+                            // });
 
-                            var ids = [];
-                            $.each(tabtitle, function (i) {
-                                console.log(i)
-                                // console.log(tabtitle);
-                                if ($(this).attr("lay-id")) {
-                                    that.tabDelete($(this).attr("lay-id"));
-                                    ids[i] = $(this).attr("lay-id")
-                                }
-
-                                console.log(ids)
-                            });
-                            active.tabDeleteAll(ids);
-                            // break;
+                            var _all_ul = $(".layui-tab-title");
+                            var _all_li = _all_ul.children()
+                            console.log(_all_li);
+                            var lal = _all_li.find(".layui-tab-close");
+                            lal.click()
+                            // var dataUrl = $(this).parents("ul").attr("data-url");
+                            // // console.log(dataUrl)
+                            // $(".layui-tab-title li[data-url='" + dataUrl + "']").parents("ul").find("li:not(.main-tab)").find(".layui-tab-close").click();
+                            break;
                     }
                     _tool.click();
                 });
