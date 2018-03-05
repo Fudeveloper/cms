@@ -3,6 +3,7 @@
 
 <head>
 
+    <link rel="shortcut icon" href="/static/build/images/title_logo.png">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>管理系统</title>
@@ -65,13 +66,34 @@
                 <li class="layui-nav-item ">
                     <a href="javascript:;"><i class="layui-icon" aria-hidden="true">&#xe614;</i><span> 设备管理</span></a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" data-url="{%url 'device:main'%}"
-                               data-title="设备管理" kit-target data-id='2'><i
-                                class="layui-icon">&#xe600;</i><span> 设备管理</span></a></dd>
-                        <dd><a href="javascript:;" data-url="{%url 'device:control'%}"
-                               data-title="可控制设备" kit-target data-id='3'><i
-                                class="layui-icon">&#xe600;</i><span> 可控制设备</span></a></dd>
+                        <!--<dd><a href="javascript:;" data-url="{%url 'device:main'%}"-->
+                               <!--data-title="设备管理" kit-target data-id='2'><i-->
+                                <!--class="layui-icon">&#xe600;</i><span> 设备管理</span></a></dd>-->
+                        <dd><a href="javascript:;" data-url="{%url 'device:renderByEquipID' '100' '0'%}"
+                               data-title="控制设备" kit-target data-id='3'><i
+                                class="layui-icon">&#xe600;</i><span> 控制设备</span></a></dd>
+                        <!--<dd><a href="javascript:;" data-url="{%url 'device:first'%}"-->
+                               <!--data-title="设备监视" kit-target data-id='16'><i-->
+                                <!--class="layui-icon">&#xe600;</i><span> 设备监视</span></a></dd>-->
+                        <dd><a href="javascript:;" data-url=""
+                               data-title="设备监视" kit-target data-id='17'><i
+                                class="layui-icon">&#xe600;</i><span> 设备监视</span></a></dd>
+                        <dd><a href="javascript:;" data-url="{%url 'device:renderByEquipID' '100' '1'%}"
+                               data-title="环境监视" kit-target data-id='18'><i
+                                class="layui-icon">&#xe600;</i><span> 环境监视</span></a></dd>
+                        <!--<dd><a href="javascript:;" data-url="{%url 'device:first'%}"-->
+                               <!--data-title="设备监视" kit-target data-id='19'><i-->
+                                <!--class="layui-icon">&#xe600;</i><span> 设备监视</span></a></dd>-->
 
+                        <dd><a href="javascript:;" data-url="{%url 'device:renderByEquipID' '01' '1'%}"
+                               data-title="焊接" kit-target data-id='22'><i
+                                class="layui-icon">&#xe600;</i><span> 焊接</span></a></dd>
+                        <dd><a href="javascript:;" data-url=""
+                               data-title="搬运" kit-target data-id='23'><i
+                                class="layui-icon">&#xe600;</i><span> 搬运</span></a></dd>
+                        <dd><a href="javascript:;" data-url=""
+                               data-title="教学" kit-target data-id='24'><i
+                                class="layui-icon">&#xe600;</i><span> 教学</span></a></dd>
 
                     </dl>
                 </li>
@@ -104,8 +126,8 @@
                     <dl class="layui-nav-child">
                         <dd>
                             <!--data-options="{url:'test.html',icon:'&#xe6c6;',title:'表格',id:'1'}"-->
-                            <a href="javascript:;" kit-target data-url="{%url 'product:erp'%}"
-                               data-title="ERP系统" data-id='7'>
+                            <!--<a href="http://192.168.13.228:8888/" >-->
+                            <a href="http://192.168.13.228:8888/ " target="_Blank">
                                 <i class="layui-icon">&#xe600;</i><span> ERP系统</span></a>
                         </dd>
                         <dd>
@@ -142,10 +164,10 @@
                                data-title="门禁管理" data-id='12'>
                                 <i class="layui-icon">&#xe600;</i><span> 门禁管理</span></a>
                         </dd>
-                        <!--<dd>-->
-                            <!--<a href="javascript:;" data-url="{%url 'security:video'%}"-->
-                               <!--data-title="视频监控" kit-target data-id='13'><i class="layui-icon">&#xe600;</i></i><span> 视频监控</span></a>-->
-                        <!--</dd>-->
+                        <dd>
+                            <a href="javascript:;" data-url="{%url 'security:video'%}"
+                               data-title="视频监控" kit-target data-id='13'><i class="layui-icon">&#xe600;</i></i><span> 视频监控</span></a>
+                        </dd>
                         <dd>
                             <a href="javascript:;" data-url="{%url 'security:environment'%}"
                                data-title="环境监控" kit-target data-id='14'><i

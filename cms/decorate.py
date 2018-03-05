@@ -18,7 +18,7 @@ def check_permiss(get_data_func):
             print(*args, **kwargs)
             print("++++++++++++++++++")
             json_result = json.loads(result)
-            print("----------------{}".format(json_result))
+            # print("----------------{}".format(json_result))
             if "message" in json_result.keys():
                 if json_result['message'] == "无权限":
                     context = {"has_permiss": "false"}
@@ -38,7 +38,7 @@ def check_permiss(get_data_func):
 # 登录验证装饰器
 def auth(func):
     def inner(request, *args, **kwargs):
-        username = request.COOKIES.get('username')
+        username = request.COOKIES.get('userid')
         if not username:
             return redirect('/user/login/')
         return func(request, *args, **kwargs)

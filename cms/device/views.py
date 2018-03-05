@@ -10,6 +10,7 @@ EQUIPID_COMPANY = settings.EQUIPID_COMPANY
 EQUIPID_OUR = settings.EQUIPID_OUR
 
 
+# 获取所有设备数据
 def get_Device_Data(request):
     userid, presend_cookie = cookie_handler.get_cookie(request)
     data = {"id": "3"}
@@ -17,6 +18,21 @@ def get_Device_Data(request):
     result = requests.post(api_link + "/Api/DeviceData/List", headers=headers, cookies=presend_cookie,
                            json=data).text
     # print(result)
+    return result
+
+
+# 根据EquipID查询设备数据
+def get_Device_Data_by_EquipID(request, EquipID, *args, **kwargs):
+    print("00000000000000000000000000000000")
+    print(EquipID)
+    print("00000000000000000000000000000000")
+    userid, presend_cookie = cookie_handler.get_cookie(request)
+    data = {"EquipID": EquipID}
+    # print(data)
+    # 从服务器获取所有设备信息
+    result = requests.post(api_link + "/Api/DeviceData/ListByEquipID", headers=headers, cookies=presend_cookie,
+                           json=data).text
+    print(result)
     return result
 
 
@@ -137,7 +153,7 @@ def api_get_device_Data(request, return_context):
     if "basedata" in return_context.keys():
         infos = return_context["basedata"]['appendData']
         only_data_devices = []
-        print(infos)
+        # print(infos)
         for info in infos:
             try:
                 if int(info["DevID"]) < 100:
@@ -145,7 +161,46 @@ def api_get_device_Data(request, return_context):
             except:
                 pass
         count = len(only_data_devices)
-
+        # test_data = {'DevDataName': '大门', 'DevDataUnit': '', 'EquipID': 100, 'DevDataType': 0, 'DevID': '1', 'DevData': '1110'}
+        # {'DevDataName': '大门', 'DevDataUnit': '', 'EquipID': '100', 'DevDataType': 0, 'DevID': '103', 'DevData': '0'}
         return JsonResponse({"code": 0, "msg": "", "count": count, "data": only_data_devices})
     else:
         return JsonResponse({"code": 0, "msg": "", "count": 0, "data": {}})
+
+
+def first(request):
+    return render(request, 'device/first.html')
+
+
+@check_permiss(get_data_func=get_Device_Data_by_EquipID)
+def renderByEquipID(request, EquipID, readonly, return_context):
+    render_template = 'device/renderByEquipID_readonly.html'
+    if "basedata" in return_context.keys():
+        infos = return_context["basedata"]['appendData']
+        return_context["readonly"] = readonly
+        # DevID>=100的只需显示数据的设备
+        if readonly == "1":
+            only_data_devices = []
+            for info in infos:
+                try:
+                    if int(info["DevID"]) < 100:
+                        only_data_devices.append(info)
+                except:
+                    pass
+            infos = only_data_devices
+        # DevID>=100的为控制设备
+        elif readonly == "0":
+            only_data_devices = []
+            for info in infos:
+                try:
+                    if int(info["DevID"]) >= 100:
+                        only_data_devices.append(info)
+                except:
+                    pass
+            infos = only_data_devices
+            render_template = "device/renderByEquipID_control.html"
+        print(infos)
+        count = len(infos)
+        return_context["data"] = infos
+        return_context["count"] = count
+    return render(request, render_template, context=return_context)

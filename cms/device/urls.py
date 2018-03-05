@@ -28,5 +28,8 @@ urlpatterns = [
 
     url(r'^api_get_device_Data/$', views.api_get_device_Data, name='api_get_device_Data'),
 
+    url(r'^first/$', views.first, name='first'),
+
+    url(r'^renderByEquipID/(\d*)/(\d)/$', views.renderByEquipID, name='renderByEquipID'),
 
 ]

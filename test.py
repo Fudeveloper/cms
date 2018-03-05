@@ -132,3 +132,10 @@ cookies = res.cookies
 # print(len(data))
 # for data in datas :
 #     print(data['permissName'])
+
+data = {"EquipID": '01'}
+    # 从服务器获取所有设备信息
+print(data)
+result = requests.post(API_ADDRESS + "/Api/DeviceData/ListByEquipID", headers=headers, cookies=cookies,
+                       json=data).text
+print(result)
