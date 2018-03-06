@@ -148,24 +148,36 @@ def UpDataDevState(request, equip_id, device_id, device_status):
     return JsonResponse({"status": status})
 
 
-@check_permiss(get_Device_Data)
-def api_get_device_Data(request, return_context):
+@check_permiss(get_Device_Data_by_EquipID)
+def api_get_device_Data(request, EquipID, readonly, return_context):
     if "basedata" in return_context.keys():
         infos = return_context["basedata"]['appendData']
         only_data_devices = []
         # print(infos)
-        for info in infos:
-            try:
-                if int(info["DevID"]) < 100:
-                    only_data_devices.append(info)
-            except:
-                pass
+        if readonly == "1":
+            only_data_devices = []
+            for info in infos:
+                try:
+                    if int(info["DevID"]) < 100:
+                        only_data_devices.append(info)
+                except:
+                    pass
+            infos = only_data_devices
+        # DevID>=100的为控制设备
+        elif readonly == "0":
+            only_data_devices = []
+            for info in infos:
+                try:
+                    if int(info["DevID"]) >= 100:
+                        only_data_devices.append(info)
+                except:
+                    pass
+            infos = only_data_devices
+
         count = len(only_data_devices)
         # test_data = {'DevDataName': '大门', 'DevDataUnit': '', 'EquipID': 100, 'DevDataType': 0, 'DevID': '1', 'DevData': '1110'}
         # {'DevDataName': '大门', 'DevDataUnit': '', 'EquipID': '100', 'DevDataType': 0, 'DevID': '103', 'DevData': '0'}
         return JsonResponse({"code": 0, "msg": "", "count": count, "data": only_data_devices})
-    else:
-        return JsonResponse({"code": 0, "msg": "", "count": 0, "data": {}})
 
 
 def first(request):
@@ -203,4 +215,6 @@ def renderByEquipID(request, EquipID, readonly, return_context):
         count = len(infos)
         return_context["data"] = infos
         return_context["count"] = count
+        return_context["EquipID"] = EquipID
+        return_context["readonly"] = readonly
     return render(request, render_template, context=return_context)
