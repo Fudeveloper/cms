@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>表单 - 页面元素 - layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/build/css/un.css" media="all">
+    <script src="/static/build/js/jsonExportToCSV.js"></script>
+    <script src="/static/build/js/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+<!--<ul class="site-dir">-->
+<!--<li><a href="#use"><cite>小睹为快</cite></a></li>-->
+<!--<li><a href="#input"><cite>输入框</cite></a></li>-->
+<!--<li><a href="#select"><cite>下拉选择框</cite></a></li>-->
+<!--<li><a href="#checkbox"><cite>复选框</cite></a></li>-->
+<!--<li><a href="#switch"><cite>开关</cite></a></li>-->
+<!--<li><a href="#radio"><cite>单选框</cite></a></li>-->
+<!--<li><a href="#textarea"><cite>文本域</cite></a></li>-->
+<!--<li><a href="#inline"><cite>组装行内表单</cite></a></li>-->
+<!--<li><a href="#ignore"><cite>忽略美化</cite></a></li>-->
+<!--<li><a href="#pane"><cite>表单方框风格</cite></a></li>-->
+<!--<li><a href="/doc/modules/form.html"><cite>相关动态操作</cite></a></li>-->
+<!--</ul>-->
+<!--<div class="site-tree">-->
+<!--<div class="layui-form" style="height: 38px; margin: 10px 13px 0 0;">-->
+<!--<select lay-filter="tabVersion">-->
+<!--<option value="new">2.x</option>-->
+<!--<option value="v1">1.0.9</option>-->
+<!--</select>-->
+<!--</div>-->
+<!--<ul class="layui-tree">-->
+
+<!--<li><h2>基础说明</h2></li>-->
+
+<!--<li class="site-tree-noicon ">-->
+<!--<a href="/doc/">-->
+<!--<cite>开始使用</cite>-->
+<!--<em>Getting Started</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="site-tree-noicon ">-->
+<!--<a href="/doc/base/infrastructure.html">-->
+<!--<cite>底层方法</cite>-->
+<!--<em>基础支撑</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="site-tree-noicon ">-->
+<!--<a href="/doc/base/element.html">-->
+<!--<cite>页面元素</cite>-->
+<!--<em>规范 / 公共类 / 属性</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="site-tree-noicon ">-->
+<!--<a href="/doc/base/modules.html">-->
+<!--<cite>模块规范</cite>-->
+<!--<em>使用 / 扩展</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="site-tree-noicon ">-->
+<!--<a href="/doc/base/faq.html">-->
+<!--<cite>常见问题</cite>-->
+<!--<em>FAQ</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="site-tree-noicon ">-->
+<!--<a href="/doc/base/changelog.html">-->
+<!--<cite>更新日志</cite>-->
+
+<!--<span class="layui-badge-dot" style="position: relative; top: -3px; left: -3px;"></span>-->
+
+<!--</a>-->
+<!--</li>-->
+
+<!--<li><h2>页面元素</h2></li>-->
+
+
+<!--<li class="site-tree-noicon ">-->
+<!--<a href="/doc/element/layout.html">-->
+<!--<cite>布局</cite>-->
+<!--<em>栅格 / 后台布局</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="site-tree-noicon ">-->
+<!--<a href="/doc/element/color.html">-->
+<!--<cite>颜色</cite>-->
+<!--<em>主题色设计感 / 内置背景色</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="site-tree-noicon ">-->
+<!--<a href="/doc/element/icon.html">-->
+<!--<cite>图标</cite>-->
+<!--<em>字体图标</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="site-tree-noicon ">-->
+<!--<a href="/doc/element/anim.html">-->
+<!--<cite>动画</cite>-->
+<!--<em>内置的CSS3动画类</em>-->
+<!--</a>-->
+<!--</li>-->
+
+<!--<li class="site-tree-noicon ">-->
+<!--<a href="/doc/element/button.html">-->
+<!--<cite>按钮</cite>-->
+<!--<em>button组</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="site-tree-noicon layui-this">-->
+<!--<a href="/doc/element/form.html">-->
+<!--<cite>表单</cite>-->
+<!--<em>form元素集合</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="site-tree-noicon ">-->
+<!--<a href="/doc/element/nav.html">-->
+<!--<cite>导航</cite>-->
+<!--<em>菜单 / 面包屑</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="site-tree-noicon ">-->
+<!--<a href="/doc/element/tab.html">-->
+<!--<cite>选项卡</cite>-->
+<!--<em>Tabs 切换</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="site-tree-noicon ">-->
+<!--<a href="/doc/element/progress.html">-->
+<!--<cite>进度条</cite>-->
+<!--<em>progress</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="site-tree-noicon ">-->
+<!--<a href="/doc/element/panel.html">-->
+<!--<cite>面板</cite>-->
+<!--<em>折叠 / 手风琴</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="site-tree-noicon ">-->
+<!--<a href="/doc/element/table.html">-->
+<!--<cite>表格</cite>-->
+<!--<em>静态table</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="site-tree-noicon ">-->
+<!--<a href="/doc/element/badge.html">-->
+<!--<cite>徽章</cite>-->
+<!--<em>小圆点 / 小边框</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="site-tree-noicon ">-->
+<!--<a href="/doc/element/timeline.html">-->
+<!--<cite>时间线</cite>-->
+<!--<em>timeline</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="site-tree-noicon ">-->
+<!--<a href="/doc/element/auxiliar.html">-->
+<!--<cite>辅助</cite>-->
+<!--<em>引用 / 字段集 / 横线等</em>-->
+<!--</a>-->
+<!--</li>-->
+
+
+<!--<li><h2>内置模块</h2></li>-->
+
+<!--<li class="">-->
+<!--<a href="/doc/modules/layer.html">-->
+<!--<i class="layui-icon" style="top: 3px;">&#xe638;</i><cite>弹出层</cite>-->
+<!--<em>layer</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="">-->
+<!--<a href="/doc/modules/laydate.html">-->
+<!--<i class="layui-icon" style="top: 1px;">&#xe637;</i><cite>日期与时间选择</cite>-->
+<!--<em>laydate</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li >-->
+<!--<a href="/doc/modules/layim.html">-->
+<!--<i class="layui-icon" style="position: relative; top: 3px;">&#xe63a;</i>-->
+<!--<cite>即时通讯</cite>-->
+<!--<em>layim</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="">-->
+<!--<a href="/doc/modules/laypage.html">-->
+<!--<i class="layui-icon">&#xe633;</i><cite>分页</cite>-->
+<!--<em>laypage</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="">-->
+<!--<a href="/doc/modules/laytpl.html">-->
+<!--<i class="layui-icon">&#xe628;</i><cite>模板引擎</cite>-->
+<!--<em>laytpl</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="">-->
+<!--<a href="/doc/modules/table.html">-->
+<!--<i class="layui-icon">&#xe62d;</i>-->
+<!--<cite>数据表格</cite>-->
+<!--<em>table</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="">-->
+<!--<a href="/doc/modules/form.html">-->
+<!--<i class="layui-icon" style="top: 2px;">&#xe63c;</i>-->
+<!--<cite>表单</cite>-->
+<!--<em>form</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="">-->
+<!--<a href="/doc/modules/upload.html">-->
+<!--<i class="layui-icon">&#xe62f;</i>-->
+<!--<cite>文件上传</cite>-->
+<!--<em>upload</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="">-->
+<!--<a href="/doc/modules/element.html">-->
+<!--<i class="layui-icon" style="top: 1px; font-size: 18px;">&#xe62a;</i>-->
+<!--<cite>常用元素操作</cite>-->
+<!--<em>element</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="">-->
+<!--<a href="/doc/modules/carousel.html">-->
+<!--<i class="layui-icon">&#xe634;</i>-->
+<!--<cite>轮播</cite>-->
+<!--<em>carousel</em>-->
+<!--</a>-->
+<!--</li>-->
+
+<!--<li class="">-->
+<!--<a href="/doc/modules/flow.html">-->
+<!--<i class="layui-icon">&#xe636;</i>-->
+<!--<cite>流加载</cite>-->
+<!--<em>flow</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="">-->
+<!--<a href="/doc/modules/util.html">-->
+<!--<i class="layui-icon">&#xe631;</i>-->
+<!--<cite>工具集</cite>-->
+<!--<em>util</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="">-->
+<!--<a href="/doc/modules/code.html">-->
+<!--<i class="layui-icon" style="top: 1px;">&#xe635;</i>-->
+<!--<cite>代码修饰器</cite>-->
+<!--<em>code</em>-->
+<!--</a>-->
+<!--</li>-->
+<!--</ul>-->
+<!--</div>-->
+
+<!--<div class="site-content">-->
+<!--<h1 class="site-h1">表单 - 页面元素</h1>-->
+<!--<blockquote class="site-text layui-elem-quote">-->
+<!--在一个容器中设定 <em>class="layui-form"</em> 来标识一个表单元素块，通过规范好的HTML结构及CSS类，来组装成各式各样的表单元素，并通过内置的 <em>form模块</em> 来完成各种交互。-->
+<!--</blockquote>-->
+<!--<blockquote class="site-text layui-elem-quote">-->
+<!--依赖加载模块：<a href="/doc/modules/form.html">form</a> <span>（请注意：如果不加载form模块，select、checkbox、radio等将无法显示，并且无法使用form相关功能）</span>-->
+<!--</blockquote>-->
+
+
+<!--<div style="margin: 15px 0; text-align: center; background-color: #F2F2F2;">-->
+<!--<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6111334333458862" data-ad-slot="9841027833"></ins>-->
+<!--</div>-->
+
+
+<!--<div class="site-title">-->
+<!--<fieldset><legend><a name="use">小睹为快</a></legend></fieldset>-->
+<!--</div>-->
+<!--<div class="site-text site-block">-->
+<!--<form class="layui-form" action="">-->
+<!--<div class="layui-form-item">-->
+<!--<label class="layui-form-label">输入框</label>-->
+<!--<div class="layui-input-block">-->
+<!--<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="layui-form-item">-->
+<!--<label class="layui-form-label">密码框</label>-->
+<!--<div class="layui-input-inline">-->
+<!--<input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">-->
+<!--</div>-->
+<!--<div class="layui-form-mid layui-word-aux">辅助文字</div>-->
+<!--</div>-->
+<!--<div class="layui-form-item">-->
+<!--<label class="layui-form-label">选择框</label>-->
+<!--<div class="layui-input-block">-->
+<!--<select name="city" lay-verify="required">-->
+<!--<option value=""></option>-->
+<!--<option value="0">北京</option>-->
+<!--<option value="1">上海</option>-->
+<!--<option value="2">广州</option>-->
+<!--<option value="3">深圳</option>-->
+<!--<option value="4">杭州</option>-->
+<!--</select>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="layui-form-item">-->
+<!--<label class="layui-form-label">复选框</label>-->
+<!--<div class="layui-input-block">-->
+<!--<input type="checkbox" name="like[write]" title="写作">-->
+<!--<input type="checkbox" name="like[read]" title="阅读" checked>-->
+<!--<input type="checkbox" name="like[dai]" title="发呆">-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="layui-form-item">-->
+<!--<label class="layui-form-label">开关</label>-->
+<!--<div class="layui-input-block">-->
+<!--<input type="checkbox" name="switch" lay-skin="switch" lay-text="ON|OFF" lay-filter="switchTest" value="1">-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="layui-form-item">-->
+<!--<label class="layui-form-label">单选框</label>-->
+<!--<div class="layui-input-block">-->
+<!--<input type="radio" name="sex" value="男" title="男">-->
+<!--<input type="radio" name="sex" value="女" title="女" checked>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="layui-form-item layui-form-text">-->
+<!--<label class="layui-form-label">文本域</label>-->
+<!--<div class="layui-input-block">-->
+<!--<textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="layui-form-item">-->
+<!--<div class="layui-input-block">-->
+<!--<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>-->
+<!--<button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</form>-->
+<!--</div>-->
+<!--<div class="site-text" style="margin-top: 15px;">-->
+<!--<blockquote class="site-text layui-elem-quote">  通过上述的小小演示，你已经大致了解了一波 layui 的表单模块，你可能会觉得她还算不错，但并不太过瘾？譬如你希望看到日期选择、图片上传等等。然而你必须认识到，本篇文档核心介绍的是表单元素，对于日期、上传等更多丰富的元素，其实也是可以很方便地穿插在内的。-->
+<!--</blockquote>-->
+<!--<p>下述是【小睹为快】的HTML结构：</p>-->
+<!--</div>-->
+<!--<div class="site-text" style="margin-top: 15px;">-->
+<!--<pre class="layui-code" lay-title="HTML">-->
+<!--&lt;form class=&quot;layui-form&quot; action=&quot;&quot;&gt;-->
+<!--&lt;div class=&quot;layui-form-item&quot;&gt;-->
+<!--&lt;label class=&quot;layui-form-label&quot;&gt;输入框&lt;/label&gt;-->
+<!--&lt;div class=&quot;layui-input-block&quot;&gt;-->
+<!--&lt;input type=&quot;text&quot; name=&quot;title&quot; required  lay-verify=&quot;required&quot; placeholder=&quot;请输入标题&quot; autocomplete=&quot;off&quot; class=&quot;layui-input&quot;&gt;-->
+<!--&lt;/div&gt;-->
+<!--&lt;/div&gt;-->
+<!--&lt;div class=&quot;layui-form-item&quot;&gt;-->
+<!--&lt;label class=&quot;layui-form-label&quot;&gt;密码框&lt;/label&gt;-->
+<!--&lt;div class=&quot;layui-input-inline&quot;&gt;-->
+<!--&lt;input type=&quot;password&quot; name=&quot;password&quot; required lay-verify=&quot;required&quot; placeholder=&quot;请输入密码&quot; autocomplete=&quot;off&quot; class=&quot;layui-input&quot;&gt;-->
+<!--&lt;/div&gt;-->
+<!--&lt;div class=&quot;layui-form-mid layui-word-aux&quot;&gt;辅助文字&lt;/div&gt;-->
+<!--&lt;/div&gt;-->
+<!--&lt;div class=&quot;layui-form-item&quot;&gt;-->
+<!--&lt;label class=&quot;layui-form-label&quot;&gt;选择框&lt;/label&gt;-->
+<!--&lt;div class=&quot;layui-input-block&quot;&gt;-->
+<!--&lt;select name=&quot;city&quot; lay-verify=&quot;required&quot;&gt;-->
+<!--&lt;option value=&quot;&quot;&gt;&lt;/option&gt;-->
+<!--&lt;option value=&quot;0&quot;&gt;北京&lt;/option&gt;-->
+<!--&lt;option value=&quot;1&quot;&gt;上海&lt;/option&gt;-->
+<!--&lt;option value=&quot;2&quot;&gt;广州&lt;/option&gt;-->
+<!--&lt;option value=&quot;3&quot;&gt;深圳&lt;/option&gt;-->
+<!--&lt;option value=&quot;4&quot;&gt;杭州&lt;/option&gt;-->
+<!--&lt;/select&gt;-->
+<!--&lt;/div&gt;-->
+<!--&lt;/div&gt;-->
+<!--&lt;div class=&quot;layui-form-item&quot;&gt;-->
+<!--&lt;label class=&quot;layui-form-label&quot;&gt;复选框&lt;/label&gt;-->
+<!--&lt;div class=&quot;layui-input-block&quot;&gt;-->
+<!--&lt;input type=&quot;checkbox&quot; name=&quot;like[write]&quot; title=&quot;写作&quot;&gt;-->
+<!--&lt;input type=&quot;checkbox&quot; name=&quot;like[read]&quot; title=&quot;阅读&quot; checked&gt;-->
+<!--&lt;input type=&quot;checkbox&quot; name=&quot;like[dai]&quot; title=&quot;发呆&quot;&gt;-->
+<!--&lt;/div&gt;-->
+<!--&lt;/div&gt;-->
+<!--&lt;div class=&quot;layui-form-item&quot;&gt;-->
+<!--&lt;label class=&quot;layui-form-label&quot;&gt;开关&lt;/label&gt;-->
+<!--&lt;div class=&quot;layui-input-block&quot;&gt;-->
+<!--&lt;input type=&quot;checkbox&quot; name=&quot;switch&quot; lay-skin=&quot;switch&quot;&gt;-->
+<!--&lt;/div&gt;-->
+<!--&lt;/div&gt;-->
+<!--&lt;div class=&quot;layui-form-item&quot;&gt;-->
+<!--&lt;label class=&quot;layui-form-label&quot;&gt;单选框&lt;/label&gt;-->
+<!--&lt;div class=&quot;layui-input-block&quot;&gt;-->
+<!--&lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;男&quot; title=&quot;男&quot;&gt;-->
+<!--&lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;女&quot; title=&quot;女&quot; checked&gt;-->
+<!--&lt;/div&gt;-->
+<!--&lt;/div&gt;-->
+<!--&lt;div class=&quot;layui-form-item layui-form-text&quot;&gt;-->
+<!--&lt;label class=&quot;layui-form-label&quot;&gt;文本域&lt;/label&gt;-->
+<!--&lt;div class=&quot;layui-input-block&quot;&gt;-->
+<!--&lt;textarea name=&quot;desc&quot; placeholder=&quot;请输入内容&quot; class=&quot;layui-textarea&quot;&gt;&lt;/textarea&gt;-->
+<!--&lt;/div&gt;-->
+<!--&lt;/div&gt;-->
+<!--&lt;div class=&quot;layui-form-item&quot;&gt;-->
+<!--&lt;div class=&quot;layui-input-block&quot;&gt;-->
+<!--&lt;button class=&quot;layui-btn&quot; lay-submit lay-filter=&quot;formDemo&quot;&gt;立即提交&lt;/button&gt;-->
+<!--&lt;button type=&quot;reset&quot; class=&quot;layui-btn layui-btn-primary&quot;&gt;重置&lt;/button&gt;-->
+<!--&lt;/div&gt;-->
+<!--&lt;/div&gt;-->
+<!--&lt;/form&gt;-->
+
+<!--&lt;script&gt;-->
+<!--//Demo-->
+<!--layui.use('form', function(){-->
+<!--var form = layui.form;-->
+
+<!--//监听提交-->
+<!--form.on('submit(formDemo)', function(data){-->
+<!--layer.msg(JSON.stringify(data.field));-->
+<!--return false;-->
+<!--});-->
+<!--});-->
+<!--&lt;/script&gt;-->
+<!--</pre>-->
+<!--<p>UI的最终呈现得益于 Form模块 的全自动渲染，她将原本普通的诸如select、checkbox、radio等元素重置为你所看到的模样。或许你可以移步左侧导航的 <em>内置模块</em> 中的 <em>表单</em> 对其进行详细的了解。</p>-->
+<!--<blockquote class="site-text layui-elem-quote">-->
+<!--而本篇介绍的是表单元素本身，譬如规定的区块、CSS类、原始控件等。他们共同组成了一个表单体系。-->
+<!--</blockquote>-->
+<!--<p>下述是基本的行区块结构，它提供了响应式的支持。但如果你不大喜欢，你可以换成你的结构，但必须要在外层容器中定义<em>class="layui-form"</em>，form模块才能正常工作。</p>-->
+<!--<pre class="layui-code" lay-title="行区块结构">-->
+<!--&lt;div class=&quot;layui-form-item&quot;&gt;-->
+<!--&lt;label class=&quot;layui-form-label&quot;&gt;标签区域&lt;/label&gt;-->
+<!--&lt;div class=&quot;layui-input-block&quot;&gt;-->
+<!--原始表单元素区域-->
+<!--&lt;/div&gt;-->
+<!--&lt;/div&gt;-->
+<!--</pre>-->
+<!--</div>-->
+
+<!--<div class="site-title">-->
+<!--<fieldset><legend><a name="input">输入框</a></legend></fieldset>-->
+<!--</div>-->
+<!--<div class="layui-inline">-->
+<!--<input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">-->
+<!--</div>-->
+<!--<div class="site-text">-->
+<!--<pre class="layui-code" lay-title="结构">-->
+<!--&lt;input type=&quot;text&quot; name=&quot;title&quot; required lay-verify=&quot;required&quot; placeholder=&quot;请输入标题&quot; autocomplete=&quot;off&quot; class=&quot;layui-input&quot;&gt;-->
+<!--</pre>-->
+<!--<p class="site-tips">-->
+<!--<em>required</em>：注册浏览器所规定的必填字段-->
+<!--<br><em>lay-verify</em>：注册form模块需要验证的类型-->
+<!--<br><em>class="layui-input"</em>：layui.css提供的通用CSS类-->
+<!--<br>-->
+<!--</p>-->
+<!--<p class="layui-word-aux">这些在下文都不再做重复介绍</p>-->
+<!--</div>-->
+
+<!--<div class="site-title">-->
+<!--<fieldset><legend><a name="select">下拉选择框</a></legend></fieldset>-->
+<!--</div>-->
+<!--<div class="layui-form">-->
+<!--<div class="layui-inline">-->
+<!--<select name="city" lay-verify="required">-->
+<!--<option value="">请选择一个城市</option>-->
+<!--<option value="010">北京</option>-->
+<!--<option value="021">上海</option>-->
+<!--<option value="0571">杭州</option>-->
+<!--</select>-->
+<!--</div>-->
+<!--<div class="layui-inline">-->
+<!--<select name="city" lay-verify="required">-->
+<!--<option value="">请选择一个城市</option>-->
+<!--<option value="010">北京</option>-->
+<!--<option value="021" disabled>上海（禁用效果）</option>-->
+<!--<option value="0571" selected>杭州</option>-->
+<!--</select>-->
+<!--</div>-->
+<!--<div class="layui-inline">-->
+<!--<select name="quiz">-->
+<!--<option value="">select分组</option>-->
+<!--<optgroup label="城市记忆">-->
+<!--<option value="你工作的第一个城市">你工作的第一个城市？</option>-->
+<!--</optgroup>-->
+<!--<optgroup label="学生时代">-->
+<!--<option value="你的工号">你的工号？</option>-->
+<!--<option value="你最喜欢的老师">你最喜欢的老师？</option>-->
+<!--</optgroup>-->
+<!--</select>-->
+<!--</div>-->
+<!--<div class="layui-inline">-->
+<!--<select name="city" lay-verify="required" lay-search>-->
+<!--<option value="">带搜索的选择框</option>-->
+<!--<option value="1">layer</option>-->
+<!--<option value="2">form</option>-->
+<!--<option value="3">layim</option>-->
+<!--<option value="4">element</option>-->
+<!--<option value="5">laytpl</option>-->
+<!--<option value="6">upload</option>-->
+<!--<option value="7">laydate</option>-->
+<!--<option value="8">laypage</option>-->
+<!--<option value="9">flow</option>-->
+<!--<option value="10">util</option>-->
+<!--<option value="11">code</option>-->
+<!--<option value="12">tree</option>-->
+<!--<option value="13">layedit</option>-->
+<!--<option value="14">nav</option>-->
+<!--<option value="15">tab</option>-->
+<!--<option value="16">table</option>-->
+<!--<option value="17">select</option>-->
+<!--<option value="18">checkbox</option>-->
+<!--<option value="19">switch</option>-->
+<!--<option value="20">radio</option>-->
+<!--</select>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="site-text">-->
+<!--<pre class="layui-code" lay-title="结构">-->
+<!--&lt;select name=&quot;city&quot; lay-verify=&quot;&quot;&gt;-->
+<!--&lt;option value=&quot;&quot;&gt;请选择一个城市&lt;/option&gt;-->
+<!--&lt;option value=&quot;010&quot;&gt;北京&lt;/option&gt;-->
+<!--&lt;option value=&quot;021&quot;&gt;上海&lt;/option&gt;-->
+<!--&lt;option value=&quot;0571&quot;&gt;杭州&lt;/option&gt;-->
+<!--&lt;/select&gt;-->
+<!--</pre>-->
+<!--<p>上述option的第一项主要是占个坑，让form模块预留“请选择”的提示空间，否则将会把第一项（存在value值）作为默认选中项。你可以在option的空值项中自定义文本，如：请选择分类。</p>-->
+
+<!--<p>你可以通过设定 <em>selected</em> 来设定默认选中项：</p>-->
+<!--<pre class="layui-code" lay-title="结构">-->
+<!--&lt;select name=&quot;city&quot; lay-verify=&quot;&quot;&gt;-->
+<!--&lt;option value=&quot;010&quot;&gt;北京&lt;/option&gt;-->
+<!--&lt;option value=&quot;021&quot; disabled&gt;上海（禁用效果）&lt;/option&gt;-->
+<!--&lt;option value=&quot;0571&quot; selected&gt;杭州&lt;/option&gt;-->
+<!--&lt;/select&gt;-->
+<!--</pre>-->
+
+<!--<p>你还可以通过 <em>optgroup</em> 标签给select分组：</p>-->
+<!--<pre class="layui-code" lay-title="结构">-->
+<!--&lt;select name="quiz"&gt;-->
+<!--&lt;option value=""&gt;请选择&lt;/option&gt;-->
+<!--&lt;optgroup label="城市记忆"&gt;-->
+<!--&lt;option value="你工作的第一个城市">你工作的第一个城市？&lt;/option&gt;-->
+<!--&lt;/optgroup&gt;-->
+<!--&lt;optgroup label="学生时代"&gt;-->
+<!--&lt;option value="你的工号">你的工号？&lt;/option&gt;-->
+<!--&lt;option value="你最喜欢的老师">你最喜欢的老师？&lt;/option&gt;-->
+<!--&lt;/optgroup&gt;-->
+<!--&lt;/select&gt;-->
+<!--</pre>-->
+<!--<p>以及通过设定属性 <em>lay-search</em> 来开启搜索匹配功能</p>-->
+<!--<pre class="layui-code" lay-title="结构">-->
+<!--&lt;select name=&quot;city&quot; lay-verify=&quot;&quot; lay-search&gt;-->
+<!--&lt;option value=&quot;010&quot;&gt;layer&lt;/option&gt;-->
+<!--&lt;option value=&quot;021&quot;&gt;form&lt;/option&gt;-->
+<!--&lt;option value=&quot;0571&quot; selected&gt;layim&lt;/option&gt;-->
+<!--……-->
+<!--&lt;/select&gt;-->
+<!--</pre>-->
+<!--<blockquote class="layui-elem-quote">-->
+<!--属性<em>selected</em>可设定默认项-->
+<!--<br>属性<em>disabled</em>开启禁用，select和option标签都支持-->
+<!--</blockquote>-->
+<!--</div>-->
+
+<!--<div class="site-title">-->
+<!--<fieldset><legend><a name="checkbox">复选框</a></legend></fieldset>-->
+<!--</div>-->
+<!--<div class="layui-form">-->
+<!--<input type="checkbox" name="write" title="写作" checked>-->
+<!--<input type="checkbox" name="dai" title="发呆">-->
+<!--<input type="checkbox" name="jin" title="禁用" disabled>-->
+<!--<input type="checkbox" name="write" title="写作" lay-skin="primary" checked>-->
+<!--<input type="checkbox" name="dai" title="发呆" lay-skin="primary">-->
+<!--<input type="checkbox" name="jin" title="禁用" lay-skin="primary" disabled>-->
+<!--</div>-->
+
+
+<!--</div>-->
+<!--</div>-->
+
+<!--<div class="layui-footer footer footer-doc">-->
+<!--<div class="layui-main">-->
+<!--<p>&copy; 2017 <a href="/">layui.com</a> MIT license</p>-->
+<!--<p>-->
+<!--<a href="http://fly.layui.com/case/2017/" target="_blank">案例</a>-->
+<!--<a href="http://fly.layui.com/jie/3147/" target="_blank">众筹</a>-->
+<!--<a href="mailto:xianxin@layui.com">联系</a>-->
+<!--<a href="https://github.com/sentsin/layui/" target="_blank" rel="nofollow">GitHub</a>-->
+<!--<a href="https://gitee.com/sentsin/layui" target="_blank" rel="nofollow">码云</a>-->
+<!--<a href="http://fly.layui.com/jie/2461/" target="_blank">微信公众号</a>-->
+<!--</p>-->
+<!--<p class="site-union">-->
+<!--<a href="https://www.upyun.com?from=layui" target="_blank" rel="nofollow" upyun><img src="//res.layui.com//images/other/upyun.png?t=1"></a>-->
+<!--<span>提供 CDN 赞助</span>-->
+<!--</p>-->
+<!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash;<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>&ndash;&gt;-->
+<!--<div class="site-tree-mobile layui-hide">-->
+<!--<i class="layui-icon">&#xe602;</i>-->
+<!--</div>-->
+<!--<div class="site-mobile-shade"></div>-->
+<div>
+    <a id="test">123</a>
+</div>
+<script src="/static/plugins/layui/layui.js" charset="utf-8"></script>
+<!--<script>-->
+<!--window.global = {-->
+<!--pageType: 'doc'-->
+<!--, preview: function () {-->
+<!--var preview = document.getElementById('LAY_preview');-->
+<!--return preview ? preview.innerHTML : '';-->
+<!--}()-->
+<!--};-->
+<!--layui.config({-->
+<!--base: '/static/build/js/'-->
+<!--}).use('global');-->
+<!--</script>-->
+
+<!--<script>-->
+<!--//Demo-->
+<!--layui.use('form', function () {-->
+<!--var form = layui.form;-->
+
+<!--});-->
+<!--</script>-->
+<script type="text/javascript">
+    $(function () {
+        $('#test').click(function () {
+            JSonToCSV.setDataConver({
+            data: [
+                {name: '张三', amont: '323433.56', proportion: 33.4},
+                {name: '李四', amont: '545234.43', proportion: 55.45}
+            ],
+            fileName: 'test',
+            columns: {
+                title: ['姓名', '金额', '占比'],
+                key: ['name', 'amont', 'proportion'],
+                formatter: function (n, v) {
+                    if (n === 'amont' && !isNaN(Number(v))) {
+                        v = v + '';
+                        v = v.split('.');
+                        v[0] = v[0].replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
+                        return v.join('.');
+                    }
+                    if (n === 'proportion') return v + '%';
+                }
+            }
+        });
+        })
+
+    })
+
+</script>
+</body>
+</html>

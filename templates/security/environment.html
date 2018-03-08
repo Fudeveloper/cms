@@ -1,0 +1,197 @@
+{% extends "base_table.html" %}
+{% block title %}环境监控{% endblock %}
+{% block table %}
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div class="row" style="width: 100%">
+    <div class="col-md-6" style="width:50%;float:left;overflow:hidden;">
+        <div id="main_temprature" style="width: 93%;height:280px;margin: 2%;"></div>
+    </div>
+    <div class="col-md-6" style="width:50%;float:left;overflow:hidden;">
+        <div id="main_humidity" style="width: 93%;height:280px;margin: 2%;"></div>
+    </div>
+</div>
+<div style="clear: both"></div>
+<div class="row" style="width: 100%">
+    <div class="col-md-6" style="width:50%;float:left;overflow:hidden;margin-left: 15px">
+        <div id="main_light" style="width: 93%;height:280px;margin: 0%;"></div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script src="/static/build/js/echarts.js"></script>
+<script src="/static/build/js/jquery-1.12.4.min.js"></script>
+
+<script type="text/javascript">
+
+    var tempratureChart = echarts.init(document.getElementById('main_temprature'));
+    var humidityChart = echarts.init(document.getElementById('main_humidity'));
+    var lightChart = echarts.init(document.getElementById('main_light'));
+    //    var base = +new Date(2014, 9, 3);
+    //    var oneDay = 24 * 3600 * 1000;
+    var date = [];
+    var data_temprature = [parseInt("{{temprature}}")];
+    var data_humidity = [parseInt("{{humidity}}")];
+    var data_light = [parseInt("{{light}}")];
+
+    //    var now = new Date(base);
+
+    option_temprature = {
+        title: {
+            text: '实时温度'
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: true,
+            data: date
+        },
+        yAxis: {
+            boundaryGap: [0, '50%'],
+            type: 'value',
+            axisLabel: {
+                formatter: '{value} °C'
+            }
+        },
+        series: [
+            {
+                legend: ["温度"],
+                name: '温度',
+                type: 'line',
+                smooth: true,
+                symbol: 'none',
+                stack: 'a',
+                data: data_temprature
+            }
+        ]
+    };
+    option_humidity = {
+        title: {
+            text: '实时湿度'
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: true,
+            data: date
+        },
+        yAxis: {
+            boundaryGap: [0, '50%'],
+            type: 'value',
+            axisLabel: {
+                formatter: '{value} %RH'
+            }
+        },
+        series: [
+            {
+                legend: ["温度"],
+                name: '温度',
+                type: 'line',
+                smooth: true,
+                symbol: 'none',
+                stack: 'a',
+                data: data_humidity
+            }
+        ]
+    };
+    option_light = {
+        title: {
+            text: '实时光照强度'
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: true,
+            data: date
+        },
+        yAxis: {
+            boundaryGap: [0, '50%'],
+            type: 'value',
+            axisLabel: {
+                formatter: '{value} lx'
+            }
+        },
+        series: [
+            {
+                legend: ["温度"],
+                name: '温度',
+                type: 'line',
+                smooth: true,
+                symbol: 'none',
+                stack: 'a',
+                data: data_light
+            }
+        ]
+    };
+    var error_count = 0;
+
+    var interval = setInterval(function () {
+        $.get('/security/get_envir_data/').done(function (ajaxdata) {
+            // 填入数据
+            if (ajaxdata.status === "true") {
+                addData(ajaxdata.temprature, ajaxdata.humidity, ajaxdata.light);
+//                console.log(data_temprature);
+                tempratureChart.setOption({
+                    xAxis: {
+                        data: []
+                    },
+                    series: [{
+                        // 根据名字对应到相应的系列
+                        type: "line",
+                        name: '温度',
+                        data: data_temprature
+                    }]
+                });
+                humidityChart.setOption({
+                    xAxis: {
+                        data: []
+                    },
+                    series: [{
+                        // 根据名字对应到相应的系列
+                        type: "line",
+                        name: '温度',
+                        data: data_humidity
+                    }]
+                });
+                lightChart.setOption({
+                    xAxis: {
+                        data: []
+                    },
+                    series: [{
+                        // 根据名字对应到相应的系列
+                        type: "line",
+                        name: '温度',
+                        data: data_light
+                    }]
+                });
+            } else if (ajaxdata.status === "false") {
+                if (error_count < 2) {
+                    alert("获取数据失败");
+                    error_count += 1;
+                } else {
+                    clearInterval(interval);
+                    location.reload();
+                }
+            }
+
+        });
+    }, 2000);
+
+    tempratureChart.setOption(option_temprature);
+    humidityChart.setOption(option_humidity);
+    lightChart.setOption(option_light);
+
+    // 添加数据
+    function addData(temprature, humidity, light) {
+//        x轴
+//        now = [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/');
+//        date.push(now);
+        data_temprature.push(temprature);
+        data_humidity.push(humidity);
+        data_light.push(light);
+        if (temprature && data_temprature.length >= 7) {
+            data_temprature.shift();
+            data_humidity.shift();
+            data_light.shift();
+        }
+//        now = new Date(+new Date(now) + oneDay);
+    }
+
+</script>
+{% endblock %}

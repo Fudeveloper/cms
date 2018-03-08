@@ -1,0 +1,230 @@
+{% extends "base_table.html" %}
+{% block title %}变更权限{% endblock %}
+<!--{{has_permiss}}-->
+{% block table %}
+<head>
+    <meta charset="utf-8">
+    <title>配置权限</title>
+    <link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/build/css/un.css" media="all">
+
+    <style>
+        body {
+            padding: 0px;
+            font-size: 20px;
+            background: #fff;
+            width: 90%;
+            margin: 0 auto;
+            line-height: 10px;
+            overflow: hidden;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        input {
+            border: 1px solid #999;
+            padding: 5px 10px;
+            margin: 0 10px 10px 0;
+        }</style>
+
+    <script language="javascript" type="text/javascript"
+            src="/static/build/js/unknow.js" charset="gb2312"></script>
+</head>
+<form class="layui-form">
+    <div style="float: left">
+        <div class="site-title">
+            <fieldset style="text-align: center">
+                <a name="checkbox" style="cursor: pointer">系统管理员</a>
+                <!--<legend><a name="checkbox">系统管理员</a></legend>-->
+
+            </fieldset>
+        </div>
+
+        <div class="layui-form">
+            <!--美化复选-->
+            <input type="checkbox" name="addUser" title="增加用户">
+            <br/>
+            <br/>
+
+            <input type="checkbox" name="delUser" title="删除用户">
+            <br/>
+            <br/>
+            <input type="checkbox" name="alterUserPassword" title="更改用户密码">
+            <br/>
+            <br/>
+            <input type="checkbox" name="selectAllUsers" title="查看用户信息">
+            <br/>
+            <br/>
+            <input type="checkbox" name="alterUserPermiss" title="配置用户权限">
+            <br/>
+            <br/>
+            <input type="checkbox" name="selectLoginLog" title="查看登陆日志">
+            <br/>
+            <br/>
+            <input type="checkbox" name="selectOperateLog" title="查看操作日志">
+            <br/>
+            <br/>
+            <input type="checkbox" name="selectWarnLog" title="查看报警日志">
+            <br/>
+            <br/>
+        </div>
+
+    </div>
+    <div style="float: left">
+        <div class="site-title">
+            <fieldset style="text-align: center">
+                <a name="checkbox" style="cursor: pointer">生产管理员</a>
+                <!--<legend><a name="checkbox">生产管理员</a></legend>-->
+            </fieldset>
+        </div>
+        <div class="layui-form">
+            <!--美化复选-->
+            <input type="checkbox" name="addModels" title="添加模块">
+            <br/>
+            <br/>
+            <input type="checkbox" name="alterAlertSetting" title="开/关报警方式">
+
+
+            <br/>
+            <br/>
+        </div>
+
+    </div>
+    <div style="float: left">
+        <div class="site-title">
+            <fieldset style="text-align: center">
+                <a name="checkbox" style="cursor: pointer">操作员</a>
+                <!--<legend><a name="checkbox">操作员</a></legend>-->
+            </fieldset>
+        </div>
+        <div class="layui-form">
+            <!--美化复选-->
+
+            <input type="checkbox" name="canselWarn" title="解除警报">
+            <br/>
+            <br/>
+            <input type="checkbox" name="operateDevice" title="控制设备">
+            <br/>
+            <br/>
+        </div>
+
+    </div>
+    <div style="float: left">
+        <div class="site-title">
+            <fieldset style="text-align: center">
+                <a name="checkbox" style="cursor: pointer">来宾</a>
+                <!--<legend><a name="checkbox">来宾</a></legend>-->
+            </fieldset>
+        </div>
+        <div class="layui-form">
+            <!--美化复选-->
+            <input type="checkbox" name="selectData" title="查看生产状态">
+        </div>
+
+    </div>
+
+
+    <div style="clear: left"></div>
+
+    <div style="text-align: right;">
+
+        <button class="layui-btn" lay-submit lay-filter="*">变更权限</button>
+        <button class="layui-btn" id="cancel">取消</button>
+        <!--<button class="layui-btn layui-btn-primary" id="new">在父层弹出一个层</button>-->
+        <!--<button class="layui-btn layui-btn-primary" id="transmit">给父页面传值</button>-->
+        <!--<button class="layui-btn layui-btn-primary" id="closeIframe">关闭iframe</button>-->
+    </div>
+</form>
+{% endblock %}
+{% block js %}
+<script src="/static/plugins/layui/layui.js"></script>
+<script src="/static/build/js/laycode.js"></script>
+<script>
+    new Function($('.run').text())()
+    //$('pre').show().laycode({height: 180});
+</script>
+<script>
+    layui.use(['form'], function () {
+        var id = getUrlId();
+        console.log(id);
+        var form = layui.form;
+        var $ = layui.jquery;
+        var permiss_array = {{permiss | safe}}
+        //        permiss_array = permiss_array.toArray();
+        var checkboxs = $('input:checkbox').toArray();
+//        alert(typeof (permiss_array))
+        permiss_array.forEach(function (permiss) {
+//            alert(permiss)
+            checkboxs.forEach(function (checkbox) {
+                if (checkbox.name === permiss) {
+                    console.log(permiss);
+                    $(checkbox).attr("checked", true);
+                }
+            });
+        });
+        form.render();
+
+        $('fieldset').click(function () {
+            var childrens = $(this).parent().next();
+            var checkboxs = $(childrens).find("input[type=checkbox]");
+            $(checkboxs).attr("checked", true);
+            form.render();
+
+        });
+
+
+        //获取窗口索引
+        var index = parent.layer.getFrameIndex(window.name);
+
+//            提交权限变更的操作
+//        $("#sub_change").on("click", function () {
+////        向服务器提交变更操作
+//
+//            parent.layer.close(index);
+//        });
+        form.on('submit(*)', function (data) {
+            var json_data = JSON.stringify(data.field);
+            $.ajax({
+                url: "/user/change_permissions_handler/",
+                type: "POST",
+                data: {"permissions_data": json_data, "uesrid": id},
+                crossDomain: true,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.status === "true") {
+                        layer.msg('修改权限成功');
+                         setTimeout(function () {
+                             parent.layer.close(index)
+                         },1300);
+                    } else {
+                        layer.msg("修改权限失败");
+                    }
+                },
+                error: function () {
+                    layer.msg("服务器错误");
+
+                }
+
+            });
+
+
+            return false;
+        });
+        //    权限变更取消
+        $("#cancel").on("click", function () {
+            parent.layer.close(index);
+        })
+
+        function getUrlId() {
+            var reg = /user\/permissions\/([0-9]*)/
+            var test = window.location.pathname;
+            var userid = test.match(reg)[1]
+            return userid;
+        }
+
+    });
+
+</script>
+{% endblock %}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <script src="/static/build/js/jquery-1.12.4.min.js"></script>
+
+    <script src="/static/build/js/echarts.common.min.js"></script>
+
+
+    <script type="text/javascript">
+        $(function () {
+            var myChart = echarts.init(document.getElementById('main'));
+
+//app.title = '水印 - ECharts 下载统计'
+
+            var builderJson = {
+                "all": 3,
+                "charts": {
+                    "环境报警":"1",
+                    "温度":"1",
+                    "啦":"1"
+                }
+            };
+
+            var downloadJson = {
+                "echarts.min.js": 1,
+                "echarts.simple.min.js": 1,
+                "echarts.common.min.js": 1,
+                "echarts.js": 1
+            };
+
+
+            var waterMarkText = 'robot';
+
+            var canvas = document.createElement('canvas');
+            var ctx = canvas.getContext('2d');
+            canvas.width = canvas.height = 100;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.globalAlpha = 0.08;
+            ctx.font = '20px Microsoft Yahei';
+            ctx.translate(50, 50);
+            ctx.rotate(-Math.PI / 4);
+            ctx.fillText(waterMarkText, 0, 0);
+
+            option = {
+                backgroundColor: {
+                    type: 'pattern',
+                    image: canvas,
+                    repeat: 'repeat'
+                },
+                tooltip: {},
+                title: [{
+                    text: '在线构建',
+                    subtext: '总计 ' + builderJson.all,
+                    x: '25%',
+                    textAlign: 'center'
+                }, {
+                    text: '各版本下载',
+                    subtext: '总计 ' + Object.keys(downloadJson).reduce(function (all, key) {
+                        return all + downloadJson[key];
+                    }, 0),
+                    x: '75%',
+                    textAlign: 'center'
+                }],
+                grid: [{
+                    top: 50,
+                    width: '50%',
+                    bottom: '0%',
+                    left: 10,
+                    containLabel: true
+                }],
+                xAxis: [{
+                    type: 'value',
+                    max: builderJson.all,
+                    splitLine: {
+                        show: false
+                    }
+                }],
+                yAxis: [{
+                    type: 'category',
+                    data: Object.keys(builderJson.charts),
+                    axisLabel: {
+                        interval: 0,
+                        rotate: 30
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                }],
+                series: [{
+                    type: 'bar',
+                    stack: 'chart',
+                    z: 3,
+                    label: {
+                        normal: {
+                            position: 'right',
+                            show: true
+                        }
+                    },
+                    data: Object.keys(builderJson.charts).map(function (key) {
+                        return builderJson.charts[key];
+                    })
+                },
+                    {
+                        type: 'pie',
+                        radius: [0, '50%'],
+                        center: ['75%', '50%'],
+                        data: Object.keys(downloadJson).map(function (key) {
+                            return {
+                                name: key.replace('.js', ''),
+                                value: downloadJson[key]
+                            }
+                        })
+                    },
+                ]
+            };
+
+            myChart.setOption(option)
+        })
+
+    </script>
+
+<body>
+<!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+<!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+<div id="main" style="height:500px;border:1px solid #ccc;padding:10px;"></div>
+
+
+<!--Step:2 Import echarts.js-->
+<!--Step:2 引入echarts.js-->
+
+</body>
+</html>

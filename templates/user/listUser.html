@@ -1,0 +1,236 @@
+﻿{% extends "base_table.html" %}
+{% block title %}查看用户{% endblock %}
+
+{% block table %}
+<!--<div class="layui-btn-group demoTable">-->
+    <!--&lt;!&ndash;<button class="layui-btn" data-type="isAll" id="lalala">添加用户</button>&ndash;&gt;-->
+
+    <!--<button class="layui-btn" data-type="getCheckData">获取选中行数据</button>-->
+    <!--<button class="layui-btn" data-type="getCheckLength">获取选中数目</button>-->
+    <!--<button class="layui-btn" data-type="isAll">验证是否全选</button>-->
+    <!--<div style="float: right;">-->
+        <!--<button class="layui-btn" data-type="export" id="export">导出到Excel</button>-->
+
+    <!--</div>-->
+
+<!--</div>-->
+<table class="layui-hide" id="demo" lay-filter="demo"></table>
+{% endblock %}
+{% block js %}
+<script src="/static/plugins/layui/layui.js" charset="utf-8"></script>
+
+<script type="text/html" id="barDemo">
+    {% ifequal alterUserPassword True %}
+    <a class="layui-btn layui-btn-mini" lay-event="change_passwd">更改密码</a>
+    {% else %}
+    <a class="layui-btn layui-btn-mini layui-btn-disabled">更改密码</a>
+    {% endifequal %}
+
+    {% ifequal alterUserPermiss True %}
+    <a class="layui-btn  layui-btn-normal layui-btn-mini" lay-event="change_permiss">变更权限</a>
+    {% else %}
+    <a class="layui-btn  layui-btn-normal layui-btn-mini layui-btn-disabled">变更权限</a>
+    {% endifequal %}
+    <!--layui-btn-disabled-->
+    {% ifequal delUser True %}
+    <a class="layui-btn layui-btn-danger layui-btn-mini " lay-event="del">删除用户</a>
+    {% else %}
+    <a class="layui-btn layui-btn-danger layui-btn-mini layui-btn-disabled">删除用户</a>
+    {% endifequal %}
+
+</script>
+<script src="/static/build/js/jsonExportToCSV.js"></script>
+<script>
+    layui.use('table', function () {
+        var table = layui.table;
+        var $ = layui.jquery;
+        //展示已知数据
+        table.render({
+            initSort: {field: 'id', type: 'asc'},
+            elem: '#demo'
+            , cols: [[ //标题栏
+                {checkbox:true, fixed: true},
+                {field:'id', width:80, sort: true, fixed: true,title:"ID",align:"center"}
+                , {field:'userName', width:80,title:"用户名",align:"center"}
+                ,{field:'name', width:80,title:"姓名",align:"center"}
+                ,{field:'phone', width:80,title:"手机号",align:"center"}
+                ,{field:'status', width:85, sort: true,title:"状态",align:"center"}
+                ,{field:'groupID', width:120,title:"用户组",align:"center"}
+                ,{field:'permissions', width:250,title:"权限",align:"center"}
+                , {fixed: 'right', width: '300', align: 'center', toolbar: '#barDemo'}
+            ]]
+            , data: {{data | safe}}
+            ,even:true
+            //,skin: 'line' //表格风格
+            //,page: true //是否显示分页
+            //,limits: [5, 7, 10]
+            //,limit: 5 //每页默认显示的数量
+        });
+        //监听表格复选框选择
+        table.on('checkbox(demo)', function (obj) {
+            console.log(obj)
+        });
+        //监听工具条
+        table.on('tool(demo)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'detail') {
+                layer.msg('ID：' + data.id + ' 的查看操作');
+            } else if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
+//                    界面删除
+//                    alert(data.id)
+//                    服务器删除
+                    $.ajax({
+                        url: "/user/del_user/" + data.id,
+                        type: "GET",
+                        crossDomain: true,
+                        success: function (data) {
+                            if (data.status === "true") {
+                                layer.msg('删除用户成功');
+                                obj.del();
+                            } else {
+                                layer.msg("删除用户失败");
+                            }
+                        },
+                        error: function () {
+                            layer.msg("服务器错误");
+
+                        }
+
+                    });
+
+                    layer.close(index);
+                });
+            } else if (obj.event === 'change_passwd') {
+
+                layer.confirm('请输入新的密码：<input type="text" id="new_passwd"/>', function (index) {
+
+                    data = obj.data;
+//                     获取输入的新密码
+                    var new_passwd = $("#new_passwd").val().trim();
+
+//                    提交密码修改请求
+                    $.ajax({
+                        url: "/user/PassWordChange/" + data['id'],
+                        type: "POST",
+                        data: {"passWordOld": null, "passWordNew": new_passwd},
+                        crossDomain: true,
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.status === "true") {
+                                alert('修改密码成功');
+
+                            } else {
+                                alert("修改密码失败");
+                            }
+                        },
+                        error: function () {
+                            alert("修改密码失败");
+
+                        }
+
+                    });
+
+                    layer.close(index);
+//                    layer.close(index);
+                });
+
+
+//                layer.alert('编辑行：<br>' + JSON.stringify(data))
+            } else if (obj.event === 'change_permiss') {
+//                更改权限事件
+                data = obj.data;
+//                请求后端获取权限接口
+//                $.ajax({
+//                    async: false,
+//                    url: "/user/GetUserPermiss/",
+//                    type: "GET",
+//                    crossDomain: true,
+//                    success: function (data) {
+//                        console.log(data['permiss']);
+//
+//                    },
+//                    error: function () {
+//                        alert("请求权限失败");
+//                    }
+//                });
+                layer.open({
+                    title: '权限分配',
+                    type: 2,
+                    area: ['730px', '480px'],
+                    fixed: false, //不固定
+                    maxmin: true,
+                    content: '/user/permissions/' + data['id']
+                });
+//              id为此元素标识，关闭时传入
+
+            }
+
+
+        });
+
+        var $ = layui.$, active = {
+            getCheckData: function () { //获取选中数据
+                var checkStatus = table.checkStatus('userList')
+                    , data = checkStatus.data;
+                layer.alert(JSON.stringify(data));
+            }
+            , getCheckLength: function () { //获取选中数目
+                var checkStatus = table.checkStatus('userList')
+                    , data = checkStatus.data;
+                layer.msg('选中了：' + data.length + ' 个');
+            }
+            , isAll: function () { //验证是否全选
+                var checkStatus = table.checkStatus('userList');
+                layer.msg(checkStatus.isAll ? '全选' : '未全选')
+            }
+        };
+
+        $('.demoTable .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+        $.support.cors = true;
+
+//        导出用户列表至csv
+        $('#export').click(function () {
+            $.ajax({
+                url: "/user/getUserInfo/",
+                type: "GET",
+                success: function (data) {
+                    alert("success");
+                    JSonToCSV.setDataConver({
+                        data: data.data,
+                        fileName: 'users',
+                        columns: {
+                            title: ['ID', '用户名', '姓名', '手机号', '状态', '用户组', '权限'],
+                            key: ['id', 'userName', 'name', 'phone', 'status', 'groupID', 'permissions'],
+                            formatter: function (n, v) {
+                                if (n === 'amont' && !isNaN(Number(v))) {
+                                    v = v + '';
+                                    v = v.split('.');
+                                    v[0] = v[0].replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
+                                    return v.join('.');
+                                }
+                                if (n === 'proportion') return v + '%';
+                            }
+                        }
+                    });
+                },
+                error: function () {
+                    alert("导出失败");
+
+                }
+
+            });
+
+
+        })
+
+    });
+</script>
+{% endblock %}
+
+
+
+
