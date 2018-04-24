@@ -1,0 +1,125 @@
+{% extends "base_table.html" %}
+
+{% block title %}设备监视{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all">
+<style type="text/css">
+    /*.top1 img, .top2 img, .top3 img, .top4 img, .top5 img {*/
+    /*float: left;*/
+    /*}*/
+
+    .main {
+        /*text-align: center;*/
+        margin: 20px auto;
+        /*background: url("/static/images/bc.png");*/
+        /*background-repeat: repeat-x;*/
+        /*background-color: lightblue;*/
+        width: 500px;
+        height: 450px;
+    }
+
+    #time {
+        cursor: not-allowed;
+    }
+
+    #checkbox:checked ~ #prepare_time {
+        display: block;
+    }
+</style>
+{% endblock %}
+
+
+<!--此页面只有在通过权限验证后，才需要js-->
+{% block table %}
+<div class="main">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">出现时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="start_time"  lay-verify="" placeholder="" autocomplete="off"
+                       class="layui-input" id="time" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">机号</label>
+            <div class="layui-input-block">
+                <input type="text" name="machine" required lay-verify="required" placeholder="机号" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">现象</label>
+            <div class="layui-input-block">
+                <input type="text" name="appearance" required lay-verify="required" placeholder="现象" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">解决方案</label>
+            <div class="layui-input-block">
+                <input type="text" name="solution" required lay-verify="required" placeholder="解决方案" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">进展情况</label>
+            <div class="layui-input-block">
+                <input type="text" name="progress" required lay-verify="required" placeholder="进展情况" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">时间预警</label>
+            <div class="layui-input-block" id="time_warn">
+                <input type="checkbox" name="time_warn" lay-skin="switch" id="checkbox">
+            </div>
+
+        </div>
+        <div class="layui-form-item" id="prepare_time" style="display: none">
+
+            <div class="layui-input-block">
+                <input type="text" name="prepare_time"  lay-verify="" placeholder="预计完成时间" autocomplete="off"
+                       class="layui-input" id="input_time">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="close" class="layui-btn layui-btn-primary">取消</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script src="/static/plugins/layui/layui.js" charset="utf-8"></script>
+<script src="/static/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="/static/js/monitor.js"></script>
+<script type="text/javascript">
+    layui.use(['table', 'laydate'], function () {
+        var laydate = layui.laydate;
+        var form = layui.form;
+        var now_time = dataFormat(new Date(), "yyyy-MM-dd HH:mm");
+        //        alert(t)
+        $("#time").val(now_time);
+//        console.log($("#time"))
+        laydate.render({
+            elem: '#input_time',
+            type: 'datetime',
+            min: now_time
+        //指定元素
+        });
+        form.on('submit(formDemo)', function (data) {
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+
+
+</script>
+{% endblock %}
+{% block js %}
+
+{% endblock %}

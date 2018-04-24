@@ -1,0 +1,175 @@
+{% extends "base_table.html" %}
+
+{% block title %}设备监视{% endblock %}
+
+{% block style %}
+<style type="text/css">
+    /*.top1 img, .top2 img, .top3 img, .top4 img, .top5 img {*/
+    /*float: left;*/
+    /*}*/
+
+    .main {
+        text-align: center;
+        margin: 20px auto;
+        background: url("/static/images/bc.png");
+        background-repeat: repeat-x;
+        /*background-color: lightblue;*/
+        width: 1000px;
+        height: 500px;
+    }
+
+    .content li {
+        /*padding-top: 10px;*/
+        list-style-type: none;
+        /*width: 100px;*/
+        float: left;
+        margin: 2px;
+        text-align: center;
+    }
+
+    .content li a {
+        line-height: 50px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        text-decoration: none;
+        color: #00949e;
+    }
+
+    .i4_bottom img {
+        height: 80px;
+        width: 80px;
+    }
+
+    .i4 img {
+        height: 89.3333px;
+        width: 80px;
+    }
+
+    .i6 img, .i7 img {
+        height: 277px;
+    }
+
+    #title li {
+        padding-top: 10px;
+        float: left;
+        width: 100px;
+        text-align: center;
+        list-style-type: none;
+
+    }
+
+    /*img{*/
+    /*cursor: pointer;*/
+    /*}*/
+</style>
+{% endblock %}
+
+
+<!--此页面只有在通过权限验证后，才需要js-->
+{% block table %}
+<div class="main">
+
+    <div style="clear: both"></div>
+    <ul class="content">
+
+        <li>
+            <a href="">料库</a>
+
+            <div class="i1">
+                <div class="i1_top">
+                    <img src="/static/images/waiting/1.gif" alt="" id="img1">
+                </div>
+                <div class="i1_bottom">
+                    <img src="/static/images/waiting/2.gif" alt="" id="img2">
+                </div>
+            </div>
+        </li>
+        <li>
+            <a href="#">下料区</a>
+
+            <div class="i2">
+                <div class="i2_top">
+                    <img src="/static/images/waiting/3.gif" alt="" id="img3">
+
+                </div>
+                <div class="i2_bottom">
+                    <img src="/static/images/waiting/4.gif" alt="" id="img4">
+                </div>
+            </div>
+        </li>
+        <li>
+            <a href="#">折弯&压铆区</a>
+
+            <div class="i3">
+                <div class="i3_top">
+                    <img src="/static/images/waiting/5.gif" alt="" id="img5">
+                </div>
+                <div class="i3_bottom">
+                    <img src="/static/images/waiting/6.gif" alt="6.gif" id="img6">
+                </div>
+            </div>
+        </li>
+        <li>
+            <a href="#">焊接区</a>
+
+            <div class="i4">
+                <div class="i4_top">
+                    <img src="/static/images/waiting/7.gif" id="img7"/>
+
+                </div>
+                <div class="i4_middle">
+                    <img src="/static/images/waiting/8.gif" alt="8.gif" id="img8">
+                </div>
+                <div class="i4_bottom">
+                    <img src="/static/images/waiting/9.gif" alt="99.gif" id="img9">
+                </div>
+            </div>
+        </li>
+        <li>
+            <a href="#">表面处理</a>
+
+            <div class="i5">
+                <div class="i5_top">
+                    <img src="/static/images/waiting/10.gif" alt="" id="img10">
+                </div>
+                <div class="i5_bottom">
+                    <img src="/static/images/waiting/11.gif" alt="" id="img11">
+                </div>
+            </div>
+        </li>
+        <li>
+            <a href="#">包装区</a>
+
+            <div class="i6">
+                <img src="/static/images/waiting/12.gif" alt="" id="img12">
+            </div>
+        </li>
+        <li>
+            <a href="#">其他</a>
+
+            <div class="i7">
+                <img src="/static/images/waiting/13.gif" alt="" id="img13">
+            </div>
+        </li>
+
+
+    </ul>
+</div>
+
+
+<script src="/static/plugins/layui/layui.js" charset="utf-8"></script>
+<script src="/static/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="/static/js/monitor.js"></script>
+<script type="text/javascript">
+    layui.use('layer', function () {
+        var layer = layui.layer;
+//        var table = layui.table;
+        blink_img(2);
+    });
+
+
+</script>
+{% endblock %}
+{% block js %}
+
+{% endblock %}

@@ -218,3 +218,13 @@ def renderByEquipID(request, EquipID, readonly, return_context):
         return_context["EquipID"] = EquipID
         return_context["readonly"] = readonly
     return render(request, render_template, context=return_context)
+
+
+@check_permiss(get_Device_Data)
+def monitor(request, return_context):
+    return render(request, 'device/monitor.html', context=return_context)
+
+
+@check_permiss(get_Device_Data)
+def report(request, return_context):
+    return render(request, 'device/report.html', context=return_context)

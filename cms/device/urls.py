@@ -18,6 +18,8 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
+
+
     url(r'^main/$', views.main, name='main'),
     url(r'^control/$', views.control, name='control'),
     # url(r'^getDeviceData/$', views.getDeviceData, name='getDeviceData'),
@@ -31,5 +33,11 @@ urlpatterns = [
     url(r'^first/$', views.first, name='first'),
 
     url(r'^renderByEquipID/(\d*)/([0-1])/$', views.renderByEquipID, name='renderByEquipID'),
+
+    url(r'^monitor/$', views.monitor, name='monitor'),
+
+    url(r'^report/$', views.report, name='report'),
+
+
 
 ]

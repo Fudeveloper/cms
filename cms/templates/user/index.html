@@ -67,23 +67,23 @@
                     <a href="javascript:;"><i class="layui-icon" aria-hidden="true">&#xe614;</i><span> 设备管理</span></a>
                     <dl class="layui-nav-child">
                         <!--<dd><a href="javascript:;" data-url="{%url 'device:main'%}"-->
-                               <!--data-title="设备管理" kit-target data-id='2'><i-->
-                                <!--class="layui-icon">&#xe600;</i><span> 设备管理</span></a></dd>-->
+                        <!--data-title="设备管理" kit-target data-id='2'><i-->
+                        <!--class="layui-icon">&#xe600;</i><span> 设备管理</span></a></dd>-->
                         <dd><a href="javascript:;" data-url="{%url 'device:renderByEquipID' '100' '0'%}"
                                data-title="控制设备" kit-target data-id='3'><i
                                 class="layui-icon">&#xe600;</i><span> 控制设备</span></a></dd>
                         <!--<dd><a href="javascript:;" data-url="{%url 'device:first'%}"-->
-                               <!--data-title="设备监视" kit-target data-id='16'><i-->
-                                <!--class="layui-icon">&#xe600;</i><span> 设备监视</span></a></dd>-->
-                        <dd><a href="javascript:;" data-url="{%url 'log:operateLog'%}"
+                        <!--data-title="设备监视" kit-target data-id='16'><i-->
+                        <!--class="layui-icon">&#xe600;</i><span> 设备监视</span></a></dd>-->
+                        <dd><a href="javascript:;" data-url="{%url 'device:monitor'%}"
                                data-title="设备监视" kit-target data-id='17'><i
                                 class="layui-icon">&#xe600;</i><span> 设备监视</span></a></dd>
                         <dd><a href="javascript:;" data-url="{%url 'device:renderByEquipID' '100' '1'%}"
                                data-title="环境监视" kit-target data-id='18'><i
                                 class="layui-icon">&#xe600;</i><span> 环境监视</span></a></dd>
                         <!--<dd><a href="javascript:;" data-url="{%url 'device:first'%}"-->
-                               <!--data-title="设备监视" kit-target data-id='19'><i-->
-                                <!--class="layui-icon">&#xe600;</i><span> 设备监视</span></a></dd>-->
+                        <!--data-title="设备监视" kit-target data-id='19'><i-->
+                        <!--class="layui-icon">&#xe600;</i><span> 设备监视</span></a></dd>-->
                         <dd><a href="javascript:;" data-url="{%url 'device:renderByEquipID' '01' '1'%}"
                                data-title="折弯" kit-target data-id='25'><i
                                 class="layui-icon">&#xe600;</i><span> 折弯</span></a></dd>
@@ -239,17 +239,17 @@
                 });
             });
             $("#openDoor").on("click", function () {
-                openDoor(103, 1);
+                openDoor(100, 103, 1);
             });
 
-            function openDoor(device_id, device_status) {
+            function openDoor(equip_id, device_id, device_status) {
                 $.ajax({
-                    url: "/device/UpDataDevState/" + device_id + "/" + device_status + "/",
+                    url: "/device/UpDataDevState/" + equip_id + "/" + device_id + "/" + device_status + "/",
                     type: "GET",
                     success: function (data) {
                         if (data.status === "true") {
                             layer.msg('开门成功');
-                            setTimeout("closeDoor(103, 0)", 2000);
+                            setTimeout("closeDoor(100,103, 0)", 2000);
 
                         } else {
                             layer.msg("开门失败");
@@ -269,9 +269,10 @@
         }
     );
 
-    function closeDoor(device_id, device_status) {
+    function closeDoor(equip_id, device_id, device_status) {
         $.ajax({
-            url: "/device/UpDataDevState/" + device_id + "/" + device_status + "/",
+            url: "/device/UpDataDevState/" + equip_id + "/" + device_id + "/" + device_status + "/",
+
             type: "GET",
             success: function (data) {
                 if (data.status === "true") {
