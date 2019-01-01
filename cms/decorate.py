@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*
 from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
@@ -15,7 +16,6 @@ def check_permiss(get_data_func):
         def inner(request, *args, **kwargs):
             result = get_data_func(request, *args, **kwargs)
             print("++++++++++++++++++")
-            print(*args, **kwargs)
             print("++++++++++++++++++")
             json_result = json.loads(result)
             # print("----------------{}".format(json_result))
@@ -28,7 +28,7 @@ def check_permiss(get_data_func):
                     context = {"has_permiss": "notlogin"}
                 else:
                     context = {"has_permiss": "true", "basedata": json_result}
-            return func(request, *args, **kwargs, return_context=context)
+            return func(request, return_context=context * args, **kwargs)
 
         return inner
 

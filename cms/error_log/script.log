@@ -1,0 +1,1079 @@
+2019-01-01 16:44:54,025 [Thread-1:123145433669632] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 22, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 21
+SyntaxError: Non-ASCII character '\xe7' in file /Users/lik/PycharmProjects/cms/cms/user/urls.py on line 21, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+2019-01-01 16:44:54,211 [Thread-3:123145433669632] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 22, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 21
+SyntaxError: Non-ASCII character '\xe7' in file /Users/lik/PycharmProjects/cms/cms/user/urls.py on line 21, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+2019-01-01 16:47:36,116 [Thread-1:123145550577664] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 22, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 21
+SyntaxError: Non-ASCII character '\xe7' in file /Users/lik/PycharmProjects/cms/cms/user/urls.py on line 21, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+2019-01-01 16:47:36,952 [Thread-3:123145550577664] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 22, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 21
+SyntaxError: Non-ASCII character '\xe7' in file /Users/lik/PycharmProjects/cms/cms/user/urls.py on line 21, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+2019-01-01 16:47:37,480 [Thread-4:123145550577664] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 22, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 21
+SyntaxError: Non-ASCII character '\xe7' in file /Users/lik/PycharmProjects/cms/cms/user/urls.py on line 21, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+2019-01-01 16:47:37,686 [Thread-5:123145550577664] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 22, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 21
+SyntaxError: Non-ASCII character '\xe7' in file /Users/lik/PycharmProjects/cms/cms/user/urls.py on line 21, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+2019-01-01 16:47:37,805 [Thread-6:123145550577664] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 22, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 21
+SyntaxError: Non-ASCII character '\xe7' in file /Users/lik/PycharmProjects/cms/cms/user/urls.py on line 21, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+2019-01-01 16:47:37,948 [Thread-7:123145550577664] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 22, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 21
+SyntaxError: Non-ASCII character '\xe7' in file /Users/lik/PycharmProjects/cms/cms/user/urls.py on line 21, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+2019-01-01 16:47:38,567 [Thread-8:123145550577664] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 22, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 21
+SyntaxError: Non-ASCII character '\xe7' in file /Users/lik/PycharmProjects/cms/cms/user/urls.py on line 21, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+2019-01-01 16:48:23,240 [Thread-1:123145490108416] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 21
+SyntaxError: Non-ASCII character '\xe7' in file /Users/lik/PycharmProjects/cms/cms/user/urls.py on line 21, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+2019-01-01 16:48:24,118 [Thread-3:123145490108416] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 21
+SyntaxError: Non-ASCII character '\xe7' in file /Users/lik/PycharmProjects/cms/cms/user/urls.py on line 21, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+2019-01-01 16:48:49,875 [Thread-1:123145344307200] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 8
+SyntaxError: Non-ASCII character '\xe6' in file /Users/lik/PycharmProjects/cms/cms/user/views.py on line 8, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+2019-01-01 16:48:51,971 [Thread-3:123145344307200] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 8
+SyntaxError: Non-ASCII character '\xe6' in file /Users/lik/PycharmProjects/cms/cms/user/views.py on line 8, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+2019-01-01 16:49:21,991 [Thread-1:123145431076864] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 11
+SyntaxError: Non-ASCII character '\xe6' in file /Users/lik/PycharmProjects/cms/cms/decorate.py on line 11, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+2019-01-01 16:49:23,020 [Thread-3:123145431076864] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 11
+SyntaxError: Non-ASCII character '\xe6' in file /Users/lik/PycharmProjects/cms/cms/decorate.py on line 11, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+2019-01-01 16:50:04,368 [Thread-1:123145570275328] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 19
+    print(*args, **kwargs)
+          ^
+SyntaxError: invalid syntax
+2019-01-01 16:51:03,354 [Thread-1:123145446297600] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 19
+    print(*args, **kwargs)
+          ^
+SyntaxError: invalid syntax
+2019-01-01 16:51:15,041 [Thread-3:123145446297600] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 19
+    print(*args, **kwargs)
+          ^
+SyntaxError: invalid syntax
+2019-01-01 16:51:17,287 [Thread-4:123145446297600] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /index.html
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 19
+    print(*args, **kwargs)
+          ^
+SyntaxError: invalid syntax
+2019-01-01 16:51:17,428 [Thread-5:123145446297600] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 19
+    print(*args, **kwargs)
+          ^
+SyntaxError: invalid syntax
+2019-01-01 16:51:20,919 [Thread-6:123145446297600] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /index.html
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 19
+    print(*args, **kwargs)
+          ^
+SyntaxError: invalid syntax
+2019-01-01 16:51:22,365 [Thread-7:123145446297600] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 19
+    print(*args, **kwargs)
+          ^
+SyntaxError: invalid syntax
+2019-01-01 16:51:23,306 [Thread-8:123145446297600] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /user
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 19
+    print(*args, **kwargs)
+          ^
+SyntaxError: invalid syntax
+2019-01-01 16:51:23,491 [Thread-9:123145446297600] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 19
+    print(*args, **kwargs)
+          ^
+SyntaxError: invalid syntax
+2019-01-01 16:51:27,446 [Thread-10:123145446297600] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /user
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 19
+    print(*args, **kwargs)
+          ^
+SyntaxError: invalid syntax
+2019-01-01 16:51:28,247 [Thread-11:123145446297600] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 19
+    print(*args, **kwargs)
+          ^
+SyntaxError: invalid syntax
+2019-01-01 16:51:30,757 [Thread-12:123145446297600] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /user
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 19
+    print(*args, **kwargs)
+          ^
+SyntaxError: invalid syntax
+2019-01-01 16:51:32,915 [Thread-13:123145446297600] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /user/index
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 19
+    print(*args, **kwargs)
+          ^
+SyntaxError: invalid syntax
+2019-01-01 16:51:33,065 [Thread-14:123145446297600] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 19
+    print(*args, **kwargs)
+          ^
+SyntaxError: invalid syntax
+2019-01-01 16:51:37,676 [Thread-15:123145446297600] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /user/index.html
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 19
+    print(*args, **kwargs)
+          ^
+SyntaxError: invalid syntax
+2019-01-01 16:51:37,825 [Thread-16:123145446297600] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 19
+    print(*args, **kwargs)
+          ^
+SyntaxError: invalid syntax
+2019-01-01 16:52:04,104 [Thread-1:123145570140160] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /user/index.html
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 31
+    return func(request, *args, **kwargs, return_context=context)
+                                        ^
+SyntaxError: invalid syntax
+2019-01-01 16:52:04,769 [Thread-3:123145570140160] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /user/index.html
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 31
+    return func(request, *args, **kwargs, return_context=context)
+                                        ^
+SyntaxError: invalid syntax
+2019-01-01 16:52:04,965 [Thread-4:123145570140160] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /user/index.html
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 31
+    return func(request, *args, **kwargs, return_context=context)
+                                        ^
+SyntaxError: invalid syntax
+2019-01-01 16:52:05,132 [Thread-5:123145570140160] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /user/index.html
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 31
+    return func(request, *args, **kwargs, return_context=context)
+                                        ^
+SyntaxError: invalid syntax
+2019-01-01 16:52:05,297 [Thread-6:123145570140160] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /user/index.html
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 31
+    return func(request, *args, **kwargs, return_context=context)
+                                        ^
+SyntaxError: invalid syntax
+2019-01-01 16:52:06,277 [Thread-7:123145570140160] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /user/index.html
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 31
+    return func(request, *args, **kwargs, return_context=context)
+                                        ^
+SyntaxError: invalid syntax
+2019-01-01 16:55:27,043 [Thread-8:123145570140160] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /user/index.html
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/cms/urls.py", line 24, in <module>
+    url(r'^user/', include('user.urls', namespace='user')),
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/lik/PycharmProjects/cms/cms/user/urls.py", line 20, in <module>
+    from . import views
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 7, in <module>
+    from decorate import *
+  File "/Users/lik/PycharmProjects/cms/cms/decorate.py", line 31
+    return func(request, *args, **kwargs, return_context=context)
+                                        ^
+SyntaxError: invalid syntax
+2019-01-01 16:56:10,468 [Thread-1:123145477791744] [django.request:170] [base:get_response] [WARNING]- Not Found: /user/index.html
+2019-01-01 16:57:55,928 [Thread-3:123145477791744] [django.request:170] [base:get_response] [WARNING]- Not Found: /user/index.html
+2019-01-01 16:58:00,713 [Thread-14:123145477791744] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /user/login_handle/
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 113, in login_handle
+    res = requests.post(url=api_link + "/Api/Account/Logon", data=post_data, headers=headers)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/requests/api.py", line 112, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/requests/api.py", line 58, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/requests/sessions.py", line 508, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/requests/sessions.py", line 618, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/requests/adapters.py", line 508, in send
+    raise ConnectionError(e, request=request)
+ConnectionError: HTTPConnectionPool(host='120.78.62.39', port=8088): Max retries exceeded with url: /Api/Account/Logon (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10ccdd110>: Failed to establish a new connection: [Errno 61] Connection refused',))
+2019-01-01 16:58:00,830 [Thread-15:123145477791744] [django.request:170] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2019-01-01 16:58:07,666 [Thread-16:123145477791744] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /user/login_handle/
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 113, in login_handle
+    res = requests.post(url=api_link + "/Api/Account/Logon", data=post_data, headers=headers)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/requests/api.py", line 112, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/requests/api.py", line 58, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/requests/sessions.py", line 508, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/requests/sessions.py", line 618, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/requests/adapters.py", line 508, in send
+    raise ConnectionError(e, request=request)
+ConnectionError: HTTPConnectionPool(host='120.78.62.39', port=8088): Max retries exceeded with url: /Api/Account/Logon (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cce5910>: Failed to establish a new connection: [Errno 61] Connection refused',))
+2019-01-01 16:58:11,482 [Thread-17:123145477791744] [django.request:170] [base:get_response] [WARNING]- Not Found: /user/index.html
+2019-01-01 16:58:16,434 [Thread-23:123145477791744] [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /user/login_handle/
+Traceback (most recent call last):
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/lik/PycharmProjects/cms/cms/user/views.py", line 113, in login_handle
+    res = requests.post(url=api_link + "/Api/Account/Logon", data=post_data, headers=headers)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/requests/api.py", line 112, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/requests/api.py", line 58, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/requests/sessions.py", line 508, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/requests/sessions.py", line 618, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/lik/PycharmProjects/cms/venv/lib/python2.7/site-packages/requests/adapters.py", line 508, in send
+    raise ConnectionError(e, request=request)
+ConnectionError: HTTPConnectionPool(host='120.78.62.39', port=8088): Max retries exceeded with url: /Api/Account/Logon (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10ccc6a50>: Failed to establish a new connection: [Errno 61] Connection refused',))

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*
 from django.shortcuts import render
 from decorate import *
 # Create your views here.

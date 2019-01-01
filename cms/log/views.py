@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*
 from decorate import *
 import requests
 import cookie_handler
